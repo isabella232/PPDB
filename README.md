@@ -40,6 +40,10 @@ In your codes enter this line of code what is going to require codes
 | StrToArr() | PDB::StrToArr($arr) | undefined | array | 0.0.1<X |
 | toFloat()  | PDB::toFloat($str)  | undefined | int | 0.0.1<X |
 | toString() | PDB::toString($int) | undefined | string | 0.0.1<X |
+| encode64() | PDB::encode64($str) | undefined | string | 0.0.1<X |
+| encode32() | PDB::encode32($str) | undefined | string | 0.0.1<X |
+| decode64() | PDB::decode64($str) | undefined | string | 0.0.1<X |
+| decode32() | PDB::decode32($str) | undefined | string | 0.0.1<X |
 
 ### Keywords
 
