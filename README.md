@@ -54,7 +54,7 @@ In your codes enter this line of code what is going to require codes
  
  | function | usage | default | return |
  | -------- | ----- | ------ | -------- |
- | connect()|PDB::mySQL()->connect($host, $user, $psw, $db)| undefined, undefined, undefined, undefined | boolean |
- | exportAll() | PDB::mySQL()->exportAll($table) | undefined | boolean |
- | export() | PDB::mySQL()->export($table, $select) | undefined, undefined | boolean |
+ | connect()|mySQL::connect($host, $user, $psw, $db)| undefined, undefined, undefined, undefined | boolean |
+ | exportAll() | mySQL::exportAll($table) | undefined | boolean |
+ | export() | mySQL()::export($table, $select) | undefined, undefined | boolean |
  
