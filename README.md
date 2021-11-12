@@ -11,6 +11,7 @@ any database if you have SSL(secured socket layer) and more...
 In your codes enter this line of code what is going to require codes
 ```html
 <?php require('./libs/pdb.lib.php')?>
+<?php include('./libs/pdb.sql.php')?>
 <html>
 <head>
 <title>PDB - demo</title>
