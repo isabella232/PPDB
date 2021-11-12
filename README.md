@@ -23,7 +23,8 @@ In your codes enter this line of code what is going to require codes
 
 ### Usable actions
 
-| Function | Usage 		   | support |
-| -------- | ------------- | ------- |
-| createStorage() | PDB::createStorage($name) | 0.0.1<X  |
-| createDB() | PDB::createDB($name, $storagePath) | 0.0.1<X |
+| Function | Usage 		   | Default | support |
+| -------- | ------------- | ------- | ------ |
+| createStorage() | PDB::createStorage($name, $storagePath) | "db", CURR_ROOT | 0.0.1<X  |
+| createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | 0.0.1<X |
+| returnDB() | PDB::returnDB($name, $storagePath) | undefined, ROOT_DB | 0.0.1<X |
