@@ -9,7 +9,7 @@ any database if you have SSL(secured socket layer) and more...
 ### How to use?
 
 In your codes enter this line of code what is going to require codes
-```
+```html
 <?php require('./libs/pdb.lib.php')?>
 <html>
 <head>
