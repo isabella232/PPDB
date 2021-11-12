@@ -56,5 +56,5 @@ In your codes enter this line of code what is going to require codes
  | -------- | ----- | ------ | -------- |
  | connect()|mySQL::connect($host, $user, $psw, $db)| undefined, undefined, undefined, undefined | boolean |
  | exportAll() | mySQL::exportAll($table) | undefined | boolean |
- | export() | mySQL()::export($table, $select) | undefined, undefined | boolean |
+ | export() | mySQL::export($table, $select) | undefined, undefined | boolean |
  
