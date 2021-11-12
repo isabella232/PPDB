@@ -21,11 +21,11 @@ In your codes enter this line of code what is going to require codes
 </html>
 ```
 
-### Usable actions
+### functions
 
 | Function | Usage 		   | Default  | return | support |
 | -------- | ------------- | ------- | ------ | ------ |
-| createStorage() | PDB::createStorage($name, $storagePath) | "db", CURR_ROOT | boolean | 0.0.1<X  |
+| createStorage() | PDB::createStorage($name, $storagePath) | "db", ROOT | boolean | 0.0.1<X  |
 | createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
 | queryDB() | PDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
 | queryDB()->read()   | PDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
@@ -35,3 +35,13 @@ In your codes enter this line of code what is going to require codes
 | queryDB()->select() | PDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
 | ArrToStr() | PDB::ArrToStr($arr) | undefined | string | 0.0.1<X |
 | StrToArr() | PDB::StrToArr($arr) | undefined | array | 0.0.1<X |
+| toFloat()  | PDB::toFloat($str)  | undefined | int | 0.0.1<X |
+| toString() | PDB::toString($int) | undefined | string | 0.0.1<X |
+
+### Keywords
+
+| Keywords | value |
+| ------- | ------ |
+| ROOT    | ../current             |
+| ROOT_DB | ../current/STORAGE/  |
+| STORAGE | {create_storage}       |
