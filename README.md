@@ -23,8 +23,13 @@ In your codes enter this line of code what is going to require codes
 
 ### Usable actions
 
-| Function | Usage 		   | Default | support |
-| -------- | ------------- | ------- | ------ |
-| createStorage() | PDB::createStorage($name, $storagePath) | "db", CURR_ROOT | 0.0.1<X  |
-| createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | 0.0.1<X |
-| returnDB() | PDB::returnDB($name, $storagePath) | undefined, ROOT_DB | 0.0.1<X |
+| Function | Usage 		   | Default  | return | support |
+| -------- | ------------- | ------- | ------ | ------ |
+| createStorage() | PDB::createStorage($name, $storagePath) | "db", CURR_ROOT | boolean | 0.0.1<X  |
+| createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
+| queryDB() | PDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
+| queryDB()->read()   | PDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
+| queryDB()->write() | PDB::queryDB($name, $storagePath)->write($str) | undefined | boolean | 0.0.1<X |
+| queryDB()->test()  | PDB::queryDB($name, $storagePath)->test() | null | boolean | 0.0.1<X |
+| queryDB()->ignore() | PDB::queryDB($name, $storagePath)->ignore() | null | undefined | 0.0.1<X |
+| queryDB()->select() | PDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
