@@ -33,3 +33,5 @@ In your codes enter this line of code what is going to require codes
 | queryDB()->test()  | PDB::queryDB($name, $storagePath)->test() | null | boolean | 0.0.1<X |
 | queryDB()->ignore() | PDB::queryDB($name, $storagePath)->ignore() | null | undefined | 0.0.1<X |
 | queryDB()->select() | PDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
+| ArrToStr() | PDB::ArrToStr($arr) | undefined | string | 0.0.1<X |
+| StrToArr() | PDB::StrToArr($arr) | undefined | array | 0.0.1<X |
