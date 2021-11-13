@@ -6,7 +6,7 @@ class PDB{
 		/*nothing/	
 	}
 
-
+	public static function createStorage();
 
 }
 
