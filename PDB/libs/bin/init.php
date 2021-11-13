@@ -34,7 +34,7 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 
 	try{
 		if(LIBRARY_API[0] !== 1){
-			throw new PDBErr(LIBRARY_API);
+			throw new PDBErr(LIBRARY_API[0]);
 		}
 	}catch(PDBErr $e){
 			  echo $e->CHECKLIBSNAME();
