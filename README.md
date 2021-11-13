@@ -56,7 +56,7 @@ In your codes enter this line of code what is going to require codes
 | ------- | ------ |
 | ROOT    | ../current             |
 | ROOT_DB | ../current/STORAGE/  |
-| STORAGE | {create_storage}       |
+| STORAGE | __create_storage__       |
 
 ***
 
