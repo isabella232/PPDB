@@ -45,7 +45,8 @@ In your codes enter this line of code what is going to require codes
 | decode64() | PDB::decode64($str) | undefined | string | 0.0.1<X |
 | decode32() | PDB::decode32($str) | undefined | string | 0.0.1<X |
 | hash | PDB::hash($algo, $str) | undefined, undefined | string | 0.0.1<X |
-| encrypt | PDB::encrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad,$taglength) | undefined, undefined, undefined, 0, undefined, undefined, undefined, 16 | string | 0.0.1<X |
+| encrypt | PDB::encrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad,$tag_length) | undefined, undefined, undefined, 0, "", null, "", 16 | string | 0.0.1<X |
+| decrypt | PDB::decrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad) | undefined, undefined, undefined, 0, "", "", "" | string | 0.0.1<X |
 
 ### Keywords
 
