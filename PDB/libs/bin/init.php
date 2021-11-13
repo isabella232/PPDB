@@ -1,5 +1,5 @@
 <?php
-require(dirname(__DIR__)."/handler/Exception.php");
+
 
 # package name
 const LIBRARY_NAME = "PDB";
