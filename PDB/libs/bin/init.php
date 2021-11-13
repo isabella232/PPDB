@@ -41,7 +41,7 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 	}
 }
 	try{
-		gettype(LIBRARY_SSL_SUPPORT !== "boolean"){
+		if(gettype (LIBRARY_SSL_SUPPORT) !== "boolean"){
 			throw new PDBErr(LIBRARY_SSL_SUPPORT);
 		}
 	}catch(PDBErr $e){
