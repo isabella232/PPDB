@@ -47,7 +47,8 @@ In your codes enter this line of code what is going to require codes
 | hash | PDB::hash($algo, $str) | undefined, undefined | string | 0.0.1<X |
 | encrypt()(SSL required) | PDB::encrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad,$tag_length) | undefined, undefined, undefined, 0, "", null, "", 16 | string | 0.0.1<X |
 | decrypt()(SSL required) | PDB::decrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad) | undefined, undefined, undefined, 0, "", "", "" | string | 0.0.1<X |
-| crypt() | PDB::crypt($str, $salt) | undefined, undefined | string | 0.0.1<X
+| crypt() | PDB::crypt($str, $salt) | undefined, undefined | string | 0.0.1<X |
+| matchHash() | PDB::matchHash($known_str, $user_str) | undefined, undefined | boolean | 0.0.1<X
 
 ### Keywords
 
