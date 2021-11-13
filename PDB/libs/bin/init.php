@@ -48,6 +48,14 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 			  echo $e->CHECKLIBSNAME();
 	}
 }
+			try{
+		if(LIBRARY_LICENCE !== "Apache-2.0 License"){
+			throw new PDBErr(LIBRARY_LICENCE);
+		}
+	}catch(PDBErr $e){
+			  echo $e->CHECKLIBSNAME();
+	}
+}
 	
 }
 
