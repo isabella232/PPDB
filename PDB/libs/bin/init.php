@@ -23,6 +23,33 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 			  echo $e->CHECKLIBSNAME();
 	}
 }
+		try{
+		if(LIBRARY_VERSION !== "0.0.1"){
+			throw new PDBErr(LIBRARY_VERSION);
+		}
+	}catch(PDBErr $e){
+			  echo $e->CHECKLIBSNAME();
+	}
+}
+
+	try{
+		if(LIBRARY_API !== "0.0.1"){
+			throw new PDBErr(LIBRARY_API);
+		}
+	}catch(PDBErr $e){
+			  echo $e->CHECKLIBSNAME();
+	}
+}
+	try{
+		if(LIBRARY_SSL_SUPPORT !== true){
+			throw new PDBErr(LIBRARY_SSL_SUPPORT);
+		}
+	}catch(PDBErr $e){
+			  echo $e->CHECKLIBSNAME();
+	}
+}
+	
+}
 
 RenderLibrary();
 ?>
