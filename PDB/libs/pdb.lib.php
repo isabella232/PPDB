@@ -7,6 +7,13 @@ class PDB{
 	 #nothing	
 	}
 	public static function createStorage(){
+		#Check if dictionary 
+		if(!file_exists(ROOT_DB)){
+			mkdir(ROOT.DS."db");
+		}else{
+			#Nothing
+		}
+			
 		
 	}
 
