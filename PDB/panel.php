@@ -1,6 +1,6 @@
 <?php 
-require('./libs/pdb.lib.php');
- require('./libs/pdb.sql.php');
+require('libs/pdb.lib.php');
+ require('libs/pdb.sql.php');
  ?>
 <html>
 <head>
@@ -8,8 +8,7 @@ require('./libs/pdb.lib.php');
 </head>
 <body>
 <?php
-# Write code here
-
+echo PDB::INSTALL("hi", "psw");
 ?>
 </body>
 </html>
