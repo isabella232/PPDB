@@ -6,6 +6,14 @@ A portable DataBase or PDB is a simplifyed version of SQLi. This uses JSON files
 inclusive secureaty. Along with a admin panel that will require a login/register prompt. Secure
 any database if you have SSL(secured socket layer) and more...
 
+### How to install?
+
+In your code enter this line of code:
+```php
+PDB::Install($username, $password);
+```
+
+
 ### How to use?
 
 In your codes enter this line of code what is going to require codes
@@ -16,7 +24,7 @@ In your codes enter this line of code what is going to require codes
 ?>
 <html>
 <head>
-<title>PDB - demo</title>
+<title>PDB - Panel</title>
 </head>
 <body>
 ...
@@ -54,10 +62,12 @@ In your codes enter this line of code what is going to require codes
 
 | Keywords | value |
 | ------- | ------ |
-| ROOT    | ../current             |
-| ROOT_DB | ../current/STORAGE/  |
-| STORAGE | __create_storage__       |
-
+| ROOT    | \current             |
+| ROOT_DB | \current\libs\db  |
+| DS  | \ |
+| PDB_CONNECT | $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] |
+| PDB_SERVER_NAME | $_SERVER['SERVER_NAME']    |
+| PDB_SERVER_PORT |  $_SERVER['SERVER_PORT'] |
 ***
 
 ## Export SQL database
