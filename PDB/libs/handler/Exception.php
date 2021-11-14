@@ -27,7 +27,11 @@ class PDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> is not a valid Library licence(string)';
     return $errorMsg;
 	}
-	
+	public function CONNECT_ERR(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> cannot connect to server';
+    return $errorMsg;
+	}
 	
 	
 	
