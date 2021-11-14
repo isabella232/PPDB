@@ -4,27 +4,27 @@ class PDBErr extends Exception{
 	#Library check
 	public function CHECKLIBSNAME(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> is not a valid Library name';
+    .': <b>'.$this->getMessage().'</b> is not a valid Library name(string)';
     return $errorMsg;
 	}
 	public function CHECKLIBSVERSION(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> is not a valid Library version';
+    .': <b>'.$this->getMessage().'</b> is not a valid Library version(string)';
     return $errorMsg;
 	}
 	public function CHECKLIBSAPI(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> is not a valid Library API';
+    .': <b>'.$this->getMessage().'</b> is not a valid Library API(string)';
     return $errorMsg;
 	}
 	public function CHECKLIBSSL(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> is not a valid Library SSL';
+    .': <b>'.$this->getMessage().'</b> is not a valid Library SSL(boolean)';
     return $errorMsg;
 	}
 	public function CHECKLIBSLICENCE(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> is not a valid Library licence';
+    .': <b>'.$this->getMessage().'</b> is not a valid Library licence(string)';
     return $errorMsg;
 	}
 	
