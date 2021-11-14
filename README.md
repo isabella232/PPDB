@@ -28,7 +28,7 @@ In your codes enter this line of code what is going to require codes
 
 | Function | Usage 		   | Default  | return | support |
 | -------- | ------------- | ------- | ------ | ------ |
-| createStorage() | PDB::createStorage($name, $storagePath) | "db", ROOT | boolean | 0.0.1<X  |
+| createStorage() | PDB::createStorage() | null | boolean | 0.0.1<X  |
 | createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
 | queryDB() | PDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
 | queryDB()->read()   | PDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
