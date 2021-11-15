@@ -10,13 +10,13 @@
         },
         {
             "name": "average-insane-insomniac",
-            "email": "",
+            "email": "average-insane-insomniac@github.com",
             "homepage": "https://github.com/average-insane-insomniac",
             "role": "contributer"
         }
     ],
     
-   "license": "MIT"
+   "license": "Apache-2.0"
 
 
 }
