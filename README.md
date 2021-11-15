@@ -25,7 +25,7 @@ In your codes enter this line of code what is going to require codes
 ?>
 <html>
 <head>
-<title>PDB - Panel</title>
+<title>PPDB - Panel</title>
 </head>
 <body>
 ...
