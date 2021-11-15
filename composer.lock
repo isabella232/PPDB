@@ -1,1 +1,22 @@
+{
+    "name": "surveybuilderteams/PDB",
+    "description": "A simple way of making protable database for anything",
+    "authors": [
+        {
+            "name": "SurveyBuilder-Admin",
+            "email": "surveybuildersbot@gmail.com",
+            "homepage": "https://surveybuilder.epizy.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "average-insane-insomniac",
+            "email": "",
+            "homepage": "https://github.com/average-insane-insomniac",
+            "role": "contributer"
+        }
+    ],
+    
+   "license": "MIT"
 
+
+}
