@@ -10,7 +10,7 @@ any database if you have SSL(secured socket layer) and more...
 
 In your code enter this line of code:
 ```php
-PDB::Install($username, $password);
+PPDB::Install($username, $password);
 ```
 or if `panel.php` use the register/login prompt
 
