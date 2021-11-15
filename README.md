@@ -1,4 +1,4 @@
-# Portable DataBase(PDB)
+# PHP Program DataBase(PPDB)
 
 ### What is this?
 
