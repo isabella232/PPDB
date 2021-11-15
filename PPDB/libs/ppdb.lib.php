@@ -2,7 +2,7 @@
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
 require("bin/init.php");
-class PDB{
+class PPDB{
 	private function __construct(){
 	 #nothing	
 	}
