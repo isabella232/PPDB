@@ -5,7 +5,7 @@ class mySQL{
 	private $psw;
 	private $db;
 	public $conn;
-	public $result;
+	public $arr;
 	
 	private function __contruct(){
 		#nothing
@@ -21,7 +21,7 @@ class mySQL{
     	  $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 		$arr = array();
 		while($row = mysqli_fetch_assoc($result)){
-		  $result[] = $row;
+		  $arr[] = $row;
 		}
 		$encode = json_encode($arr);
 		$export = fopen(ROOT_DB.DS."SQLALL.json", "w+");
@@ -33,7 +33,7 @@ class mySQL{
     	  $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 		$arr = array();
 		while($row = mysqli_fetch_assoc($result)){
-		  $result[] = $row;
+		  $arr[] = $row;
 		}
 		$encode = json_encode($arr);
 		$export = fopen(ROOT_DB.DS."SQLALL.json", "w+");
