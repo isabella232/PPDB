@@ -1,6 +1,6 @@
 <?php
 
-class PDBErr extends Exception{
+class PPDBErr extends Exception{
 	#Library check
 	public function CHECKLIBSNAME(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
