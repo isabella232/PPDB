@@ -36,7 +36,7 @@ class mySQL{
 		  $arr[] = $row;
 		}
 		$encode = json_encode($arr);
-		$export = fopen(ROOT_DB.DS."SQLALL.json", "w+");
+		$export = fopen(ROOT_DB.DS."SQL_'.$selector.'.json", "w+");
 		fwrite($export, $encode);
 		fclose($export);
 	}
