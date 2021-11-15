@@ -50,7 +50,7 @@ if(isset($_POST['regbtn'])){
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		PDB::PSW_ENCRYPT($psw);
+		$psw = PDB::PSW_ENCRYPT($psw);
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
