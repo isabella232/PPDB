@@ -41,13 +41,13 @@ class PPDB{
 		
 	}
 	
-	public static function INSTALL($user, $psw, $host=PDB_CONNECT){
+	public static function INSTALL($user, $psw, $host=PPDB_CONNECT){
 		$pass = 1;
 		try{
-			if($host !== PDB_CONNECT){
-				throw new PDBErr($host);
+			if($host !== PPDB_CONNECT){
+				throw new PPDBErr($host);
 			}
-		}catch(PDBErr $e){
+		}catch(PPDBErr $e){
 			echo $e->CONNECT_ERR();
 			$pass = 0;
 		}
