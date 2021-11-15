@@ -32,6 +32,10 @@ In your codes enter this line of code what is going to require codes
 </html>
 ```
 
+or
+
+You can use our `panel.php` as a baseplate of plugins and other database extentions for non-developers
+
 ### functions
 
 | Function | Usage 		   | Default  | return | support |
