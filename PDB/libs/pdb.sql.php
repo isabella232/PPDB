@@ -5,6 +5,7 @@ class mySQL{
 	private $psw;
 	private $db;
 	public $conn;
+	public $result;
 	
 	private function __contruct(){
 		#nothing
