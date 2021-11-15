@@ -41,27 +41,27 @@ You can use our `panel.php` as a baseplate of plugins and other database extenti
 
 | Function | Usage 		   | Default  | return | support |
 | -------- | ------------- | ------- | ------ | ------ |
-| createStorage() | PDB::createStorage() | null | boolean | 0.0.1<X  |
-| createDB() | PDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
-| queryDB() | PDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
-| queryDB()->read()   | PDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
-| queryDB()->write() | PDB::queryDB($name, $storagePath)->write($str) | undefined | boolean | 0.0.1<X |
-| queryDB()->test()  | PDB::queryDB($name, $storagePath)->test() | null | boolean | 0.0.1<X |
-| queryDB()->ignore() | PDB::queryDB($name, $storagePath)->ignore() | null | undefined | 0.0.1<X |
-| queryDB()->select() | PDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
-| ArrToStr() | PDB::ArrToStr($arr) | undefined | string | 0.0.1<X |
-| StrToArr() | PDB::StrToArr($arr) | undefined | array | 0.0.1<X |
-| toFloat()  | PDB::toFloat($str)  | undefined | int | 0.0.1<X |
-| toString() | PDB::toString($int) | undefined | string | 0.0.1<X |
-| encode64() | PDB::encode64($str) | undefined | string | 0.0.1<X |
-| encode32() | PDB::encode32($str) | undefined | string | 0.0.1<X |
-| decode64() | PDB::decode64($str) | undefined | string | 0.0.1<X |
-| decode32() | PDB::decode32($str) | undefined | string | 0.0.1<X |
-| hash | PDB::hash($algo, $str) | undefined, undefined | string | 0.0.1<X |
+| createStorage() | PPDB::createStorage() | null | boolean | 0.0.1<X  |
+| createDB() | PPDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
+| queryDB() | PPDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
+| queryDB()->read()   | PPDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
+| queryDB()->write() | PPDB::queryDB($name, $storagePath)->write($str) | undefined | boolean | 0.0.1<X |
+| queryDB()->test()  | PPDB::queryDB($name, $storagePath)->test() | null | boolean | 0.0.1<X |
+| queryDB()->ignore() | PPDB::queryDB($name, $storagePath)->ignore() | null | undefined | 0.0.1<X |
+| queryDB()->select() | PPDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
+| ArrToStr() | PPDB::ArrToStr($arr) | undefined | string | 0.0.1<X |
+| StrToArr() | PPDB::StrToArr($arr) | undefined | array | 0.0.1<X |
+| toFloat()  | PPDB::toFloat($str)  | undefined | int | 0.0.1<X |
+| toString() | PPDB::toString($int) | undefined | string | 0.0.1<X |
+| encode64() | PPDB::encode64($str) | undefined | string | 0.0.1<X |
+| encode32() | PPDB::encode32($str) | undefined | string | 0.0.1<X |
+| decode64() | PPDB::decode64($str) | undefined | string | 0.0.1<X |
+| decode32() | PPDB::decode32($str) | undefined | string | 0.0.1<X |
+| hash | PPDB::hash($algo, $str) | undefined, undefined | string | 0.0.1<X |
 | encrypt()(SSL required) | PDB::encrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad,$tag_length) | undefined, undefined, undefined, 0, "", null, "", 16 | string | 0.0.1<X |
-| decrypt()(SSL required) | PDB::decrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad) | undefined, undefined, undefined, 0, "", "", "" | string | 0.0.1<X |
-| crypt() | PDB::crypt($str, $salt) | undefined, undefined | string | 0.0.1<X |
-| matchHash() | PDB::matchHash($known_str, $user_str) | undefined, undefined | boolean | 0.0.1<X
+| decrypt()(SSL required) | PPDB::decrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad) | undefined, undefined, undefined, 0, "", "", "" | string | 0.0.1<X |
+| crypt() | PPDB::crypt($str, $salt) | undefined, undefined | string | 0.0.1<X |
+| matchHash() | PPDB::matchHash($known_str, $user_str) | undefined, undefined | boolean | 0.0.1<X
 
 ### Keywords
 
