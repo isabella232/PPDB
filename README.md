@@ -20,8 +20,8 @@ or if `panel.php` use the register/login prompt
 In your codes enter this line of code what is going to require codes
 ```html
 <?php
- require('./libs/pdb.lib.php');
- include('./libs/pdb.sql.php');
+ require('./libs/ppdb.lib.php');
+ include('./libs/ppdb.sql.php');
 ?>
 <html>
 <head>
