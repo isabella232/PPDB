@@ -1,7 +1,7 @@
 <?php 
 session_start();
-require('libs/pdb.lib.php');
- require('libs/pdb.sql.php');
+require('libs/ppdb.lib.php');
+ require('libs/ppdb.sql.php');
  ?>
 <html>
 <head>
@@ -36,7 +36,7 @@ h1{
 </head>
 <body>
 <?php
-echo PDB::userUI();
+echo PPDB::userUI();
 if(!file_exists(ROOT.'user.json')){
 		session_unset();
 }
@@ -50,7 +50,7 @@ if(isset($_POST['regbtn'])){
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		$psw = PDB::PSW_ENCRYPT($psw);
+		$psw = PPDB::PSW_ENCRYPT($psw);
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
@@ -58,7 +58,7 @@ if(isset($_POST['regbtn'])){
 		}
 		$_SESSION['username'] = $username;
 	}
-	echo PDB::loadPanel();
+	echo PPDB::loadPanel();
 ?>
 
 <!-- JavaScript Bundle with Popper -->
