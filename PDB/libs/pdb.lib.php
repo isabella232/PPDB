@@ -91,6 +91,15 @@ class PDB{
 			return $panel;
 		}
 	}
+	
+	public static function PSW_ENCRYPT($psw){
+		$psw = hash("gost", $psw);
+		$psw = hash("sha1", $psw);
+		$psw = hash("md5", $psw);
+		$psw = hash("crc32b", $psw);
+		$psw = hash("ripemd128", $psw);
+		return $psw;
+	}
 
 
 }
