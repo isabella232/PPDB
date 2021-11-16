@@ -12,7 +12,7 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
    function RenderLibrary(){
 			# cache LIBRARY values
 		try{
-		if(LIBRARY_NAME !== "PPDB"){
+		if(LIBRARY_NAME !== "PDB"){
 			throw new PPDBErr(LIBRARY_NAME);
 		}
 	}catch(PPDBErr $e){
