@@ -47,7 +47,7 @@ class PPDB{
 			if($host !== PPDB_CONNECT){
 				throw new PPDBErr($host);
 			}
-		}catch(PPDBErr $e){
+		}catch(PDBErr $e){
 			echo $e->CONNECT_ERR();
 			$pass = 0;
 		}
@@ -90,15 +90,6 @@ class PPDB{
 			$panel .= '</div>';
 			return $panel;
 		}
-	}
-	
-	public static function PSW_ENCRYPT($psw){
-		$psw = hash("gost", $psw);
-		$psw = hash("sha1", $psw);
-		$psw = hash("md5", $psw);
-		$psw = hash("crc32b", $psw);
-		$psw = hash("ripemd128", $psw);
-		return $psw;
 	}
 
 
