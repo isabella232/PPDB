@@ -44,13 +44,17 @@ if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		
-		PDB::INSTALL($username, $psw);
+		PPDB::INSTALL($username, $psw);
 		$_SESSION['username'] = $username;
 	}
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		$psw = PPDB::PSW_ENCRYPT($psw);
+		$psw = hash("gost", $psw);
+		$psw = hash("sha1", $psw);
+		$psw = hash("md5", $psw);
+		$psw = hash("crc32b", $psw);
+		$psw = hash("ripemd128", $psw);
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
