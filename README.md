@@ -37,6 +37,8 @@ or
 
 You can use our `panel.php` as a baseplate of plugins and other database extentions for non-developers
 
+***
+
 ### Developer tools
 
 Until were finished I will put up a documentation that developers can use
