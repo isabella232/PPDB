@@ -6,6 +6,8 @@ A portable DataBase or PDB is a simplifyed version of SQLi. This uses JSON files
 inclusive security. Along with a admin panel that will require a login/register prompt. Secure
 any database if you have SSL(secured socket layer) and more...
 
+***
+
 ### How to install?
 
 In your code enter this line of code:
