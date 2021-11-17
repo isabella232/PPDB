@@ -37,42 +37,10 @@ or
 
 You can use our `panel.php` as a baseplate of plugins and other database extentions for non-developers
 
-### functions
+### Developer tools
 
-| Function | Usage 		   | Default  | return | support |
-| -------- | ------------- | ------- | ------ | ------ |
-| createStorage() | PPDB::createStorage() | null | boolean | 0.0.1<X  |
-| createDB() | PPDB::createDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
-| queryDB() | PPDB::queryDB($name, $storagePath) | undefined, ROOT_DB | boolean | 0.0.1<X |
-| queryDB()->read()   | PPDB::queryDB($name, $storagePath)->read() | null | string | 0.0.1<X |
-| queryDB()->write() | PPDB::queryDB($name, $storagePath)->write($str) | undefined | boolean | 0.0.1<X |
-| queryDB()->test()  | PPDB::queryDB($name, $storagePath)->test() | null | boolean | 0.0.1<X |
-| queryDB()->ignore() | PPDB::queryDB($name, $storagePath)->ignore() | null | undefined | 0.0.1<X |
-| queryDB()->select() | PPDB::queryDB($name, $storagePath)->select($query) | undefined | string | 0.0.1<X |
-| ArrToStr() | PPDB::ArrToStr($arr) | undefined | string | 0.0.1<X |
-| StrToArr() | PPDB::StrToArr($arr) | undefined | array | 0.0.1<X |
-| toFloat()  | PPDB::toFloat($str)  | undefined | int | 0.0.1<X |
-| toString() | PPDB::toString($int) | undefined | string | 0.0.1<X |
-| encode64() | PPDB::encode64($str) | undefined | string | 0.0.1<X |
-| encode32() | PPDB::encode32($str) | undefined | string | 0.0.1<X |
-| decode64() | PPDB::decode64($str) | undefined | string | 0.0.1<X |
-| decode32() | PPDB::decode32($str) | undefined | string | 0.0.1<X |
-| hash | PPDB::hash($algo, $str) | undefined, undefined | string | 0.0.1<X |
-| encrypt()(SSL required) | PDB::encrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad,$tag_length) | undefined, undefined, undefined, 0, "", null, "", 16 | string | 0.0.1<X |
-| decrypt()(SSL required) | PPDB::decrypt($data,$cipher_algo,$passphrase,$options,$iv,$tag,$aad) | undefined, undefined, undefined, 0, "", "", "" | string | 0.0.1<X |
-| crypt() | PPDB::crypt($str, $salt) | undefined, undefined | string | 0.0.1<X |
-| matchHash() | PPDB::matchHash($known_str, $user_str) | undefined, undefined | boolean | 0.0.1<X
+Until were finished I will put up a documentation that developers can use
 
-### Keywords
-
-| Keywords | value |
-| ------- | ------ |
-| ROOT    | \current             |
-| ROOT_DB | \current\libs\db  |
-| DS  | \ |
-| PDB_CONNECT | $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] |
-| PDB_SERVER_NAME | $_SERVER['SERVER_NAME']    |
-| PDB_SERVER_PORT |  $_SERVER['SERVER_PORT'] |
 ***
 
 ## Export SQL database
