@@ -32,7 +32,21 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> cannot connect to server';
     return $errorMsg;
 	}
-	
+	public function isNotNumber(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> must be a number';
+    return $errorMsg;
+	}
+	public function isNotString(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> must be a string';
+    return $errorMsg;
+	}
+	public function isNotBoolean(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> must be a boolean';
+    return $errorMsg;
+	}
 	
 	
 }
