@@ -1,7 +1,9 @@
 <?php 
 session_start();
+ 
 require('libs/ppdb.lib.php');
  require('libs/ppdb.sql.php');
+
  ?>
 <html>
 <head>
@@ -58,9 +60,11 @@ if(isset($_POST['regbtn'])){
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
-			
+			$_SESSION['username'] = $username;
+		}else{
+			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(42).'">Error: cannot login correctly!</p>';
 		}
-		$_SESSION['username'] = $username;
+		
 	}
 	echo PPDB::loadPanel();
 ?>
