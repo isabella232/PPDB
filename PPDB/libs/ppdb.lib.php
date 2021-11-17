@@ -6,6 +6,29 @@ class PPDB{
 	private function __construct(){
 	 #nothing	
 	}
+#Logic
+	public static function isNumber($int){
+		if(gettype($int) === "double" || gettype($int) === "integer"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static function isString($str){
+		if(gettype($str) === "string"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static function isBoolean($bool){
+		if(gettype($bool) === "boolean"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+#others
 	public static function userUI(){
 		#register
 		if(!file_exists(ROOT."user.json")){
@@ -91,7 +114,79 @@ class PPDB{
 			return $panel;
 		}
 	}
+	
+	#Stylesheet
+	public static function COLOR($r, $g, $b, $a=1){
+		
+		try{
+			if(!PPDB::isNumber($r)){
+				throw new PPDBErr($r);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
+		try{
+			if(!PPDB::isNumber($g)){
+				throw new PPDBErr($g);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
+		try{
+			if(!PPDB::isNumber($g)){
+				throw new PPDBErr($g);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
+		try{
+			if(!PPDB::isNumber($a)){
+				throw new PPDBErr($a);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
 
+		
+		
+		return 'color:rgba('.$r.', '.$g.', '.$b.', '.$a.');';
+		
+	}
+	
+	public static function BOLD(){
+		return 'font-weight:bold;';
+	}
+	
+	public static function ITALIC(){
+		return 'font-style:italic;';
+	}
+	public static function SIZE($size){
+		try{
+			if(!PPDB::isNumber($size)){
+				throw new PPDBErr($size);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
+		return 'font-size:'.$size.'px';
+	}
+
+	public static function ALIGN($align){
+		try{
+			if(gettype($align) !== "string"){
+				throw new PPDBErr($align);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotString();
+			return false;
+		}
+		return 'text-align: '.$align.';';
+	}
 
 }
 
