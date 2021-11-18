@@ -56,4 +56,5 @@ Until were finished I will put up a documentation that developers can use
  | connect()|mySQL::connect($host, $user, $psw, $db)| undefined, undefined, undefined, undefined | boolean |
  | exportAll() | mySQL::exportAll($table) | undefined | boolean |
  | export() | mySQL::export($table, $select) | undefined, undefined | boolean |
+ | import() | mySQL::import($table, $JSONFILE) | undefined, undefined | boolean |
  
