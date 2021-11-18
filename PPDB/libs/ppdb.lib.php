@@ -93,6 +93,14 @@ class PPDB{
 		
 		
 	}
+	public static function PSW_ENCRYPT($psw){
+			$psw = hash("gost", $psw);
+			$psw = hash("sha1", $psw);
+			$psw = hash("md5", $psw);
+			$psw = hash("crc32b", $psw);
+			$psw = hash("ripemd128", $psw);
+			return $psw;
+	}
 	public static function createStorage(){
 		#Check if dictionary 
 		if(!file_exists(ROOT_DB)){
@@ -173,7 +181,7 @@ class PPDB{
 			echo $e->isNotNumber();
 			return false;
 		}
-		return 'font-size:'.$size.'px';
+		return 'font-size:'.$size.'px;';
 	}
 
 	public static function ALIGN($align){
@@ -186,6 +194,18 @@ class PPDB{
 			return false;
 		}
 		return 'text-align: '.$align.';';
+	}
+	public static function TXTRANS($transform){
+		try{
+			if(gettype($transform) !== "string"){
+				throw new PPDBErr($transform);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotString();
+			return false;
+		}
+		return 'text-transform: '.$transform.';';
+		
 	}
 
 }

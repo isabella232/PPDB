@@ -52,17 +52,13 @@ if(isset($_POST['regbtn'])){
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		$psw = hash("gost", $psw);
-		$psw = hash("sha1", $psw);
-		$psw = hash("md5", $psw);
-		$psw = hash("crc32b", $psw);
-		$psw = hash("ripemd128", $psw);
+		$psw = PPDB::PSW_ENCRYPT($psw);
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
 			$_SESSION['username'] = $username;
 		}else{
-			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(42).'">Error: cannot login correctly!</p>';
+			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(42).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Error: cannot login correctly!</p>';
 		}
 		
 	}
