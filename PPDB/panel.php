@@ -2,8 +2,6 @@
 session_start();
  
 require('libs/ppdb.lib.php');
- require('libs/ppdb.sql.php');
-
  ?>
 <html>
 	<head>
@@ -38,6 +36,7 @@ require('libs/ppdb.lib.php');
 		</head>
 		<body>
 			<?php
+			PPDB::createStorage();
 echo PPDB::userUI();
 if(!file_exists(ROOT.'user.json')){
 		session_unset();
@@ -66,6 +65,7 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	
+
 
 ?>
 			<!-- JavaScript Bundle with Popper -->

@@ -104,14 +104,19 @@ class PPDB{
 	}
 	public static function createStorage(){
 		#Check if dictionary 
-		if(!is_dir(ROOT_DB."db")){
+		if(!is_dir(ROOT.DS."db")){
 			mkdir(ROOT.DS."db");
 		}else{
-			#Nothing
-		}
 			
-		
+		}
 	}
+	public static function Encrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = "", $tag_length = 16){
+		return openssl_encrypt($data, $cipher_algo, $passphrase, $options, $iv, $tag, $aad, $tag_length);	
+	}
+	public static function Decrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = ""){
+		return openssl_decrypt($data, $cipher_algo, $passphrase, $options, $iv, $tag, $aad);	
+	}
+	
 	public static function loadPanel(){
 		if(SESSION_USER){
 			$panel = '<div class="container-fluid panelCon">';
