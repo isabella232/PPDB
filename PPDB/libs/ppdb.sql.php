@@ -1,27 +1,30 @@
 <?php
 class mySQL{
-	private $host;
-	private $user;
-	private $psw;
-	private $db;
+	public $host;
+	public $user;
+	public $psw;
+	public $db;
 	public $conn;
 	public $arr;
 	
-	private function __contruct(){
-		#nothing
+	private function __contruct(){		
+	# Nothing
 	}
 	public static function connect($host, $user, $psw, $db){
-		$conn = new sqli($host, $user, $psw, $db);
-	if ($conn->connect_error) {
-  		die("Connection failed: " . $conn->connect_error);
+		$this->host = $host;
+		$this->user = $user;
+		$this->psw = $psw;
+		$this->conn = new sqli($host, $user, $psw, $db);
+	if ($this->conn->connect_error) {
+  		die("Connection failed: " . $this->conn->connect_error);
 		}
 	}
 	public static function exportAll($table){
 	  $sql = "select * from '.$table.'";
-    	  $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
+    	  $result = mysqli_query($this->conn, $sql) or die("Error in Selecting " . mysqli_error($this->conn));
 		$arr = array();
 		while($row = mysqli_fetch_assoc($result)){
-		  $arr[] = $row;
+		  $this->arr[] = $row;
 		}
 		$encode = json_encode($arr);
 		$export = fopen(ROOT_DB.DS."SQLALL.json", "w+");
@@ -30,10 +33,10 @@ class mySQL{
 	}
        public static function export($table, $selector){
        	$sql = "select '.$selector.' from '.$table.'";
-    	  $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
+    	  $result = mysqli_query($this->conn, $sql) or die("Error in Selecting " . mysqli_error($this->conn));
 		$arr = array();
 		while($row = mysqli_fetch_assoc($result)){
-		  $arr[] = $row;
+		  $this->arr[] = $row;
 		}
 		$encode = json_encode($arr);
 		$export = fopen(ROOT_DB.DS."SQL_'.$selector.'.json", "w+");

@@ -2,6 +2,7 @@
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
 require("bin/init.php");
+require("bin/reload.php");
 class PPDB{
 	private function __construct(){
 	 #nothing	
@@ -32,7 +33,7 @@ class PPDB{
 	public static function userUI(){
 		#register
 		if(!file_exists(ROOT."user.json")){
-			$form = "<form method='post'>";
+			$form = "<form method='post' action='#' class='panelForm'>";
 			$form .= "<h1 class='text-center'>Register</h1>";
 			$form .= '  <div class="form-group">';
 		$form .= "<input type='text' class='form-control' name='username' required='' id='username' placeholder='Username'/><br/>";
@@ -47,7 +48,7 @@ class PPDB{
 		return $form;
 		}else{
 			if(!SESSION_USER){
-				$form = "<form method='post' action='#'>";
+				$form = "<form method='post' action='#' class='panelForm'>";
 			$form .= "<h1 class='text-center'>Login</h1>";
 			$form .= '  <div class="form-group">';
 		$form .= "<input type='text' class='form-control' name='username' required='' id='username' placeholder='Username'/><br/>";
@@ -86,7 +87,7 @@ class PPDB{
 				$query = json_encode($data);
 				fwrite($file, $query);
 				fclose($file);
-				return "<script>window.location.reload();</script>";
+				Reload::run();
 			}
 		}
 		
@@ -116,8 +117,16 @@ class PPDB{
 			$panel = '<div class="container-fluid panelCon">';
 			$panel .= '<div class="heading">
 			<h1 class="text-center text-primary">Panel</h1>
+			<form method="post">
+			<input type="submit" name="logoutbtn" class="btn btn-danger logoutbtn" value="Logout"/>
+			</form>
 			</div>';
-			
+			$panel.= '<div class="panel-nav">
+			<nav class="nav-con">
+			<a href="#" class="nav-list" title="Table">Table</a>
+			<a href="#" class="nav-list" title="Query">Query</a>
+			</nav>
+			</div>';
 			$panel .= '</div>';
 			return $panel;
 		}
@@ -205,6 +214,15 @@ class PPDB{
 			return false;
 		}
 		return 'text-transform: '.$transform.';';
+		
+	}
+	
+	#Events
+	public static function logout(){
+		if(isset($_POST['logoutbtn'])){
+			session_unset();
+		Reload::run();
+		}
 		
 	}
 
