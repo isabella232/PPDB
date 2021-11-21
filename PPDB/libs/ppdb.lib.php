@@ -104,7 +104,7 @@ class PPDB{
 	}
 	public static function createStorage(){
 		#Check if dictionary 
-		if(!file_exists(ROOT_DB)){
+		if(!is_dir(ROOT_DB."db")){
 			mkdir(ROOT.DS."db");
 		}else{
 			#Nothing
