@@ -110,18 +110,18 @@ class PPDB{
 			$psw = hash("ripemd128", $psw);
 			return $psw;
 	}
-	public static function createStorage(){
+	public static function createStorage($dir){
 		#Check if dictionary 
-		if(!is_dir(ROOT."db")){
-			mkdir(ROOT."db");
+		if(!is_dir($dir."db")){
+			mkdir($dir."db");
 		}else{
 			
 		}
 	}
-	public static function removeStorage(){
+	public static function removeStorage($dir, $Slash){
 		#Check if dictionary 
-		if(is_dir(ROOT."db")){
-			removerDirFile(ROOT."db".DS);
+		if(is_dir($dir."db")){
+			removerDirFile($dir."db".$Slash);
 		}else{
 			
 		}
