@@ -23,7 +23,6 @@ In your codes enter this line of code what is going to require codes
 ```html
 <?php
  require('./libs/ppdb.lib.php');
- require('./libs/ppdb.sql.php');
 ?>
 <html>
 <head>
