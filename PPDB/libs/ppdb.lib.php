@@ -38,9 +38,9 @@ class PPDB{
 		}
 	}
 #others
-	public static function userUI(){
+	public static function userUI($dir){
 		#register
-		if(!file_exists(ROOT."user.json")){
+		if(!file_exists($dir."user.json")){
 			$form = "<form method='post' action='#' class='panelForm'>";
 			$form .= "<h1 class='text-center'>Register</h1>";
 			$form .= '  <div class="form-group">';
@@ -169,7 +169,7 @@ class PPDB{
 			return false;
 		}	
 	}
-	public static function renameDB($oldName, $newName){
+	public static function renameDB($dir, $oldName, $newName){
 			try{
 				if(!PPDB::isString($oldName)){
 					throw new PPDBErr($oldName);
@@ -188,8 +188,8 @@ class PPDB{
 			}
 			
 			try{
-				if(!rename(ROOT_DB.$oldName.".json", ROOT_DB.$newName.".json")){
-					throw new PPDBErr(ROOT_DB.$oldName.".json" . " > " . ROOT_DB.$newName.".json");
+				if(!rename($dir.$oldName.".json", $dir.$newName.".json")){
+					throw new PPDBErr($dir.$oldName.".json" . " > " . $dir.$newName.".json");
 				}
 			}catch(PPDBErr $e){
 				echo $e->isNotRenamed();
