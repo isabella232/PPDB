@@ -7,7 +7,7 @@ inclusive security. Along with a admin panel that will require a login/register 
 any database if you have SSL(secured socket layer) and more...
 
 ***
-
+ 
 ### How to install?
 
 In your code enter this line of code:
