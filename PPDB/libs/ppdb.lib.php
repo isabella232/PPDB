@@ -73,7 +73,7 @@ class PPDB{
 		
 	}
 	
-	public static function INSTALL($user, $psw, $host=PPDB_CONNECT){
+	public static function INSTALL($dir, $user, $psw, $host=PPDB_CONNECT){
 		$pass = 1;
 		try{
 			if($host !== PPDB_CONNECT){
@@ -89,8 +89,8 @@ class PPDB{
 			$psw = hash("md5", $psw);
 			$psw = hash("crc32b", $psw);
 			$psw = hash("ripemd128", $psw);
-			if(!file_exists(ROOT."user.json")){
-				$file = fopen(ROOT."user.json", "w+");
+			if(!file_exists($dir."user.json")){
+				$file = fopen($dir."user.json", "w+");
 				$data = array("user"=>$user, "password"=>$psw);
 				$query = json_encode($data);
 				fwrite($file, $query);
