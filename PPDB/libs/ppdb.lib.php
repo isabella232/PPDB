@@ -127,7 +127,7 @@ class PPDB{
 		}
 	}
 	
-	public static function createDB($name, $arr){
+	public static function createDB($dir, $name, $arr){
 			try{
 				if(!PPDB::isString($name)){
 					throw new PPDBErr($name);
@@ -146,12 +146,12 @@ class PPDB{
 			}
 			
 			$encode = json_encode($arr);
-			$file = fopen(ROOT_DB.$name.".json", "w+");
+			$file = fopen($dir.$name.".json", "w+");
 			fwrite($file, $encode);
 			fclose($file);
 			
 	}
-	public static function removeDB($name){
+	public static function removeDB($dir, $name){
 		try{
 				if(!PPDB::isString($name)){
 					throw new PPDBErr($name);
@@ -161,8 +161,8 @@ class PPDB{
 				return false;
 			}
 		try{
-			if(!unlink(ROOT_DB.$name.".json")){
-				throw new PPDBErr(ROOT_DB.$name.".json");
+			if(!unlink($dir.$name.".json")){
+				throw new PPDBErr($dir.$name.".json");
 			}
 		}catch(PPDBErr $e){
 			echo $e->fileNotFound();
