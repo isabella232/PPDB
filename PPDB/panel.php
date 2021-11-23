@@ -64,7 +64,9 @@ if(isset($_POST['regbtn'])){
 	}
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
-	
+	# Demo
+	/*$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
+	PPDB::createDB("MyDatabase",  $args);*/
 
 
 ?>

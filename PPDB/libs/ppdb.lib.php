@@ -1,6 +1,7 @@
 <?php
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
+require("handler/removeFileFolder.php");
 require("bin/init.php");
 require("bin/reload.php");
 class PPDB{
@@ -24,6 +25,13 @@ class PPDB{
 	}
 	public static function isBoolean($bool){
 		if(gettype($bool) === "boolean"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static function isArray($arr){
+		if(gettype($arr) === "array"){
 			return true;
 		}else{
 			return false;
@@ -104,12 +112,92 @@ class PPDB{
 	}
 	public static function createStorage(){
 		#Check if dictionary 
-		if(!is_dir(ROOT.DS."db")){
-			mkdir(ROOT.DS."db");
+		if(!is_dir(ROOT."db")){
+			mkdir(ROOT."db");
 		}else{
 			
 		}
 	}
+	public static function removeStorage(){
+		#Check if dictionary 
+		if(is_dir(ROOT."db")){
+			removerDirFile(ROOT."db".DS);
+		}else{
+			
+		}
+	}
+	
+	public static function createDB($name, $arr){
+			try{
+				if(!PPDB::isString($name)){
+					throw new PPDBErr($name);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotString();
+				return false;
+			}
+			try{
+				if(!PPDB::isArray($arr)){
+					throw new PPDBErr($arr);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotArray();
+				return false;
+			}
+			
+			$encode = json_encode($arr);
+			$file = fopen(ROOT_DB.$name.".json", "w+");
+			fwrite($file, $encode);
+			fclose($file);
+			
+	}
+	public static function removeDB($name){
+		try{
+				if(!PPDB::isString($name)){
+					throw new PPDBErr($name);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotString();
+				return false;
+			}
+		try{
+			if(!unlink(ROOT_DB.$name.".json")){
+				throw new PPDBErr(ROOT_DB.$name.".json");
+			}
+		}catch(PPDBErr $e){
+			echo $e->fileNotFound();
+			return false;
+		}	
+	}
+	public static function renameDB($oldName, $newName){
+			try{
+				if(!PPDB::isString($oldName)){
+					throw new PPDBErr($oldName);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotString();
+				return false;
+			}
+				try{
+				if(!PPDB::isString($newName)){
+					throw new PPDBErr($newName);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotString();
+				return false;
+			}
+			
+			try{
+				if(!rename(ROOT_DB.$oldName.".json", ROOT_DB.$newName.".json")){
+					throw new PPDBErr(ROOT_DB.$oldName.".json" . " > " . ROOT_DB.$newName.".json");
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotRenamed();
+				return false;
+			}
+			
+	}
+	
 	public static function Encrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = "", $tag_length = 16){
 		return openssl_encrypt($data, $cipher_algo, $passphrase, $options, $iv, $tag, $aad, $tag_length);	
 	}
@@ -207,6 +295,15 @@ class PPDB{
 			echo $e->isNotString();
 			return false;
 		}
+		try{
+			if($align !== "justify" && $align !== "left" && $align !== "center" && $align !== "right"){
+				throw new PPDBErr($align);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotAlign();
+			return false;
+		}
+		
 		return 'text-align: '.$align.';';
 	}
 	public static function TXTRANS($transform){

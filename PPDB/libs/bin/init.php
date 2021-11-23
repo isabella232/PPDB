@@ -47,8 +47,14 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 	}catch(PPDBErr $e){
 			  echo $e->CHECKLIBSLICENCE();
 	}
-	
-	
+	try{
+		if(!extension_loaded('openssl')){
+			throw new PPDBErr();
+		}
+	}catch(PPDBErr $e){
+		echo $e->noOpenSSL('This app needs the Open SSL PHP extension.');
+	}
+
 	
 	
 	
