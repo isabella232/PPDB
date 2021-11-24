@@ -2,8 +2,10 @@
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
 require("handler/removeFileFolder.php");
+require("handler/ReturnfileSize.php");
 require("bin/init.php");
 require("bin/reload.php");
+
 class PPDB{
 	private function __construct(){
 	 #nothing	
@@ -196,6 +198,25 @@ class PPDB{
 				return false;
 			}
 			
+	}
+	public static function infoDB($dir, $name, $info=FILE_INFO){
+		try{
+				if(!PPDB::isString($name)){
+					throw new PPDBErr($name);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotString();
+				return false;
+			}
+		try{
+				if(!PPDB::isArray($info)){
+					throw new PPDBErr($info);
+				}
+			}catch(PPDBErr $e){
+				echo $e->isNotArray();
+				return false;
+			}
+		return array("created"=>date("F d Y H:i:s.", filectime($dir.$name.".json")),"updated"=>date ("F d Y H:i:s.", filemtime($dir.$name.".json")),"size"=>sizeFormat(filesize($dir.$name.".json")), "type"=>"json");
 	}
 	
 	public static function Encrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = "", $tag_length = 16){

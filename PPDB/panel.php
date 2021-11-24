@@ -36,8 +36,8 @@ require('libs/ppdb.lib.php');
 		</head>
 		<body>
 			<?php
-			PPDB::createStorage();
-echo PPDB::userUI();
+			PPDB::createStorage(ROOT);
+echo PPDB::userUI(ROOT);
 if(!file_exists(ROOT.'user.json')){
 		session_unset();
 }
@@ -65,9 +65,11 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Demo
-	/*$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
-	PPDB::createDB("MyDatabase",  $args);*/
-
+	$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
+	PPDB::createDB(ROOT_DB, "MyDatabase",  $args);
+	
+	echo PPDB::infoDB(ROOT_DB, "MyDatabase")['created'];
+	echo PPDB::infoDB(ROOT_DB, "MyDatabase")['updated'];
 
 ?>
 			<!-- JavaScript Bundle with Popper -->
