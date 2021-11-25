@@ -219,6 +219,30 @@ class PPDB{
 		return array("created"=>date("F d Y H:i:s.", filectime($dir.$name.".json")),"updated"=>date ("F d Y H:i:s.", filemtime($dir.$name.".json")),"size"=>sizeFormat(filesize($dir.$name.".json")), "type"=>"json");
 	}
 	
+	public static function JSONTOARRAY($JSON){
+		try{
+			if(!PPDB::isString($JSON)){
+				throw new PPDBErr($JSON);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotString();
+			return false;
+		}
+		$JSON = str_replace(array("\r\n", "\n", "\r"), "", $JSON);
+		return json_decode($JSON, true);
+	}
+	public static function ARRAYTOJSON($ARRAY){
+		try{
+			if(!PPDB::isArray($ARRAY)){
+				throw new PPDBErr($ARRAY);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotArray();
+			return false;
+		}
+		return json_encode($ARRAY);
+	}
+	
 	public static function Encrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = "", $tag_length = 16){
 		return openssl_encrypt($data, $cipher_algo, $passphrase, $options, $iv, $tag, $aad, $tag_length);	
 	}

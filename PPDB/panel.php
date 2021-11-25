@@ -65,14 +65,12 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Demo
-	$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
-	PPDB::createDB(ROOT_DB, "MyDatabase",  $args);
-	
-	echo PPDB::infoDB(ROOT_DB, "MyDatabase")['created'];
-	echo PPDB::infoDB(ROOT_DB, "MyDatabase")['updated'];
+	/*$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
+	PPDB::createDB(ROOT_DB, "MyDatabase",  $args);*/
+
 
 ?>
 			<!-- JavaScript Bundle with Popper -->
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"/>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		</body>
 	</html>
