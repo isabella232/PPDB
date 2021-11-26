@@ -1,4 +1,6 @@
 <?php
+global $READER;
+
 define("DS", "\\", false);
 define("DS_FOWARD", "/", false);
 define("ROOT", dirname(__FILE__).DS, false);
@@ -17,4 +19,5 @@ define("CAPITALIZE", "capitalize", false);
 define("UPPERCASE", "uppercase", false);
 define("LOWERCASE", "lowercase", false);
 define("FILE_INFO", ["created", "updated", "size", "type"], false);
+
 ?>

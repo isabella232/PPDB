@@ -5,7 +5,7 @@ require("handler/removeFileFolder.php");
 require("handler/ReturnfileSize.php");
 require("bin/init.php");
 require("bin/reload.php");
-
+require("classes/class.query.php");
 class PPDB{
 	private function __construct(){
 	 #nothing	
@@ -242,6 +242,9 @@ class PPDB{
 		}
 		return json_encode($ARRAY);
 	}
+	
+	
+	
 	
 	public static function Encrypt($data, $cipher_algo, $passphrase, $options = 0, $iv = "", $tag = null, $aad = "", $tag_length = 16){
 		return openssl_encrypt($data, $cipher_algo, $passphrase, $options, $iv, $tag, $aad, $tag_length);	
