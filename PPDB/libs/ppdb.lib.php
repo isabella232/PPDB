@@ -7,6 +7,7 @@ require("bin/init.php");
 require("bin/reload.php");
 require("classes/class.query.php");
 class PPDB{
+
 	private function __construct(){
 	 #nothing	
 	}
@@ -314,6 +315,51 @@ class PPDB{
 		return 'color:rgba('.$r.', '.$g.', '.$b.', '.$a.');';
 		
 	}
+	public static function createPanelCSS(){
+		return '<style>	*{ margin:0; padding:0; } 
+			body{ background-color:rgb(105, 106, 105); } 
+			.heading{
+				width:100%;
+			}
+			.panelForm{ width:50%; height:50%; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color: rgb(0, 167, 232); } 
+			h1{ font-size:52px; color:rgb(115, 234, 7); } 
+			.panelCon{ background-color:rgba(16, 213, 5, 0.5); } 
+			.logoutbtn{ position:absolute; top:0; right:0; font-size:32px; }
+			.panel-header{width:100%;}
+			.nav-con{
+				background-color:rgb(3, 252, 218);
+				width:100%;
+			}
+			.nav-con a{
+				text-decoration:none;
+				font-size:32px;
+				margin-right:8px;
+				color:rgb(255, 213, 0);
+				font-weight: bold;
+			}</style>';
+	}
+	public static function createCSSLink($url, $inter="", $crossorigin=""){
+		return '<link href="'.$url.'" rel="stylesheet" integrity="'.$inter.'" crossorigin="'.$crossorigin.'"/>';
+	}
+	public static function createCSS($CSS){
+		return '<style>'.$CSS."</style>";
+	}
+	
+	public static function createJSLink($url, $onLoad=true, $integrity="", $crossorigin="", $referrerpolicy=""){
+		if($onLoad){
+			return '<script src="'.$url.'" type="text/javascript" defer integrity="'.$integrity.'" crossorigin="'.$crossorigin.'" referrerpolicy="'.$referrerpolicy.'"></script>';
+		}else{
+				return '<script src="'.$url.'" type="text/javascript" async integrity="'.$integrity.'" crossorigin="'.$crossorigin.'" referrerpolicy="'.$referrerpolicy.'"></script>';
+		}
+		
+	}
+	public static function createJS($JS, $onLoad=true){
+		if($onLoad){
+			return '<script type="text/javascript" defer>'.$JS.'</script>';
+		}else{
+			return '<script type="text/javascript" async>'.$JS.'</script>';
+		}
+	}
 	
 	public static function BOLD(){
 		return 'font-weight:bold;';
@@ -375,6 +421,8 @@ class PPDB{
 		}
 		
 	}
+	
+
 
 }
 

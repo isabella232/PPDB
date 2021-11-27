@@ -15,7 +15,13 @@ function read(){
 	
 			$this->args = json_decode($getContents, true);
 			return $this->args;
-	}
+}
+function update($update){
+		$encode = json_encode($update);
+		$data = fopen($this->path, "w+");
+		fwrite($data, $encode);
+		fclose($data);
+}
 
 
 }
