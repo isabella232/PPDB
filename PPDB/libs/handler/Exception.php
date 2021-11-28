@@ -71,6 +71,11 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> cannot be renamed<br/>';
     return $errorMsg;
 	}
+	public function invalidExportFormat(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid export type.<br/>';
+    return $errorMsg;
+	}
 	
 	
 	

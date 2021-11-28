@@ -353,11 +353,11 @@ class PPDB{
 		}
 		
 	}
-	public static function createJS($JS, $onLoad=true){
+	public static function createJS($JS, $id, $onLoad=true){
 		if($onLoad){
-			return '<script type="text/javascript" defer>'.$JS.'</script>';
+			return '<script id="'.$id.'" type="text/javascript" defer>'.$JS.'</script>';
 		}else{
-			return '<script type="text/javascript" async>'.$JS.'</script>';
+			return '<script id="'.$id.'" type="text/javascript" async>'.$JS.'</script>';
 		}
 	}
 	

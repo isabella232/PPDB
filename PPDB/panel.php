@@ -50,12 +50,9 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Demo
-	$args = array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21")));
-	PPDB::createDB(ROOT_DB, "data",  $args);
-
-	//echo $READER->select(ROOT_DB, "data")->read()["user"][0]['name'];
-	echo $READER->select(ROOT_DB, "data")->update(array("user"=>array(0=>array("name"=>"hello","age"=>32,"expire"=>"01-21"), 1=>array("name"=>"world","age"=>21,"expire"=>"02-21"))));
-
+	/*$data = PPDB::JSONTOARRAY('{"user":[{"name":"hello","age":32,"expire":"01-21"},{"name":"world","age":21,"expire":"02-21"}]}');
+	PPDB::createDB(ROOT_DB, "data",  $data);
+	$READER->export(ROOT, ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
 ?>
 			<!-- JavaScript Bundle with Popper -->
 			<?php
