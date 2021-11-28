@@ -55,7 +55,9 @@ L = Localhost | D = Domain
 | ROOT_DB | dirname(__FILE__).DS."db".DS | L |
 | ROOT_DB_FORWARD | dirname(__FILE__).DS_FORWARD."db".DS_FORWARD | D |
 | ROOT_TEMP | dirname(__FILE__).DS."libs".DS."temp".DS | L |
-
+| ROOT_TEMP_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."temp".DS_FORWARD | D |
+| DOC_ROOT | $_SERVER['DOCUMENT_ROOT'] | L |
+| DOC_ROOT_BACKWARDS | str_replace("/","\\", $_SERVER['DOCUMENT_ROOT']) | D |
 
 
 
