@@ -23,7 +23,7 @@ function update($update){
 		fclose($data);
 }
 
-function export($root, $dir, $tdir, $name, $type){
+function export($dir, $tdir, $name, $type){
 	 try{
 		if(!PPDB::isString($root)){
 			throw new PPDBErr($root);
@@ -76,7 +76,7 @@ function export($root, $dir, $tdir, $name, $type){
 	
 	if($type === "JSON"){
 		$date = date("Y-m-d");
-		$path = $root."libs".DS."temp".DS.$date.DS;
+		$path = $tdir.$date.DS;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = file_get_contents($dir.$name.".json");
@@ -100,7 +100,7 @@ function export($root, $dir, $tdir, $name, $type){
 	}
 	if($type === "PHP_ARRAY"){
 			$date = date("Y-m-d");
-		$path = $root."libs".DS."temp".DS.$date.DS;
+		$path = $tdir.$date.DS;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = file_get_contents($dir.$name.".json");
