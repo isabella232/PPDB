@@ -199,7 +199,7 @@ if(PPDB::isArray($value)){
 }
 ```
 
-### 4. creating/removing Database
+### 4. creating/removing/renaming Database
 
 This is easy
 
@@ -213,9 +213,18 @@ Removing database:
 PPDB::removeDB($dir, $name);
 ```
 
+Renaming database:
+```php
+PPDB::renameDB($dir, $oldName, $newName);
+```
+
 `$dir` eaither is`ROOT` or `ROOT_FORWARD`
 
 `$name` is the name of your database
+
+`$oldName` is the current database name
+
+`$newName` is to set a new name for the old database
 
 `$arr` is the array which converts to JSON
 
