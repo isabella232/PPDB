@@ -269,6 +269,9 @@ $READER->export($dir, $tdir, $name, $type);
 more variables
 
 `$dir` eaither `ROOT_DB` or `ROOT_DB_FORWARD`
+
 `$tdir` eaither `ROOT_TEMP` or `ROOT_TEMP_FORWARD`
+
 `$name` is database name
+
 `$type` eaither is `JSON` or `PHP_ARRAY`
