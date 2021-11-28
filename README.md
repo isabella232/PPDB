@@ -50,12 +50,12 @@ L = Localhost | D = Domain
 | ------ | ------ | ----- |
 | DS     |  "\\"   | L |
 | DS_FORWARD | "/" | D |
-| ROOT | dirname(__FILE__).DS | L |
-| ROOT_FORWARD | dirname(__FILE__).DS_FORWARD | D |
-| ROOT_DB | dirname(__FILE__).DS."db".DS | L |
-| ROOT_DB_FORWARD | dirname(__FILE__).DS_FORWARD."db".DS_FORWARD | D |
-| ROOT_TEMP | dirname(__FILE__).DS."libs".DS."temp".DS | L |
-| ROOT_TEMP_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."temp".DS_FORWARD | D |
+| ROOT | dirname( __ FILE __ ).DS | L |
+| ROOT_FORWARD | dirname( __ FILE __ ).DS_FORWARD | D |
+| ROOT_DB | dirname( __ FILE __ ).DS."db".DS | L |
+| ROOT_DB_FORWARD | dirname( __ FILE __ ).DS_FORWARD."db".DS_FORWARD | D |
+| ROOT_TEMP | dirname( __ FILE __ ).DS."libs".DS."temp".DS | L |
+| ROOT_TEMP_FORWARD | dirname( __ FILE __ ).DS_FORWARD."libs".DS_FORWARD."temp".DS_FORWARD | D |
 | DOC_ROOT | $_SERVER['DOCUMENT_ROOT'] | D |
 | DOC_ROOT_BACKWARDS | str_replace("/","\\", $_SERVER['DOCUMENT_ROOT']) | L |
 | PPDB_CONNECT | $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] | D & L |
