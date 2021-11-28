@@ -40,9 +40,23 @@ You can use our `panel.php` as a baseplate of plugins and other database extenti
 
 ***
 
-### Developer tools
+# Developer tools
+This can be used as a `Developer tools` This is also be a documentation as well...
 
-Until were finished I will put up a documentation that developers can use
+### Defined variables 
+
+L = Localhost | D = Domain
+| Define | output | Allow |
+| ------ | ------ | ----- |
+| DS     |  "\\"   | L |
+| DS_FORWARD | "/" | D |
+| ROOT | dirname(__FILE__).DS | L |
+| ROOT_FORWARD | dirname(__FILE__).DS_FORWARD | D |
+| ROOT_DB | dirname(__FILE__).DS."db".DS | L |
+| ROOT_DB_FORWARD | dirname(__FILE__).DS_FORWARD."db".DS_FORWARD | D |
+| ROOT_TEMP | dirname(__FILE__).DS."libs".DS."temp".DS | L |
+
+
 
 
  
