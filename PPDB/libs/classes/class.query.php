@@ -90,7 +90,7 @@ function export($dir, $tdir, $name, $type){
 			fclose($file);
 		}
 		$id = uniqid();
-		$getMoved = str_replace(DOC_ROOT_FORWARD,"", $path);
+		$getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
 		echo '<a href="'.$getMoved.$name.".json".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.json"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");
 			download.click();
