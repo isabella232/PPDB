@@ -52,7 +52,7 @@ if(isset($_POST['regbtn'])){
 	# Demo
 	/*$data = PPDB::JSONTOARRAY('{"user":[{"name":"hello","age":32,"expire":"01-21"},{"name":"world","age":21,"expire":"02-21"}]}');
 	PPDB::createDB(ROOT_DB, "data",  $data);
-	$READER->export(ROOT, ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
+	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
 ?>
 			<!-- JavaScript Bundle with Popper -->
 			<?php
