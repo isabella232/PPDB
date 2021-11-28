@@ -198,3 +198,77 @@ if(PPDB::isArray($value)){
 //false
 }
 ```
+
+### 4. creating/removing Database
+
+This is easy
+
+creating database:
+```php
+PPDB::createDB($dir, $name, $arr)
+```
+
+Removing database:
+```php
+PPDB::removeDB($dir, $name);
+```
+
+`$dir` eaither is`ROOT` or `ROOT_FORWARD`
+`$name` is the name of your database
+`$arr` is the array which converts to JSON
+
+### 5. Converting JSON to Array / ARRAY TO JSON
+
+JSONTOARRAY():
+```php
+PPDB::JSONTOARRAY($JSON);
+```
+ARRAYTOJSON():
+```php
+PPDB::ARRAYTOJSON($ARRAY);
+```
+
+### 6. Query
+
+This is defaulted to use `$READER` before doing a task
+
+Selecting:
+```php
+$READER->select($sdir, $sname)
+```
+
+`$sdir` is eaither `ROOT_DB` or `ROOT_DB_FORWARD`
+`$sname` is your database name
+
+Reading:
+```php
+$READER->select($sdir, $sname)->read()
+```
+
+this will be converted to an array after read, put an array of items to access what needs to be shown
+
+example(find user at array 0 name):
+```php
+echo $READER->select($sdir, $sname)->read()['user'][0]['name'];
+```
+
+Updating:
+
+```php
+$READER->select($sdir, $sname)->update($arr);
+```
+
+same variables but `$arr` means PHP array to convert to JSON
+
+Export:
+
+```php
+$READER->export($dir, $tdir, $name, $type);
+```
+
+more variables
+
+`$dir` eaither `ROOT_DB` or `ROOT_DB_FORWARD`
+`$tdir` eaither `ROOT_TEMP` or `ROOT_TEMP_FORWARD`
+`$name` is database name
+`$type` eaither is `JSON` or `PHP_ARRAY`
