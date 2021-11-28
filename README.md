@@ -43,7 +43,9 @@ You can use our `panel.php` as a baseplate of plugins and other database extenti
 # Developer tools
 This can be used as a `Developer tools` This is also be a documentation as well...
 
-### Defined variables 
+***
+
+## Defined variables 
 
 L = Localhost | D = Domain
 | Define | output | Allow |
@@ -71,7 +73,128 @@ L = Localhost | D = Domain
 | LOWERCASE | lowercase | D & L |
 | FILE_INFO | ["created", "updated", "size", "type"] | D & L |
 
+***
 
+## PDDB FUNCTIONS
 
+### 1. Creating/Removing storage
+Creating storage is the first step, this will make it easier to store data, by your custom name of file, folder will always be `db`
 
- 
+Creating:
+```php
+PPDB::createStorage($dir)
+```
+Removing:
+```php
+PPDB::removeStorage($dir, $Slash);
+```
+
+`$dir` can be either `ROOT` or `ROOT_FORWARD` 
+
+`$Slash` can be eaither `DS` or `DS_FORWARD`
+
+### 2. User UI(only Panel use)
+This line of code only works for panel uses aka: `panel.php`
+
+Build prompt/panel (`panel.php`):
+```php
+echo PPDB::userUI(ROOT);
+if(!file_exists(ROOT.'user.json')){
+		session_unset();
+}
+if(isset($_POST['regbtn'])){
+		$username = $_POST['username'];
+		$psw = $_POST['psw'];
+		
+		PPDB::INSTALL(ROOT, $username, $psw);
+		$_SESSION['username'] = $username;
+	}
+	if(isset($_POST['logbtn'])){
+		$username = $_POST['username'];
+		$psw = $_POST['psw'];
+		$psw = PPDB::PSW_ENCRYPT($psw);
+		$json = file_get_contents(ROOT."user.json");
+		$query = json_decode($json);
+		if($username === $query->user && $psw === $query->password){
+			$_SESSION['username'] = $username;
+				Reload::run();
+		}else{
+			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(42).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Error: cannot login correctly!</p>';
+		}
+		
+	}
+	echo PPDB::loadPanel();
+	echo PPDB::logout();
+```
+
+ok, lets break it down
+
+creating the prompt:
+```php
+PPDB::ueserUI(ROOT/ROOT_FOWARD)
+```
+
+Creating user data: 
+```php
+PPDB::INSTALL((ROOT/ROOT_FORWARD), $username, $psw);
+```
+
+Encrypting Password:
+```php
+PPDB::PSW_ENCRYPT($psw);
+```
+
+Reloading Page:
+```php
+Reload::run();
+```
+
+Loading panel:
+```php
+echo PPDB::loadPanel();
+```
+
+Logout function/button:
+```php
+echo PPDB::logout();
+```
+
+That is the basic parts of the panel
+
+### 3. Logics
+
+isNumber():
+```php
+if(PPDB::isNumber($value)){
+//return true
+}else{
+//false
+}
+```
+
+isString():
+```php
+if(PPDB::isString($value)){
+//return true
+}else{
+//false
+}
+```
+
+isBoolean():
+```php
+if(PPDB::isBoolean($value)){
+//return true
+}else{
+//false
+}
+```
+
+isArray():
+```php
+if(PPDB::isArray($value)){
+//return true
+}else{
+//false
+}
+```
