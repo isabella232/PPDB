@@ -214,7 +214,9 @@ PPDB::removeDB($dir, $name);
 ```
 
 `$dir` eaither is`ROOT` or `ROOT_FORWARD`
+
 `$name` is the name of your database
+
 `$arr` is the array which converts to JSON
 
 ### 5. Converting JSON to Array / ARRAY TO JSON
@@ -238,6 +240,7 @@ $READER->select($sdir, $sname)
 ```
 
 `$sdir` is eaither `ROOT_DB` or `ROOT_DB_FORWARD`
+
 `$sname` is your database name
 
 Reading:
