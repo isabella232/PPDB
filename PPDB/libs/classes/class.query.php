@@ -23,7 +23,21 @@ function update($update){
 		fclose($data);
 }
 
-function export($Split, $dir, $tdir, $name, $type){
+function export($dom, $Split,$dir, $tdir, $name, $type){
+    	 try{
+		if(!PPDB::isBoolean($dom)){
+			throw new PPDBErr($dom);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotBoolean();
+	}
+    	 try{
+		if(!PPDB::isString($Split)){
+			throw new PPDBErr($Split);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotString();
+	}
 	 try{
 		if(!PPDB::isString($dir)){
 			throw new PPDBErr($dir);
@@ -83,7 +97,12 @@ function export($Split, $dir, $tdir, $name, $type){
 			fclose($file);
 		}
 		$id = uniqid();
-		$getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
+        if(!$dom){
+            $getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
+        }else{
+            $getMoved = str_replace(DOC_ROOT,"", $path);
+        }
+		
 		echo '<a href="'.$getMoved.$name.".json".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.json"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");
 			download.click();
