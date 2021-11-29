@@ -218,7 +218,7 @@ Renaming database:
 PPDB::renameDB($dir, $oldName, $newName);
 ```
 
-`$dir` eaither is`ROOT` or `ROOT_FORWARD`
+`$dir` eaither is`ROOT_DB` or `ROOT_DB_FORWARD`
 
 `$name` is the name of your database
 
