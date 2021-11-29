@@ -25,13 +25,6 @@ function update($update){
 
 function export($Split, $dir, $tdir, $name, $type){
 	 try{
-		if(!PPDB::isString($root)){
-			throw new PPDBErr($root);
-		}
-	}catch(PPDBErr $e){
-		echo $e->isNotString();
-	}
-	 try{
 		if(!PPDB::isString($dir)){
 			throw new PPDBErr($dir);
 		}
