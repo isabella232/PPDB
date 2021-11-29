@@ -275,10 +275,12 @@ same variables but `$arr` means PHP array to convert to JSON
 Export:
 
 ```php
-$READER->export($Split, $dir, $tdir, $name, $type);
+$READER->export($dom, $Split, $dir, $tdir, $name, $type);
 ```
 
 more variables
+
+`$dom` eaiter `true` or `false`
 
 `$Split` eaither `DS` or `DS_FORWARD` 
 
