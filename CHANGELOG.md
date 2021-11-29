@@ -9,3 +9,7 @@
 # v1.0.1.1
 
 - Fixed export removed "false" syntax error
+
+# v1.0.1.2
+
+- Fixed export to fit domains
