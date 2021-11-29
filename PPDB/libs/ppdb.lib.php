@@ -1,4 +1,5 @@
 <?php
+require("handler/autoupdater.php");
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
 require("handler/removeFileFolder.php");

@@ -18,14 +18,14 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 	}catch(PPDBErr $e){
 			  echo $e->CHECKLIBSNAME();
 	}
-		try{
-		if(LIBRARY_VERSION !== "0.0.1"){
-			throw new PPDBErr(LIBRARY_VERSION);
+	try{
+		if(LIBRARY_VERSION !== update::checkUpdate()){
+			throw new PPDBErr('You are out-of-date!<br/><br/><b>Your Version: '.LIBRARY_VERSION.'</b><br/><b>Current Version: '.update::checkUpdate().'</b><br/><a href="https://github.com/surveybuilderteams/PPDB" style="color:lime;">Download on github</a>');
 		}
 	}catch(PPDBErr $e){
-			  echo $e->CHECKLIBSVERSION();
+		echo $e->neededUpdate();
 	}
-		try{
+	try{
 		if(LIBRARY_API[0] !== 1){
 			throw new PPDBErr(LIBRARY_API[0]);
 		}
@@ -49,10 +49,10 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 	}
 	try{
 		if(!extension_loaded('openssl')){
-			throw new PPDBErr();
+			throw new PPDBErr('This app needs the Open SSL PHP extension.');
 		}
 	}catch(PPDBErr $e){
-		echo $e->noOpenSSL('This app needs the Open SSL PHP extension.');
+		echo $e->noOpenSSL();
 	}
 
 	

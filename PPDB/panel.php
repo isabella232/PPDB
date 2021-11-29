@@ -30,7 +30,7 @@ if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		
-		PPDB::INSTALL($username, $psw);
+		PPDB::INSTALL(ROOT, $username, $psw);
 		$_SESSION['username'] = $username;
 	}
 	if(isset($_POST['logbtn'])){
