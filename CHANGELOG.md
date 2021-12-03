@@ -13,3 +13,7 @@
 # v1.0.1.2
 
 - Fixed export to fit domains
+
+# v1.0.2
+
+- Added createTable() in query reader
