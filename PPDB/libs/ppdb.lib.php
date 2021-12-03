@@ -256,6 +256,7 @@ class PPDB{
 	}
 	
 	public static function loadPanel(){
+		$READER = new query();
 		if(SESSION_USER){
 			$panel = '<div class="container-fluid panelCon">';
 			$panel .= '<div class="heading">
@@ -269,6 +270,7 @@ class PPDB{
 			<a href="#" class="nav-list" title="Table">Table</a>
 			<a href="#" class="nav-list" title="Query">Query</a>
 			</nav>
+		
 			</div>';
 			$panel .= '</div>';
 			return $panel;
@@ -337,7 +339,19 @@ class PPDB{
 				margin-right:8px;
 				color:rgb(255, 213, 0);
 				font-weight: bold;
-			}</style>';
+			}
+			/*Table*/
+			table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #00ffeb;
+  text-align:center;
+  font-size: 32px;
+}
+			tr:nth-child(even) {
+	background-color: #D6EEEE;
+			}
+			</style>';
 	}
 	public static function createCSSLink($url, $inter="", $crossorigin=""){
 		return '<link href="'.$url.'" rel="stylesheet" integrity="'.$inter.'" crossorigin="'.$crossorigin.'"/>';

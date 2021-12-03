@@ -23,17 +23,10 @@ function update($update){
 		fclose($data);
 }
 
-function export($dom, $Split,$dir, $tdir, $name, $type){
-    	 try{
-		if(!PPDB::isBoolean($dom)){
-			throw new PPDBErr($dom);
-		}
-	}catch(PPDBErr $e){
-		echo $e->isNotBoolean();
-	}
-    	 try{
-		if(!PPDB::isString($Split)){
-			throw new PPDBErr($Split);
+function export($dir, $tdir, $name, $type){
+	 try{
+		if(!PPDB::isString($root)){
+			throw new PPDBErr($root);
 		}
 	}catch(PPDBErr $e){
 		echo $e->isNotString();
@@ -83,7 +76,7 @@ function export($dom, $Split,$dir, $tdir, $name, $type){
 	
 	if($type === "JSON"){
 		$date = date("Y-m-d");
-		$path = $tdir.$date.$Split;
+		$path = $tdir.$date.DS;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = file_get_contents($dir.$name.".json");
@@ -97,12 +90,7 @@ function export($dom, $Split,$dir, $tdir, $name, $type){
 			fclose($file);
 		}
 		$id = uniqid();
-        if(!$dom){
-            $getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
-        }else{
-            $getMoved = str_replace(DOC_ROOT,"", $path);
-        }
-		
+		$getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
 		echo '<a href="'.$getMoved.$name.".json".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.json"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");
 			download.click();
@@ -112,7 +100,7 @@ function export($dom, $Split,$dir, $tdir, $name, $type){
 	}
 	if($type === "PHP_ARRAY"){
 			$date = date("Y-m-d");
-		$path = $tdir.$date.$Split;
+		$path = $tdir.$date.DS;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = file_get_contents($dir.$name.".json");
@@ -139,8 +127,68 @@ function export($dom, $Split,$dir, $tdir, $name, $type){
 	
 }
 
+public function listFiles($dir){
+	foreach(glob($dir."*.json*") as $file){
+		return $file;
+	}
 }
-$data = new query();
-$READER = $data;
+
+public function createTable($tbs, $trs, $main, $cels){
+	$table = '';
+	try{
+		if(!PPDB::isArray($tbs)){
+			throw new PPDBErr($tbs);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
+	try{
+		if(!PPDB::isArray($trs)){
+			throw new PPDBErr($trs);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
+	try{
+		if(!PPDB::isString($main)){
+			throw new PPDBErr($main);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotString();
+		return false;
+	}
+		try{
+		if(!PPDB::isArray($cels)){
+			throw new PPDBErr($cels);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
 	
+	$table .= '<table>';
+	$table .= '<tr>';
+	foreach($tbs as $tb){
+		$table.='<th>'.$tb.'</th>';
+	}
+	$table .= '</tr>';
+
+	for($i=0;$i<sizeof($trs[$main]);$i++){
+			$table .= '<tr>';
+		foreach($cels as $cel){
+			$table .= '<td>'.$trs[$main][$i][$cel].'</td>';
+		}
+		$table .= '</tr>';
+	}
+	$table .= '</table>';
+	
+	return $table;
+}
+
+}
+
+$READER = new query();
+
 ?>

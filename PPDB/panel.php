@@ -53,7 +53,15 @@ if(isset($_POST['regbtn'])){
 	/*$data = PPDB::JSONTOARRAY('{"user":[{"name":"hello","age":32,"expire":"01-21"},{"name":"world","age":21,"expire":"02-21"}]}');
 	PPDB::createDB(ROOT_DB, "data",  $data);
 	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
+	if(SESSION_USER){
+		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."data.json"));
+		echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
+	}
 ?>
+
+
+
+
 			<!-- JavaScript Bundle with Popper -->
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
