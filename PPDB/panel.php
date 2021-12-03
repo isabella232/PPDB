@@ -54,7 +54,7 @@ if(isset($_POST['regbtn'])){
 	PPDB::createDB(ROOT_DB, "data",  $data);
 	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
 	if(SESSION_USER){
-		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."data.json"));
+		//$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."{database}.json"));
 		echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
 	}
 ?>
