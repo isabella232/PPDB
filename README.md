@@ -278,6 +278,7 @@ Export:
 $READER->export($dom, $Split, $dir, $tdir, $name, $type);
 ```
 
+
 more variables
 
 `$dom` eaiter `true` or `false`
@@ -291,3 +292,19 @@ more variables
 `$name` is database name
 
 `$type` eaither is `JSON` or `PHP_ARRAY`
+
+
+Create Tabele:
+
+```php
+$READER->createTable($tbs, $trs, $main, $cels);
+```
+
+`$tbs` is the array to display as the "<th>" tag (array)
+	
+`$trs` user PPDB::JSONTOARRAY(file_get_contents(file-to-database))
+	
+`$main` first args of an array
+	
+`$cels` list what needs to be displated (exact as `$tbs`)
+	
