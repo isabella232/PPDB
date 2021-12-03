@@ -52,11 +52,11 @@ if(isset($_POST['regbtn'])){
 	# Demo
 	/*$data = PPDB::JSONTOARRAY('{"user":[{"name":"hello","age":32,"expire":"01-21"},{"name":"world","age":21,"expire":"02-21"}]}');
 	PPDB::createDB(ROOT_DB, "data",  $data);
-	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");*/
+	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");
 	if(SESSION_USER){
-		//$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."{database}.json"));
-		echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
-	}
+		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."{database}.json"));
+		 echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
+	}*/
 ?>
 
 
