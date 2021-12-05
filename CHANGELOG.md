@@ -17,3 +17,7 @@
 # v1.0.2
 
 - Added createTable() in query reader
+
+# v1.1.0
+
+- Added `CHECK_VALID_PASSWORD` and `CHANGE_PSW`
