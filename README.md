@@ -144,6 +144,16 @@ Encrypting Password:
 PPDB::PSW_ENCRYPT($psw);
 ```
 
+Changing Password:
+```php
+PPDB::CHANGE_PSW((ROOT/ROOT_FORWARD), $old, $new);
+```
+
+Check valid Password:
+```php
+PPDB::CHECK_VALID_PASSWORD($psw, $min_length, $max_length, $include_lowercase_str, $include_uppercase_str, $include_int, $include_symbol);
+```
+
 Reloading Page:
 ```php
 Reload::run();
