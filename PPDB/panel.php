@@ -29,9 +29,11 @@ if(!file_exists(ROOT.'user.json')){
 if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		
-		PPDB::INSTALL(ROOT, $username, $psw);
+		# Password, min, max, lower, upper, number, symbols
+		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, true)){
+			PPDB::INSTALL(ROOT, $username, $psw);
 		$_SESSION['username'] = $username;
+		}
 	}
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
@@ -47,6 +49,7 @@ if(isset($_POST['regbtn'])){
 		}
 		
 	}
+	
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Demo
@@ -54,8 +57,8 @@ if(isset($_POST['regbtn'])){
 	PPDB::createDB(ROOT_DB, "data",  $data);
 	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");
 	if(SESSION_USER){
-		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."{database}.json"));
-		 echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
+		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."data.json"));
+		echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
 	}*/
 ?>
 

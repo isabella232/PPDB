@@ -80,8 +80,22 @@ class PPDBErr extends Exception{
 		$errorMsg = $this->getMessage();
     return $errorMsg;
 	}
-	
-	
+	public function passwordNotMatches(){
+		$errorMsg = $this->getMessage();
+    return $errorMsg;
+	}
+	public function passwordToShort(){
+		$errorMsg = $this->getMessage();
+    return $errorMsg;
+	}
+	public function passwordToLong(){
+			$errorMsg = $this->getMessage();
+    return $errorMsg;
+	}
+	public function regexpErr(){
+		$errorMsg = $this->getMessage();
+    return $errorMsg;
+	}
 	
 	
 }

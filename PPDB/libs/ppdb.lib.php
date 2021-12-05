@@ -1,4 +1,7 @@
 <?php
+if(session_status() === PHP_SESSION_NONE || session_id() == ''){
+	session_start();
+}
 require("handler/autoupdater.php");
 require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
@@ -106,6 +109,135 @@ class PPDB{
 		
 		
 	}
+	public static function CHECK_VALID_PASSWORD($psw, $min_length=8, $max_length=25, $include_lower_str=true, $include_upper_str=true, $include_int=true, $include_symbol=true){
+		try{
+			if(!PPDB::isString($psw)){
+				throw new PPDBErr($psw);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotString();
+			return false;
+		}
+		try{
+			if(!PPDB::isNumber($min_length)){
+				throw new PPDBErr($min_length);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotNumber();
+			return false;
+		}
+		try{
+			if(!PPDB::isNumber($max_length)){
+				throw new PPDBErr($max_length);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotNumber();
+			return false;
+		}
+		try{
+			if(!PPDB::isBoolean($include_lower_str)){
+				throw new PPDBErr($include_lower_str);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotBoolean();
+			return false;
+		}
+		try{
+			if(!PPDB::isBoolean($include_upper_str)){
+				throw new PPDBErr($include_upper_str);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotBoolean();
+			return false;
+		}
+		try{
+			if(!PPDB::isBoolean($include_int)){
+				throw new PPDBErr($include_int);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotBoolean();
+			return false;
+		}
+		try{
+			if(!PPDB::isBoolean($include_symbol)){
+				throw new PPDBErr($include_symbol);
+			}
+		}catch(PPDBErr $e){
+			$e->isNotBoolean();
+			return false;
+		}
+		
+		if($min_length >= 6 && $max_length > $min_length){
+			try{
+				if(strlen($psw) < $min_length){
+					throw new PPDBErr("<span style='color:red;'>Password:".$psw . " | is to short</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->passwordToShort();
+				return false;
+			}
+			try{
+				if(strlen($psw) > $max_length){
+					throw new PPDBErr("<span style='color:red;'>Password:".$psw . " | is to long</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->passwordToLong();
+				return false;
+			}
+		}
+		 if($include_lower_str){
+			try{
+				if(!preg_match("/(?=[a-z])/", $psw)){
+					throw new PPDBErr("<span style='color:red;'>".$psw . " must include lowercase letter</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->regexpErr();
+				return false;
+			}
+		}
+		 if($include_upper_str){
+			try{
+				if(!preg_match("/(?=[A-Z])/", $psw)){
+					throw new PPDBErr("<span style='color:red;'>".$psw . " must include uppercase letter</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->regexpErr();
+				return false;
+			}
+		}
+		 if($include_int){
+			try{
+				if(!preg_match("/(?=[0-9])/", $psw)){
+					throw new PPDBErr("<span style='color:red;'>".$psw . " must include number(s)</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->regexpErr();
+				return false;
+			}
+		}
+		 if($include_int){
+			try{
+				if(!preg_match("/(?=[0-9])/", $psw)){
+					throw new PPDBErr("<span style='color:red;'>".$psw . " must include number(s)</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->regexpErr();
+				return false;
+			}
+		}
+		 if($include_symbol){
+			try{
+				if(!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+¬-]/", $psw)){
+					throw new PPDBErr("<span style='color:red;'>".$psw . " must include symbols</span>");
+				}
+			}catch(PPDBErr $e){
+				echo $e->regexpErr();
+				return false;
+			}
+		}
+		
+			return true;
+	}
 	public static function PSW_ENCRYPT($psw){
 			$psw = hash("gost", $psw);
 			$psw = hash("sha1", $psw);
@@ -113,6 +245,44 @@ class PPDB{
 			$psw = hash("crc32b", $psw);
 			$psw = hash("ripemd128", $psw);
 			return $psw;
+	}
+	public static function CHANGE_PSW($dir, $old, $new){
+		$get = file_get_contents($dir."user.json");
+		$d = json_decode($get);
+		try{
+			if(!PPDB::isString($dir)){
+				throw new PPDBErr($dir);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotString();
+		}
+		try{
+			if(!PPDB::isString($old)){
+				throw new PPDBErr($old);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotString();
+		}
+		try{
+			if(!PPDB::isString($new)){
+				throw new PPDBErr($new);
+			}
+		}catch(PPDBErr $e){
+		echo $e->isNotString();
+		}
+		try{
+			if(PPDB::PSW_ENCRYPT($old) !== $d->password){
+			throw new PPDBErr("Your Password doesn't match the old password");
+		}
+		}catch(PPDBErr $e){
+			echo $e->passwordNotMatches();
+		}
+		
+		
+		$update = '{"user": "'.$d->user.'", "password": "'.PPDB::PSW_ENCRYPT($new).'"}';
+		$data = fopen($dir."user.json", "w+");
+		fwrite($data, $update);
+		fclose($data);
 	}
 	public static function createStorage($dir){
 		#Check if dictionary 
