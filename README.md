@@ -310,7 +310,7 @@ Create Tabele:
 $READER->createTable($tbs, $trs, $main, $cels);
 ```
 
-`$tbs` is the array to display as the "<th>" tag (array)
+`$tbs` is the array to display as the "&lt;th&gt;" tag (array)
 	
 `$trs` user PPDB::JSONTOARRAY(file_get_contents(file-to-database))
 	
