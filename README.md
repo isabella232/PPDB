@@ -355,4 +355,4 @@ PPDB::createCSS($css);
 
 ### 8. scripting(JS)
 
-Same thing as [Styling](../../readme.md#7. Styling(CSS))
+Same thing as [Styling](#7-stylingcss)
