@@ -26,3 +26,7 @@
 
 - Added `view()` function addition to `createTable()` with added value selector
 - Added New Defined `VIEW_ALL` with a value of `-1`
+
+# v1.2.1
+
+- Fixed $READER->listFiles($dir), now outputs an array not a single string
