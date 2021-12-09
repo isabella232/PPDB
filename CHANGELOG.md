@@ -21,3 +21,8 @@
 # v1.1.0
 
 - Added `CHECK_VALID_PASSWORD` and `CHANGE_PSW`
+
+# v1.2.0
+
+- Added `view()` function addition to `createTable()` with added value selector
+- Added New Defined `VIEW_ALL` with a value of `-1`
