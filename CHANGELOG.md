@@ -34,3 +34,8 @@
 # v1.2.2
 
 - updated Readme.md
+
+# v1.2.3
+
+- fixed `Reload::run()`
+- made table for stylish
