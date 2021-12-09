@@ -4,12 +4,13 @@ class Reload{
 		#nothing
 	}
 	public static function run(){
-		$data = $_GET['u'];
 		
-		if(isset($data) || $data  === $data){
-			header("Refresh:0");
-			exit;
-		}
+		         if(!$_GET['u']){
+            echo "<script>setTimeout(function(){window.open('./panel?u=0', '_self')})</script>";
+        }else{
+            $getNum = intval($_GET['u']) + 1;
+            echo "<script>setTimeout(function(){window.open('./panel?u=".$getNum."', '_self')})</script>";
+        }
 	}
 	
 }
