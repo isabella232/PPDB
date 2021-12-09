@@ -3,6 +3,8 @@ class query{
 	# Properties
  public $path;
  public $args;
+ public $isTab = false;
+ public $table;
   
   # Methods
  function select($sdir, $sname) {
@@ -168,7 +170,7 @@ public function createTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	
-	$table .= '<table>';
+	$table .= '<table id="portTable">';
 	$table .= '<tr>';
 	foreach($tbs as $tb){
 		$table.='<th>'.$tb.'</th>';
@@ -183,8 +185,39 @@ public function createTable($tbs, $trs, $main, $cels){
 		$table .= '</tr>';
 	}
 	$table .= '</table>';
-	
-	return $table;
+	$this->isTab = true;
+    $this->table = $table;
+	return $this;
+}
+public function view($line){
+  try{
+			if(!PPDB::isNumber($line)){
+				throw new PPDBErr($line);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotNumber();
+			return false;
+		}
+if($line === -1){
+return $this->table;
+}else{
+    $t = $this->table;
+    $t .= '<script>
+    function runQuery(){
+        let table = document.querySelector("#portTable");
+        let tr = table.querySelectorAll("tr");
+        for(let i=1;i<tr.length;i++){
+            if(tr[i].rowIndex !== '.$line.'){
+                tr[i].style.display = "none";
+            }
+        }
+       
+    }
+   setTimeout(runQuery, 0);
+    </script>';
+return $t;
+}
+
 }
 
 }
