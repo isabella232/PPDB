@@ -356,3 +356,31 @@ PPDB::createCSS($css);
 ### 8. scripting(JS)
 
 Same thing as [Styling](#7-stylingcss)
+
+Linking:
+
+```php
+PPDB::createJSLink($url, $onLoad=true, $integrity="", $crossorigin="", $referrerpolicy="");
+```
+
+`$url` enter valid JS `url/path`
+
+`$onLoad` run code on load
+
+`$integrity` enter valid `integrity`
+
+`$crossorigin` enter valid `crossorigin setting`
+
+`$referrerpolicy` enter valid `referrerpolicy`
+
+Creating:
+
+```php
+PPDB::createJS($JS, $id, $onLoad=true);
+```
+
+`$JS` enter `JavaScript code`
+
+`$id` enter `ID`
+
+`$onLoad` run code on load
