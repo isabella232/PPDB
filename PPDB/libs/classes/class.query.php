@@ -130,9 +130,11 @@ function export($dir, $tdir, $name, $type){
 }
 
 public function listFiles($dir){
+    $data = [];
 	foreach(glob($dir."*.json*") as $file){
-		return $file;
+        $data[] = $file;
 	}
+    return $data;
 }
 
 public function createTable($tbs, $trs, $main, $cels){
