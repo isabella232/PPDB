@@ -30,3 +30,7 @@
 # v1.2.1
 
 - Fixed $READER->listFiles($dir), now outputs an array not a single string
+
+# v1.2.2
+
+- updated Readme.md
