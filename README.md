@@ -320,4 +320,13 @@ $READER->createTable($tbs, $trs, $main, $cels)->view($int);
 `$cels` list what needs to be displated (exact as `$tbs`)
 
 `$int` displays what row you want to view use `-1` or `VIEW_ALL` to list all values
-	
+
+List Database Files:
+
+```php
+$READER->listFiles($dir)[$int];
+```
+
+`$dir` is eaither a ROOT_DB or ROOT_DB_FORWARD
+
+`$int` is the index of the selector you want
