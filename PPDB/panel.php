@@ -33,7 +33,7 @@ if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		# Password, min, max, lower, upper, number, symbols
-		if(PPDB::CHECK_VALID_PASSWORD($psw, 4, 25, true, false, false, false)){
+		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, true)){
 			PPDB::INSTALL(ROOT_FORWARD, $username, $psw);
 		$_SESSION['username'] = $username;
 		}
@@ -55,10 +55,10 @@ if(isset($_POST['regbtn'])){
 	
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
-	if(SESSION_USER){
+	/*if(SESSION_USER){
 		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB_FORWARD."gameplay.json"));
 		echo $READER->createTable(["id", "name", "score"], $data, "users", ["id", "name", "score"])->view(VIEW_ALL);
-	}
+	}*/
 ?>
 
 
