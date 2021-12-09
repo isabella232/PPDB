@@ -38,4 +38,4 @@
 # v1.2.3
 
 - fixed `Reload::run()`
-- made table for stylish
+- made table for stylish for panel
