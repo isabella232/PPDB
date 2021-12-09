@@ -330,3 +330,29 @@ $READER->listFiles($dir)[$int];
 `$dir` is eaither a ROOT_DB or ROOT_DB_FORWARD
 
 `$int` is the index of the selector you want
+
+### 7. Styling(CSS)
+
+Styling your page is simple as well
+
+Linking:
+
+```php 
+PPDB::createCSSLink($url, $inter="", $crossorigin="");
+```
+
+`$url` enter valid css `URL/path`
+`$inter` enter a valid `integrity`
+`$crossorgin` enter a vlaid `crossorigin setting`
+
+Creating:
+
+```php
+PPDB::createCSS($css);
+```
+
+`$css` enter CSS code, YOU DO NOT NEED THE STYLE TAG
+
+### 8. scripting(JS)
+
+Same thing as [Styling](../../readme.md#7. Styling(CSS))
