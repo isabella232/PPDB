@@ -17,21 +17,24 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 			<?php
 			echo PPDB::createCSSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css","sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3", "anonymous");
 			echo PPDB::createPanelCSS();
+            echo PPDB::createCSS(".bte{
+                text-decoration:none;
+            }");
 			?>
 		</head>
 		<body>
 			<?php
-			PPDB::createStorage(ROOT);
-echo PPDB::userUI(ROOT);
-if(!file_exists(ROOT.'user.json')){
+			PPDB::createStorage(ROOT_FORWARD);
+echo PPDB::userUI(ROOT_FORWARD);
+if(!file_exists(ROOT_FORWARD.'user.json')){
 		session_unset();
 }
 if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		# Password, min, max, lower, upper, number, symbols
-		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, true)){
-			PPDB::INSTALL(ROOT, $username, $psw);
+		if(PPDB::CHECK_VALID_PASSWORD($psw, 4, 25, true, false, false, false)){
+			PPDB::INSTALL(ROOT_FORWARD, $username, $psw);
 		$_SESSION['username'] = $username;
 		}
 	}
@@ -39,7 +42,7 @@ if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		$psw = PPDB::PSW_ENCRYPT($psw);
-		$json = file_get_contents(ROOT."user.json");
+		$json = file_get_contents(ROOT_FORWARD."user.json");
 		$query = json_decode($json);
 		if($username === $query->user && $psw === $query->password){
 			$_SESSION['username'] = $username;
@@ -52,14 +55,10 @@ if(isset($_POST['regbtn'])){
 	
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
-	# Demo
-	/*$data = PPDB::JSONTOARRAY('{"user":[{"name":"hello","age":32,"expire":"01-21"},{"name":"world","age":21,"expire":"02-21"}]}');
-	PPDB::createDB(ROOT_DB, "data",  $data);
-	$READER->export(ROOT_DB, ROOT_TEMP, "data", "PHP_ARRAY");
 	if(SESSION_USER){
-		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB."data.json"));
-		echo $READER->createTable(["name", "age", "expire"], $data, "user", ["name", "age", "expire"]);
-	}*/
+		$data = PPDB::JSONTOARRAY(file_get_contents(ROOT_DB_FORWARD."gameplay.json"));
+		echo $READER->createTable(["id", "name", "score"], $data, "users", ["id", "name", "score"])->view(VIEW_ALL);
+	}
 ?>
 
 

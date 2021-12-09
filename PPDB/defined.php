@@ -22,4 +22,5 @@ define("CAPITALIZE", "capitalize", false);
 define("UPPERCASE", "uppercase", false);
 define("LOWERCASE", "lowercase", false);
 define("FILE_INFO", ["created", "updated", "size", "type"], false);
+define("VIEW_ALL", -1, false);
 ?>
