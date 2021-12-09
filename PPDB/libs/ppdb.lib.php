@@ -511,16 +511,9 @@ class PPDB{
 				font-weight: bold;
 			}
 			/*Table*/
-			table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  background-color: #00ffeb;
-  text-align:center;
-  font-size: 32px;
-}
-			tr:nth-child(even) {
-	background-color: #D6EEEE;
-			}
+            table{
+                margin-top: 10px;
+            }
 			</style>';
 	}
 	public static function createCSSLink($url, $inter="", $crossorigin=""){
