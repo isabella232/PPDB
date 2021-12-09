@@ -172,17 +172,18 @@ public function createTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	
-	$table .= '<table id="portTable">';
-	$table .= '<tr>';
+	$table .= '<table id="portTable" class="table table-hover table-dark table-bordered table-striped">';
+    $table .= '<caption class="text-primary bg-dark">PPDB Table viewer - ©SurveyBuilder</caption>';
+	$table .= '<tr class="table-success">';
 	foreach($tbs as $tb){
-		$table.='<th>'.$tb.'</th>';
+		$table.='<th scope="col">'.$tb.'</th>';
 	}
 	$table .= '</tr>';
 
 	for($i=0;$i<sizeof($trs[$main]);$i++){
 			$table .= '<tr>';
 		foreach($cels as $cel){
-			$table .= '<td>'.$trs[$main][$i][$cel].'</td>';
+			$table .= '<td scope="row">'.$trs[$main][$i][$cel].'</td>';
 		}
 		$table .= '</tr>';
 	}
