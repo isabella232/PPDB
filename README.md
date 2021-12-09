@@ -72,6 +72,7 @@ L = Localhost | D = Domain
 | UPPERCASE | uppercase | D & L |
 | LOWERCASE | lowercase | D & L |
 | FILE_INFO | ["created", "updated", "size", "type"] | D & L |
+| VIEW_ALL | -1 | D & L |
 
 ***
 
@@ -307,7 +308,7 @@ more variables
 Create Tabele:
 
 ```php
-$READER->createTable($tbs, $trs, $main, $cels);
+$READER->createTable($tbs, $trs, $main, $cels)->view($int);
 ```
 
 `$tbs` is the array to display as the "&lt;th&gt;" tag (array)
@@ -317,4 +318,6 @@ $READER->createTable($tbs, $trs, $main, $cels);
 `$main` first args of an array
 	
 `$cels` list what needs to be displated (exact as `$tbs`)
+
+`$int` displays what row you want to view use `-1` or `VIEW_ALL` to list all values
 	
