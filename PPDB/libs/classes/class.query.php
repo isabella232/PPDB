@@ -274,7 +274,7 @@ if($line === -1){
             }
         }
   }
-
+hightlightQuery(location.hash.replace("#L", ""));
     </script>';
 return $arg;
 }else{
@@ -300,6 +300,13 @@ return $t;
 }
 
 public function allowSearch($searchBy=0){
+    try{
+        if(!PPDB::isNumber($searchBy)){
+            throw new PPDBErr($searchBy);
+        }
+    }catch(PPDBErr $e){
+        $e->isNotNumber();
+    }
     $out = '';
     $out.='<input type="search" id="searchBarFilter" placeholder="Search..." oninput="filterTable('.$searchBy.')"/>';
     $out .= "<script>
@@ -326,6 +333,39 @@ function filterTable(n) {
 }
 </script>";
     return $out;
+}
+
+public function allowPageLimit($data=[5,10,15,20]){
+        try{
+        if(!PPDB::isArray($data)){
+            throw new PPDBErr($data);
+        }
+    }catch(PPDBErr $e){
+        $e->isNotArray();
+    }
+$out = '';
+$out .= '<select class="form-select limitTable" style="width:50%;" onchange="limitPage()">';
+foreach($data as $d){
+    $out .= '<option value="'.$d.'">'.$d.'</option>';
+}
+$out .= '</select>';
+$out .= '<script>
+function limitPage(){
+   let table = document.querySelector("#portTable");
+        let tr = table.querySelectorAll("tr");
+        let select = document.querySelector(".limitTable").selectedIndex;
+        let str = document.querySelector(".limitTable").options;
+        for(let i=1;i<tr.length;i++){
+            if(tr[i].rowIndex > parseInt(str[select].text)){
+                tr[i].hidden = true;
+            }else{
+                 tr[i].hidden = false;
+            }
+        }
+}
+setTimeout(limitPage, 0);
+</script>';
+return $out;
 }
 
 
