@@ -335,6 +335,15 @@ $READER->allowSearch($int);
 
 `$int` displays what row column you want to search by
 
+
+Limiting Viewing Table:
+
+```php
+$READER->allowPageLimit($arg);
+```
+
+`$arg` is the array of numbers that will display on a select box to limit on how much you want to see
+
 List Database Files:
 
 ```php
