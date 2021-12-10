@@ -5,7 +5,6 @@ class query{
  public $args;
  public $isTab = false;
  public $table;
-  
   # Methods
  function select($sdir, $sname) {
       $this->path = $sdir . $sname . ".json";
@@ -192,6 +191,65 @@ public function createTable($tbs, $trs, $main, $cels){
     $this->table = $table;
 	return $this;
 }
+
+public function createLinkedTable($tbs, $trs, $main, $cels){
+	$table = '';
+	try{
+		if(!PPDB::isArray($tbs)){
+			throw new PPDBErr($tbs);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
+	try{
+		if(!PPDB::isArray($trs)){
+			throw new PPDBErr($trs);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
+	try{
+		if(!PPDB::isString($main)){
+			throw new PPDBErr($main);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotString();
+		return false;
+	}
+		try{
+		if(!PPDB::isArray($cels)){
+			throw new PPDBErr($cels);
+		}
+	}catch(PPDBErr $e){
+		echo $e->isNotArray();
+		return false;
+	}
+	
+	$table .= '<table id="portTable" class="table table-hover table-dark table-bordered">';
+    $table .= '<caption class="text-primary bg-dark">PPDB Table viewer - ©SurveyBuilder</caption>';
+	$table .= '<tr class="table-success">';
+	foreach($tbs as $tb){
+		$table.='<th scope="col">'.$tb.'</th>';
+	}
+	$table .= '</tr>';
+
+	for($i=0;$i<sizeof($trs[$main]);$i++){
+        $valLine = $i+1;
+			$table .= '<tr onclick="hightlightQuery('.$valLine.')">';
+		foreach($cels as $cel){
+			$table .= '<td scope="row">'.$trs[$main][$i][$cel].'</td>';
+		}
+		$table .= '</tr>';
+        $table .= '</a>';
+	}
+	$this->isTab = true;
+    $this->table = $table;
+	return $this;
+}
+
+
 public function view($line){
   try{
 			if(!PPDB::isNumber($line)){
@@ -202,7 +260,23 @@ public function view($line){
 			return false;
 		}
 if($line === -1){
-return $this->table;
+    $arg .= $this->table;
+    $arg .= '<script>
+      function hightlightQuery(n){
+          location.hash = "#L"+n;
+            let table = document.querySelector("#portTable");
+        let tr = table.querySelectorAll("tr");
+        for(let i=1;i<tr.length;i++){
+            if(parseInt(location.hash.replace("#L", "")) === tr[i].rowIndex){
+                tr[i].setAttribute("class", "table-primary");
+            }else{
+            tr[i].removeAttribute("class");
+            }
+        }
+  }
+
+    </script>';
+return $arg;
 }else{
     $t = $this->table;
     $t .= '<script>
@@ -217,11 +291,43 @@ return $this->table;
        
     }
    setTimeout(runQuery, 0);
+
+  
     </script>';
 return $t;
 }
 
 }
+
+public function allowSearch($searchBy=0){
+    $out = '';
+    $out.='<input type="search" id="searchBarFilter" placeholder="Search..." oninput="filterTable('.$searchBy.')"/>';
+    $out .= "<script>
+function filterTable(n) {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById('searchBarFilter');
+  filter = input.value.toUpperCase();
+  table = document.getElementById('portTable');
+  tr = table.getElementsByTagName('tr');
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName('td')[n];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = '';
+      } else {
+        tr[i].style.display = 'none';
+      }
+    }
+  }
+}
+</script>";
+    return $out;
+}
+
 
 }
 
