@@ -48,4 +48,4 @@
 # v1.3.1
 
 - added `allowPageLimit()` function: limits how much you want to see in the table
-- fixed `Line Highlight` now hightlights row on page load 
+- fixed `Line Highlight` now highlights row on page load 
