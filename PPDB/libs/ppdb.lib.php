@@ -511,9 +511,16 @@ class PPDB{
 				font-weight: bold;
 			}
 			/*Table*/
-            table{
-                margin-top: 10px;
-            }
+
+            /*Search*/
+            input[type=search] {
+                  padding: 6px;
+                     margin-top: 8px;
+                    font-size: 17px;
+                 border: 1px solid #ccc;  
+                 width:50%;
+                 outline:none;
+                }
 			</style>';
 	}
 	public static function createCSSLink($url, $inter="", $crossorigin=""){
