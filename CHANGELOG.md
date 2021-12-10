@@ -44,3 +44,8 @@
 
 - added `createLinkedTable()` function: this will give you a highlighted row of what you selected to make viewing easier
 - added `allowSearch()` function: this will create a search bar and makes searching even easier
+
+# v1.3.1
+
+- added `allowPageLimit()` function: limits how much you want to see in the table
+- fixed `Line Highlight` now hightlights row on page load 
