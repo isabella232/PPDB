@@ -311,6 +311,12 @@ Create Tabele:
 $READER->createTable($tbs, $trs, $main, $cels)->view($int);
 ```
 
+or 
+
+```php
+$READER->createLinkedTable($tbs, $trs, $main, $cels)->view($int)
+```
+
 `$tbs` is the array to display as the "&lt;th&gt;" tag (array)
 	
 `$trs` user PPDB::JSONTOARRAY(file_get_contents(file-to-database))
@@ -320,6 +326,14 @@ $READER->createTable($tbs, $trs, $main, $cels)->view($int);
 `$cels` list what needs to be displated (exact as `$tbs`)
 
 `$int` displays what row you want to view use `-1` or `VIEW_ALL` to list all values
+
+Search bar Table:
+
+```php
+$READER->allowSearch($int);
+```
+
+`$int` displays what row column you want to search by
 
 List Database Files:
 
