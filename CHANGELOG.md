@@ -39,3 +39,8 @@
 
 - fixed `Reload::run()`
 - made table for stylish for panel
+
+# v1.3.0
+
+- added `createLinkedTable()` function: this will give you a highlighted row of what you selected to make viewing easier
+- added `allowSearch()` function: this will create a search bar and makes searching even easier
