@@ -49,3 +49,7 @@
 
 - added `allowPageLimit()` function: limits how much you want to see in the table
 - fixed `Line Highlight` now highlights row on page load 
+
+# v1.3.2
+
+- moved `is` Logics to `bin/Logic.php` use `PPDBLogic::` to trigger a logic function
