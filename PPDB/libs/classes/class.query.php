@@ -26,35 +26,35 @@ function update($update){
 
 function export($dir, $tdir, $name, $type){
 	 try{
-		if(!PPDB::isString($root)){
+		if(!PPDBLogic::isString($root)){
 			throw new PPDBErr($root);
 		}
 	}catch(PPDBErr $e){
 		echo $e->isNotString();
 	}
 	 try{
-		if(!PPDB::isString($dir)){
+		if(!PPDBLogic::isString($dir)){
 			throw new PPDBErr($dir);
 		}
 	}catch(PPDBErr $e){
 		echo $e->isNotString();
 	}
 	 try{
-		if(!PPDB::isString($tdir)){
+		if(!PPDBLogic::isString($tdir)){
 			throw new PPDBErr($tdir);
 		}
 	}catch(PPDBErr $e){
 		echo $e->isNotString();
 	}
 	try{
-		if(!PPDB::isString($name)){
+		if(!PPDBLogic::isString($name)){
 			throw new PPDBErr($name);
 		}
 	}catch(PPDBErr $e){
 		echo $e->isNotString();
 	}
 	 try{
-		if(!PPDB::isString($type)){
+		if(!PPDBLogic::isString($type)){
 			throw new PPDBErr($type);
 		}
 	}catch(PPDBErr $e){
@@ -139,7 +139,7 @@ public function listFiles($dir){
 public function createTable($tbs, $trs, $main, $cels){
 	$table = '';
 	try{
-		if(!PPDB::isArray($tbs)){
+		if(!PPDBLogic::isArray($tbs)){
 			throw new PPDBErr($tbs);
 		}
 	}catch(PPDBErr $e){
@@ -147,7 +147,7 @@ public function createTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	try{
-		if(!PPDB::isArray($trs)){
+		if(!PPDBLogic::isArray($trs)){
 			throw new PPDBErr($trs);
 		}
 	}catch(PPDBErr $e){
@@ -155,7 +155,7 @@ public function createTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	try{
-		if(!PPDB::isString($main)){
+		if(!PPDBLogic::isString($main)){
 			throw new PPDBErr($main);
 		}
 	}catch(PPDBErr $e){
@@ -163,7 +163,7 @@ public function createTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 		try{
-		if(!PPDB::isArray($cels)){
+		if(!PPDBLogic::isArray($cels)){
 			throw new PPDBErr($cels);
 		}
 	}catch(PPDBErr $e){
@@ -195,7 +195,7 @@ public function createTable($tbs, $trs, $main, $cels){
 public function createLinkedTable($tbs, $trs, $main, $cels){
 	$table = '';
 	try{
-		if(!PPDB::isArray($tbs)){
+		if(!PPDBLogic::isArray($tbs)){
 			throw new PPDBErr($tbs);
 		}
 	}catch(PPDBErr $e){
@@ -203,7 +203,7 @@ public function createLinkedTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	try{
-		if(!PPDB::isArray($trs)){
+		if(!PPDBLogic::isArray($trs)){
 			throw new PPDBErr($trs);
 		}
 	}catch(PPDBErr $e){
@@ -211,7 +211,7 @@ public function createLinkedTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 	try{
-		if(!PPDB::isString($main)){
+		if(!PPDBLogic::isString($main)){
 			throw new PPDBErr($main);
 		}
 	}catch(PPDBErr $e){
@@ -219,7 +219,7 @@ public function createLinkedTable($tbs, $trs, $main, $cels){
 		return false;
 	}
 		try{
-		if(!PPDB::isArray($cels)){
+		if(!PPDBLogic::isArray($cels)){
 			throw new PPDBErr($cels);
 		}
 	}catch(PPDBErr $e){
@@ -252,7 +252,7 @@ public function createLinkedTable($tbs, $trs, $main, $cels){
 
 public function view($line){
   try{
-			if(!PPDB::isNumber($line)){
+			if(!PPDBLogic::isNumber($line)){
 				throw new PPDBErr($line);
 			}
 		}catch(PPDBErr $e){
@@ -301,7 +301,7 @@ return $t;
 
 public function allowSearch($searchBy=0){
     try{
-        if(!PPDB::isNumber($searchBy)){
+        if(!PPDBLogic::isNumber($searchBy)){
             throw new PPDBErr($searchBy);
         }
     }catch(PPDBErr $e){
@@ -337,7 +337,7 @@ function filterTable(n) {
 
 public function allowPageLimit($data=[5,10,15,20]){
         try{
-        if(!PPDB::isArray($data)){
+        if(!PPDBLogic::isArray($data)){
             throw new PPDBErr($data);
         }
     }catch(PPDBErr $e){
