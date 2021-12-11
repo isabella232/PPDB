@@ -176,7 +176,7 @@ That is the basic parts of the panel
 
 isNumber():
 ```php
-if(PPDB::isNumber($value)){
+if(PPDBLogic::isNumber($value)){
 //return true
 }else{
 //false
@@ -185,7 +185,7 @@ if(PPDB::isNumber($value)){
 
 isString():
 ```php
-if(PPDB::isString($value)){
+if(PPDBLogic::isString($value)){
 //return true
 }else{
 //false
@@ -194,7 +194,7 @@ if(PPDB::isString($value)){
 
 isBoolean():
 ```php
-if(PPDB::isBoolean($value)){
+if(PPDBLogic::isBoolean($value)){
 //return true
 }else{
 //false
@@ -203,7 +203,7 @@ if(PPDB::isBoolean($value)){
 
 isArray():
 ```php
-if(PPDB::isArray($value)){
+if(PPDBLogic::isArray($value)){
 //return true
 }else{
 //false
