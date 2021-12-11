@@ -28,6 +28,22 @@ public static function isNumber($int){
 			return false;
 		}
 	}
+	
+	public static function storageExists($dir){
+		if(is_dir($dir."db/")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public static function dbExists($dir, $name){
+		if(file_exists($dir.$name.".json")){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 
 ?>

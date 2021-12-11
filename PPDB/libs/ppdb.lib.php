@@ -408,10 +408,13 @@ public static function userUI($dir){
 			</div>';
 			$panel.= '<div class="panel-nav">
 			<nav class="nav-con">
-			<a href="#" class="nav-list" title="Table">Table</a>
-			<a href="#" class="nav-list" title="Query">Query</a>
+			<form method="post">
+			<a href="#" class="nav-list" title="Storage"><input type="submit" name="store" value="Storage"/></a>
+			<span class="seperator">|</span>
+			<a href="#db" class="nav-list" title="Database"><input type="submit" name="db" value="DataBase"/></a>
+			
+			</form>
 			</nav>
-		
 			</div>';
 			$panel .= '</div>';
 			return $panel;
@@ -474,12 +477,23 @@ public static function userUI($dir){
 				background-color:rgb(3, 252, 218);
 				width:100%;
 			}
+			.nav-con input[type=submit]{
+				background-color:transparent;
+				border:0;
+				color:yellow;
+			}
 			.nav-con a{
 				text-decoration:none;
 				font-size:32px;
 				margin-right:8px;
 				color:rgb(255, 213, 0);
 				font-weight: bold;
+			}
+			.seperator{
+				font-size:32px;
+				color:yellow;
+				marign-left:5px;
+				margin-right: 5px;
 			}
 			/*Table*/
 
