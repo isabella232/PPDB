@@ -6,6 +6,7 @@ const LIBRARY_VERSION = "1.3.2";
 const LIBRARY_API = [1];
 const LIBRARY_SSL_SUPPORT = true;
 const LIBRARY_LICENCE = "Apache-2.0 License";
+const LIBRARY_AUTHOR = "SurveyBuilderTeams";
 
 
 # render
@@ -47,6 +48,13 @@ const LIBRARY_LICENCE = "Apache-2.0 License";
 	}catch(PPDBErr $e){
 			  echo $e->CHECKLIBSLICENCE();
 	}
+    try{
+        if(LIBRARY_AUTHOR !== "SurveyBuilderTeams"){
+       throw new PPDBErr(LIBRARY_AUTHOR);
+        }
+    }catch(PPDBErr $e){
+        echo $e->CHECKLIBSAuthor();
+    }
 	try{
 		if(!extension_loaded('openssl')){
 			throw new PPDBErr('This app needs the Open SSL PHP extension.');
