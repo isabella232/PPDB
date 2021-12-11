@@ -53,3 +53,8 @@
 # v1.3.2
 
 - moved `is` Logics to `bin/Logic.php` use `PPDBLogic::` to trigger a logic function
+
+# v1.3.2.1000
+
+- Added `LIBRARY_AUTHOR` credit in `bin/init.php`
+
