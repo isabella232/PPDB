@@ -9,43 +9,14 @@ require("handler/removeFileFolder.php");
 require("handler/ReturnfileSize.php");
 require("bin/init.php");
 require("bin/reload.php");
+require("bin/logic.php");
 require("classes/class.query.php");
 class PPDB{
 
 	private function __construct(){
 	 #nothing	
 	}
-#Logic
-	public static function isNumber($int){
-		if(gettype($int) === "double" || gettype($int) === "integer"){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public static function isString($str){
-		if(gettype($str) === "string"){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public static function isBoolean($bool){
-		if(gettype($bool) === "boolean"){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public static function isArray($arr){
-		if(gettype($arr) === "array"){
-			return true;
-		}else{
-			return false;
-		}
-	}
-#others
-	public static function userUI($dir){
+public static function userUI($dir){
 		#register
 		if(!file_exists($dir."user.json")){
 			$form = "<form method='post' action='#' class='panelForm'>";
@@ -111,7 +82,7 @@ class PPDB{
 	}
 	public static function CHECK_VALID_PASSWORD($psw, $min_length=8, $max_length=25, $include_lower_str=true, $include_upper_str=true, $include_int=true, $include_symbol=true){
 		try{
-			if(!PPDB::isString($psw)){
+			if(!PPDBLogic::isString($psw)){
 				throw new PPDBErr($psw);
 			}
 		}catch(PPDBErr $e){
@@ -119,7 +90,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isNumber($min_length)){
+			if(!PPDBLogic::isNumber($min_length)){
 				throw new PPDBErr($min_length);
 			}
 		}catch(PPDBErr $e){
@@ -127,7 +98,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isNumber($max_length)){
+			if(!PPDBLogic::isNumber($max_length)){
 				throw new PPDBErr($max_length);
 			}
 		}catch(PPDBErr $e){
@@ -135,7 +106,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isBoolean($include_lower_str)){
+			if(!PPDBLogic::isBoolean($include_lower_str)){
 				throw new PPDBErr($include_lower_str);
 			}
 		}catch(PPDBErr $e){
@@ -143,7 +114,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isBoolean($include_upper_str)){
+			if(!PPDBLogic::isBoolean($include_upper_str)){
 				throw new PPDBErr($include_upper_str);
 			}
 		}catch(PPDBErr $e){
@@ -151,7 +122,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isBoolean($include_int)){
+			if(!PPDBLogic::isBoolean($include_int)){
 				throw new PPDBErr($include_int);
 			}
 		}catch(PPDBErr $e){
@@ -159,7 +130,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isBoolean($include_symbol)){
+			if(!PPDBLogic::isBoolean($include_symbol)){
 				throw new PPDBErr($include_symbol);
 			}
 		}catch(PPDBErr $e){
@@ -250,21 +221,21 @@ class PPDB{
 		$get = file_get_contents($dir."user.json");
 		$d = json_decode($get);
 		try{
-			if(!PPDB::isString($dir)){
+			if(!PPDBLogic::isString($dir)){
 				throw new PPDBErr($dir);
 			}
 		}catch(PPDBErr $e){
 			echo $e->isNotString();
 		}
 		try{
-			if(!PPDB::isString($old)){
+			if(!PPDBLogic::isString($old)){
 				throw new PPDBErr($old);
 			}
 		}catch(PPDBErr $e){
 			echo $e->isNotString();
 		}
 		try{
-			if(!PPDB::isString($new)){
+			if(!PPDBLogic::isString($new)){
 				throw new PPDBErr($new);
 			}
 		}catch(PPDBErr $e){
@@ -303,7 +274,7 @@ class PPDB{
 	
 	public static function createDB($dir, $name, $arr){
 			try{
-				if(!PPDB::isString($name)){
+				if(!PPDBLogic::isString($name)){
 					throw new PPDBErr($name);
 				}
 			}catch(PPDBErr $e){
@@ -311,7 +282,7 @@ class PPDB{
 				return false;
 			}
 			try{
-				if(!PPDB::isArray($arr)){
+				if(!PPDBLogic::isArray($arr)){
 					throw new PPDBErr($arr);
 				}
 			}catch(PPDBErr $e){
@@ -327,7 +298,7 @@ class PPDB{
 	}
 	public static function removeDB($dir, $name){
 		try{
-				if(!PPDB::isString($name)){
+				if(!PPDBLogic::isString($name)){
 					throw new PPDBErr($name);
 				}
 			}catch(PPDBErr $e){
@@ -345,7 +316,7 @@ class PPDB{
 	}
 	public static function renameDB($dir, $oldName, $newName){
 			try{
-				if(!PPDB::isString($oldName)){
+				if(!PPDBLogic::isString($oldName)){
 					throw new PPDBErr($oldName);
 				}
 			}catch(PPDBErr $e){
@@ -353,7 +324,7 @@ class PPDB{
 				return false;
 			}
 				try{
-				if(!PPDB::isString($newName)){
+				if(!PPDBLogic::isString($newName)){
 					throw new PPDBErr($newName);
 				}
 			}catch(PPDBErr $e){
@@ -373,7 +344,7 @@ class PPDB{
 	}
 	public static function infoDB($dir, $name, $info=FILE_INFO){
 		try{
-				if(!PPDB::isString($name)){
+				if(!PPDBLogic::isString($name)){
 					throw new PPDBErr($name);
 				}
 			}catch(PPDBErr $e){
@@ -381,7 +352,7 @@ class PPDB{
 				return false;
 			}
 		try{
-				if(!PPDB::isArray($info)){
+				if(!PPDBLogic::isArray($info)){
 					throw new PPDBErr($info);
 				}
 			}catch(PPDBErr $e){
@@ -393,7 +364,7 @@ class PPDB{
 	
 	public static function JSONTOARRAY($JSON){
 		try{
-			if(!PPDB::isString($JSON)){
+			if(!PPDBLogic::isString($JSON)){
 				throw new PPDBErr($JSON);
 			}
 		}catch(PPDBErr $e){
@@ -405,7 +376,7 @@ class PPDB{
 	}
 	public static function ARRAYTOJSON($ARRAY){
 		try{
-			if(!PPDB::isArray($ARRAY)){
+			if(!PPDBLogic::isArray($ARRAY)){
 				throw new PPDBErr($ARRAY);
 			}
 		}catch(PPDBErr $e){
@@ -451,7 +422,7 @@ class PPDB{
 	public static function COLOR($r, $g, $b, $a=1){
 		
 		try{
-			if(!PPDB::isNumber($r)){
+			if(!PPDBLogic::isNumber($r)){
 				throw new PPDBErr($r);
 			}
 		}catch(PPDBErr $e){
@@ -459,7 +430,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isNumber($g)){
+			if(!PPDBLogic::isNumber($g)){
 				throw new PPDBErr($g);
 			}
 		}catch(PPDBErr $e){
@@ -467,7 +438,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isNumber($g)){
+			if(!PPDBLogic::isNumber($g)){
 				throw new PPDBErr($g);
 			}
 		}catch(PPDBErr $e){
@@ -475,7 +446,7 @@ class PPDB{
 			return false;
 		}
 		try{
-			if(!PPDB::isNumber($a)){
+			if(!PPDBLogic::isNumber($a)){
 				throw new PPDBErr($a);
 			}
 		}catch(PPDBErr $e){
@@ -555,7 +526,7 @@ class PPDB{
 	}
 	public static function SIZE($size){
 		try{
-			if(!PPDB::isNumber($size)){
+			if(!PPDBLogic::isNumber($size)){
 				throw new PPDBErr($size);
 			}
 		}catch(PPDBErr $e){
