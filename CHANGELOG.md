@@ -58,3 +58,6 @@
 
 - Added `LIBRARY_AUTHOR` credit in `bin/init.php`
 
+# v1.3.3
+
+- Fixed Panel UI - but you will need to config it if you on website
