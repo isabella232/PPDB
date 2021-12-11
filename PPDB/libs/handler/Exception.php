@@ -17,6 +17,11 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> is not a valid Library API(string)<br/>';
     return $errorMsg;
 	}
+    public function CHECKLIBSAuthor(){
+    $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid Library aurthor<br/>';
+    return $errorMsg;
+	}
 	public function CHECKLIBSSL(){
     $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
     .': <b>'.$this->getMessage().'</b> is not a valid Library SSL(boolean)<br/>';
@@ -96,6 +101,10 @@ class PPDBErr extends Exception{
 		$errorMsg = $this->getMessage();
     return $errorMsg;
 	}
+    public function TableNotFound(){
+        	$errorMsg = $this->getMessage();
+    return $errorMsg;
+    }
 	
 	
 }
