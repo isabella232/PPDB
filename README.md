@@ -522,3 +522,34 @@ PPDB::createJS($JS, $id, $onLoad=true);
 `$id` enter `ID`
 
 `$onLoad` run code on load
+
+### 9. Coding and JSON format
+
+This is a strict type of database, all database are required to have a table
+
+JSON example: 
+
+```json
+{
+"users": [{
+"__comment__": "Use only arrays, strings, numbers, no extra string"
+}]
+}
+```
+"users" is the table of the setting
+
+PHP example:
+
+```php
+array (
+  'users' => 
+  array (
+    0 => 
+    array (
+      '__comment__' => 'Use only arrays, strings, numbers, no extra string',
+    ),
+  ),
+)
+```
+
+in PHP this will select `users=>0` being `__comment__`
