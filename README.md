@@ -523,7 +523,7 @@ PPDB::createJS($JS, $id, $onLoad=true);
 
 `$onLoad` run code on load
 
-### 9. Coding and JSON format
+### 9. Coding PHP and JSON format
 
 This is a strict type of database, all database are required to have a table
 
