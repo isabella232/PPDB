@@ -61,3 +61,7 @@
 # v1.3.3
 
 - Fixed Panel UI - but you will need to config it if you on website
+
+# v1.4.0
+
+- Completed Panel UI add viewable table
