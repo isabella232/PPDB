@@ -359,7 +359,7 @@ public static function userUI($dir){
 				echo $e->isNotArray();
 				return false;
 			}
-		return array("created"=>date("F d Y H:i:s.", filectime($dir.$name.".json")),"updated"=>date ("F d Y H:i:s.", filemtime($dir.$name.".json")),"size"=>sizeFormat(filesize($dir.$name.".json")), "type"=>"json");
+		return array("created"=>date("F d Y H:i:s", filectime($dir.$name.".json")),"updated"=>date ("F d Y H:i:s", filemtime($dir.$name.".json")),"size"=>sizeFormat(filesize($dir.$name.".json")), "type"=>"json");
 	}
 	
 	public static function JSONTOARRAY($JSON){
@@ -412,7 +412,8 @@ public static function userUI($dir){
 			<a href="#" class="nav-list" title="Storage"><input type="submit" name="store" value="Storage"/></a>
 			<span class="seperator">|</span>
 			<a href="#db" class="nav-list" title="Database"><input type="submit" name="db" value="DataBase"/></a>
-			
+			<span class="seperator">|</span>
+			<a href="#table" class="nav-list" title="Table Viewer"><input type="submit" name="table" value="Table"/></a>
 			</form>
 			</nav>
 			</div>';

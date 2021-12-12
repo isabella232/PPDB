@@ -260,6 +260,7 @@ public function view($line){
 			return false;
 		}
 if($line === -1){
+	$arg = '';
     $arg .= $this->table;
     $arg .= '<script>
       function hightlightQuery(n){
