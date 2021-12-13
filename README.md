@@ -485,7 +485,7 @@ $READER->createLinkedTable($tbs, $trs, $main, $cels)->view($int)
 	
 `$trs` user PPDB::JSONTOARRAY(file_get_contents(file-to-database))
 	
-`$main` first args of an array
+`$main` your table name
 	
 `$cels` list what needs to be displated (exact as `$tbs`)
 
