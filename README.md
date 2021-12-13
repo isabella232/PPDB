@@ -612,3 +612,13 @@ array (
 ```
 
 in PHP this will select `users=>0` being `__comment__`
+
+### 10. Syntax Errors
+
+To build a custom syntax error, use this line of code below
+
+```php
+class {CustomClass} extends PPDBErr{
+# Write syntax line here
+}
+```
