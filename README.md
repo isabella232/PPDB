@@ -460,13 +460,11 @@ same variables but `$arr` means PHP array to convert to JSON
 Export:
 
 ```php
-$READER->export($dom, $dir, $tdir, $name, $type);
+$READER->export($dir, $tdir, $name, $type);
 ```
 
 
 more variables
-
-`$dom` eaiter `true` or `false`
 
 `$dir` eaither `ROOT_DB` or `ROOT_DB_FORWARD`
 
