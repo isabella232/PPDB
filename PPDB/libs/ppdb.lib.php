@@ -11,6 +11,7 @@ require("bin/init.php");
 require("bin/reload.php");
 require("bin/logic.php");
 require("classes/class.query.php");
+require("classes/class.mysql.php");
 class PPDB{
 
 	private function __construct(){

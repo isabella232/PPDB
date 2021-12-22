@@ -29,7 +29,7 @@ if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		# Password, min, max, lower, upper, number, symbols
-		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, true)){
+		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, false)){
 			PPDB::INSTALL(ROOT, $username, $psw);
 		$_SESSION['username'] = $username;
 		}

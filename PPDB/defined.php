@@ -1,5 +1,5 @@
 <?php
-global $READER;
+global $READER, $msql;
 define("DS", "\\", false);
 define("DS_FORWARD", "/", false);
 define("ROOT", dirname(__FILE__).DS, false);
