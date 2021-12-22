@@ -65,3 +65,7 @@
 # v1.4.0
 
 - Completed Panel UI add viewable table
+
+# 1.4.1
+
+- Added `mySQL exporter`
