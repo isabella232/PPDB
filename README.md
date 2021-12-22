@@ -618,3 +618,35 @@ class {CustomClass} extends PPDBErr{
 # Write syntax line here
 }
 ```
+
+### 11. mySQL exporter
+
+Export your mySQL database table as a JSON file
+
+Connect to mySQL:
+
+```php
+$msql->connect($host, $user, $psw, $db);
+```
+
+Get mySQL Info:
+
+```php
+echo $msql->connect($host, $user, $psw, $db)->getInfo();
+```
+
+exportAll:
+
+```php
+$msql->connect($host, $user, $psw, $db)-exportAll($db,$table);
+```
+
+export:
+```php
+$msql->connect($host, $user, $psw, $db)->export($db, $table, $sel);
+```
+
+`$db` is the eaither `ROOT_DB` or `ROOT_DB_FORWARD`
+
+
+`$sel` is an array of selector of tables that you want
