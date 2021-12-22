@@ -649,4 +649,4 @@ $msql->connect($host, $user, $psw, $db)->export($db, $table, $sel);
 `$db` is the eaither `ROOT_DB` or `ROOT_DB_FORWARD`
 
 
-`$sel` is an array of selector of tables that you want
+`$sel` is an array of selector of items in a table
