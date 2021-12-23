@@ -66,6 +66,10 @@
 
 - Completed Panel UI add viewable table
 
-# 1.4.1
+# v1.4.1
 
 - Added `mySQL exporter`
+
+# v1.4.2
+
+- Added `PPDB::minify()`
