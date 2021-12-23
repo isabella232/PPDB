@@ -22,6 +22,7 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 		<body>
 			<?php
 echo PPDB::userUI(ROOT);
+echo PPDB::minify("Hello<br/>world <!--world-->");
 if(!file_exists(ROOT.'user.json')){
 		session_unset();
 }

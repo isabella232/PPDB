@@ -26,13 +26,6 @@ function update($update){
 
 function export($dir, $tdir, $name, $type){
 	 try{
-		if(!PPDBLogic::isString($root)){
-			throw new PPDBErr($root);
-		}
-	}catch(PPDBErr $e){
-		echo $e->isNotString();
-	}
-	 try{
 		if(!PPDBLogic::isString($dir)){
 			throw new PPDBErr($dir);
 		}
@@ -80,18 +73,18 @@ function export($dir, $tdir, $name, $type){
 		$path = $tdir.$date.DS;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
-			$data = file_get_contents($dir.$name.".json");
+			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
 			$file = fopen($path.$name.".json", "w+");
 			fwrite($file, $data);
 			fclose($file);
 		}else{
-			$data = file_get_contents($dir.$name.".json");
+			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
 			$file = fopen($path.$name.".json", "w+");
 			fwrite($file, $data);
 			fclose($file);
 		}
 		$id = uniqid();
-		$getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
+		$getMoved = str_replace(DOC_ROOT,"", $path);
 		echo '<a href="'.$getMoved.$name.".json".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.json"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");
 			download.click();
@@ -107,17 +100,17 @@ function export($dir, $tdir, $name, $type){
 			$data = file_get_contents($dir.$name.".json");
 			$data = PPDB::JSONTOARRAY($data);
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, print_r($data, true));
+			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true));
 			fclose($file);
 		}else{
 			$data = file_get_contents($dir.$name.".json");
-			$data = PPDB::JSONTOARRAY($data);
+			$data = str_replace(array("\n","\t","\t\n"),"",PPDB::JSONTOARRAY($data));
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, print_r($data, true));
+			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".PPDB::minify(print_r($data, true)));
 			fclose($file);
 		}
 		$id = uniqid();
-		$getMoved = str_replace(DOC_ROOT_FORWARD,"", $path);
+		$getMoved = str_replace(DOC_ROOT,"", $path);
 		echo '<a href="'.$getMoved.$name.".php".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.php"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");
 			download.click();

@@ -256,6 +256,17 @@ public static function userUI($dir){
 		fwrite($data, $update);
 		fclose($data);
 	}
+	
+	public static function minify($a){
+		$min = str_replace(array("\n","\r","\r\n", " ", "\#"), "", $a);
+		$min = preg_replace("(\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+)", "", $min); //remove block comments
+		$min = preg_replace("(\<!--(.|\n)*?-->)", "", $min); //remove <!--.--> comments
+		$min = preg_replace("(\/\/\/*([a-zA-Z0-1 0-9_\-\!\@\#\$\%\^\&\*\(\)\+\=\|\/\.\,\?\'\"\:\;\`\~]{1,}))", "", $min); //remove single line
+		$min = preg_replace("(\#\#*([a-zA-Z0-1 0-9_\-\!\@\#\$\%\^\&\*\(\)\+\=\|\/\.\,\?\'\"\:\;\`\~]{1,}))", "", $min); //hashtag comment
+		$min = str_replace("<br/>", " ", $min);
+		return $min;
+	}
+	
 	public static function createStorage($dir){
 		#Check if dictionary 
 		if(!is_dir($dir."db")){
