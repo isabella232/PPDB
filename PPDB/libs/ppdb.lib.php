@@ -29,9 +29,7 @@ public static function userUI($dir){
 		$form .= "<input type='password' class='form-control' name='psw' required='' id='psw' placeholder='Password'/><br/>";
 		$form .= "</div>";
 		$form .= "<input type='submit' class='form-control' value='Register' name='regbtn'/>";
-		$form .= "<br/><a href='/projects/PPDB/demo' class='bte'><button type='button' class='form-control btn btn-success'>Back to execution</button></a>";
 		$form .= "</form>";
-	
 		return $form;
 		}else{
 			if(!SESSION_USER){
@@ -44,13 +42,14 @@ public static function userUI($dir){
 		$form .= "<input type='password' class='form-control' name='psw' required='' id='psw' placeholder='Password'/><br/>";
 		$form .= "</div>";
 		$form .= "<input type='submit' class='form-control' value='Login' name='logbtn'/>";
-		$form .= "<br/><a href='/projects/PPDB/demo' class='bte'><button type='button' class='form-control btn btn-success'>Back to execution</button></a>";
 		$form .= "</form>";
 		return $form;
 			}
 		}
 		
 	}
+	
+	
 	
 	public static function INSTALL($dir, $user, $psw, $host=PPDB_CONNECT){
 		$pass = 1;

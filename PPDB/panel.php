@@ -22,9 +22,9 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 		<body>
 			<?php
 echo PPDB::userUI(ROOT);
-echo PPDB::minify("Hello<br/>world <!--world-->");
-if(!file_exists(ROOT.'user.json')){
+if(!file_exists(ROOT.'user.json') && SESSION_USER){
 		session_unset();
+		Reload::run();
 }
 if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];

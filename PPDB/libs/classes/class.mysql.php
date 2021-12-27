@@ -58,6 +58,7 @@ public function export($db, $table, $sel){
 		}
 		
 }
+
 }
 $msql = new mySQL();
 ?>
