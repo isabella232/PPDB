@@ -73,3 +73,7 @@
 # v1.4.2
 
 - Added `PPDB::minify()`
+
+# v1.4.3
+
+- Fixed Panel reload, now when `user.json` file is deleted, it will reload the page and will not leave panel open.
