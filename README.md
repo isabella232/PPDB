@@ -651,7 +651,7 @@ $msql->connect($host, $user, $psw, $db)->export($db, $table, $sel);
 
 `$sel` is an array of selector of items in a table
 
-### Minifing files or text
+### 12. Minifing files or text
 
 ```php
 PPDB::minify($txt);
@@ -659,7 +659,7 @@ PPDB::minify($txt);
 
 `$txt` is the string/array that you are minifying removing linebreaks,spaces,tabs
 
-### URI(URL)
+### 13. URI(URL)
 
 There is 2 functions for this
 
