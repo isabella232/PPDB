@@ -56,7 +56,7 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Storage
-	if(isset($_POST['store']) || isset($_GET['type']) && $_GET['type'] === "storage"){
+	if(isset($_POST['store']) || isset($_GET['type']) && $_GET['type'] === "storage" && SESSION_USER){
 		echo "<br/><br/><form method='post'>
 		<input type='submit' value='Create Storage' name='cs'/><br/><br/>
 		<input type='submit' value='Remove Storage' name='rs'/>
@@ -82,7 +82,7 @@ if(isset($_POST['regbtn'])){
 		}
 	# Database
 	
-	if(isset($_POST['db']) || isset($_GET['type']) && $_GET['type'] === "db"){
+	if(isset($_POST['db']) || isset($_GET['type']) && $_GET['type'] === "db" && SESSION_USER){
 			echo "<br/><br/><form method='post'>
 			<input type='text' placeholder='Enter Database Name' name='dbname' require/><br/>
 			<br/>
@@ -145,7 +145,7 @@ if(isset($_POST['dbinfo'])){
 
 # Table
 
-if(isset($_POST['table']) || isset($_GET['type']) && $_GET['type'] === "table"){
+if(isset($_POST['table']) || isset($_GET['type']) && $_GET['type'] === "table" && SESSION_USER){
 	echo '<br/><br/><form method="post">
 	<input type="text" name="dbname" placeholder="Enter Database Name"/><br/></br>
 	<input type="text" name="dbarr" placeholder="Enter data(use \',\' split)"/><br/></br>
@@ -181,6 +181,7 @@ if(isset($_POST['LoadLinkedTable'])){
 	}
 	
 }
+
 ?>
 
 
