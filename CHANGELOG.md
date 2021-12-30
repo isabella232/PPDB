@@ -77,3 +77,7 @@
 # v1.4.3
 
 - Fixed Panel reload, now when `user.json` file is deleted, it will reload the page and will not leave panel open.
+
+# v1.4.4
+
+- Added URI class and allow users to use direct url `?type="storage"|"db"|"table"`
