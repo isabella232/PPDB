@@ -1,2 +1,2 @@
 <?php exit();?>
-Array([users]=>Array([0]=>Array([id]=>1[name]=>[is_real]=>true)[1]=>Array([id]=>2[name]=>[is_real]=>false)[2]=>Array([id]=>3[name]=>[is_real]=>true)))
+array("users"=>array(array("id"=>1,"name"=>"#1","is_real"=>"true" ),array("id"=>2,"name"=>"#2","is_real"=>"false"),array("id"=>3,"name"=>"#3","is_real"=>"true")));
