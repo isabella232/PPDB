@@ -7,6 +7,7 @@ require(dirname(__DIR__)."/defined.php");
 require("handler/Exception.php");
 require("handler/removeFileFolder.php");
 require("handler/ReturnfileSize.php");
+require("handler/URI.php");
 require("bin/init.php");
 require("bin/reload.php");
 require("bin/logic.php");
@@ -420,11 +421,11 @@ public static function userUI($dir){
 			$panel.= '<div class="panel-nav">
 			<nav class="nav-con">
 			<form method="post">
-			<a href="#" class="nav-list" title="Storage"><input type="submit" name="store" value="Storage"/></a>
+			<a href="./panel?type=storage" class="nav-list storageTab" title="Storage"><input type="submit" name="store" value="Storage"/></a>
 			<span class="seperator">|</span>
-			<a href="#db" class="nav-list" title="Database"><input type="submit" name="db" value="DataBase"/></a>
+			<a href="./panel?type=db" class="nav-list dbTab" title="Database"><input type="submit" name="db" value="DataBase"/></a>
 			<span class="seperator">|</span>
-			<a href="#table" class="nav-list" title="Table Viewer"><input type="submit" name="table" value="Table"/></a>
+			<a href="./panel?type=table" class="nav-list tableTab" title="Table Viewer"><input type="submit" name="table" value="Table"/></a>
 			</form>
 			</nav>
 			</div>';
