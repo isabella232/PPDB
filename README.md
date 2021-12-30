@@ -658,3 +658,32 @@ PPDB::minify($txt);
 ```
 
 `$txt` is the string/array that you are minifying removing linebreaks,spaces,tabs
+
+### URI(URL)
+
+There is 2 functions for this
+
+1. URI(URI)::
+2. URLS(URI_SCRIPT)::
+
+recive URL:
+```php
+URI::getCurrent();
+```
+
+recive Query:
+```php
+URI::getQuery();
+```
+
+check valid URL:
+```php
+URI::checkValid($url);
+```
+
+adding scripts:
+
+_example: pushURI.js(Panel usage only)_
+````php
+URIS::PUSH_URL();
+```
