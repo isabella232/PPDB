@@ -1,1 +1,1 @@
-{"users":[{"id":1,"name":"},{"id":2,"name":"},{"id":3,"name":"}]}
+{"users":[{"id":1,"name":"#1","is_real":"true"},{"id":2,"name":"#2","is_real":"false"},{"id":3,"name":"#3","is_real":"true"}]}
