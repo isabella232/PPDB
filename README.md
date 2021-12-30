@@ -684,6 +684,6 @@ URI::checkValid($url);
 adding scripts:
 
 _example: pushURI.js(Panel usage only)_
-````php
+```php
 URIS::PUSH_URL();
 ```
