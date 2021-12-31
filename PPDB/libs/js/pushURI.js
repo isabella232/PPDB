@@ -1,3 +1,13 @@
+/*
+* pushURI
+*
+* @aurthor     SurveyBuilderTeams
+* @copyright   (c) 2021-2022
+* @license     https://www.apache.org/licenses/LICENSE-2.0.html
+* @package     PPDB
+* @version     2.0
+* @update      12-30-21
+*/
 var arcive = sessionStorage.getItem("once");
 setTimeout(function(){
 	if(arcive === 1){
