@@ -122,6 +122,8 @@ require('libs/ppdb.lib.php');
 <!--Javascript-->
 <?php
 echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
+echo URIS::PUSH_URL();
+
 ?>
 
 		<!-- CSS only -->
@@ -132,15 +134,17 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 		</head>
 		<body>
 			<?php
+		
 echo PPDB::userUI(ROOT);
-if(!file_exists(ROOT.'user.json')){
+if(!file_exists(ROOT.'user.json') && SESSION_USER){
 		session_unset();
+		Reload::run();
 }
 if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
 		# Password, min, max, lower, upper, number, symbols
-		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, true)){
+		if(PPDB::CHECK_VALID_PASSWORD($psw, 8, 20, true, true, true, false)){
 			PPDB::INSTALL(ROOT, $username, $psw);
 		$_SESSION['username'] = $username;
 		}
@@ -163,7 +167,7 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Storage
-	if(isset($_POST['store'])){
+	if(isset($_POST['store']) || isset($_GET['type']) && $_GET['type'] === "storage" && SESSION_USER){
 		echo "<br/><br/><form method='post'>
 		<input type='submit' value='Create Storage' name='cs'/><br/><br/>
 		<input type='submit' value='Remove Storage' name='rs'/>
@@ -189,7 +193,7 @@ if(isset($_POST['regbtn'])){
 		}
 	# Database
 	
-	if(isset($_POST['db'])){
+	if(isset($_POST['db']) || isset($_GET['type']) && $_GET['type'] === "db" && SESSION_USER){
 			echo "<br/><br/><form method='post'>
 			<input type='text' placeholder='Enter Database Name' name='dbname' require/><br/>
 			<br/>
@@ -252,7 +256,7 @@ if(isset($_POST['dbinfo'])){
 
 # Table
 
-if(isset($_POST['table'])){
+if(isset($_POST['table']) || isset($_GET['type']) && $_GET['type'] === "table" && SESSION_USER){
 	echo '<br/><br/><form method="post">
 	<input type="text" name="dbname" placeholder="Enter Database Name"/><br/></br>
 	<input type="text" name="dbarr" placeholder="Enter data(use \',\' split)"/><br/></br>
@@ -288,6 +292,7 @@ if(isset($_POST['LoadLinkedTable'])){
 	}
 	
 }
+
 ?>
 
 
@@ -296,10 +301,11 @@ if(isset($_POST['LoadLinkedTable'])){
 			<!-- JavaScript Bundle with Popper -->
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
-			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","")
+			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
 			?>
 		</body>
 	</html>
+
 ```
 
 ok, lets break it down
