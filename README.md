@@ -644,7 +644,7 @@ echo $msql->connect($host, $user, $psw, $db)->getInfo();
 exportAll:
 
 ```php
-$msql->connect($host, $user, $psw, $db)-exportAll($db,$table);
+$msql->connect($host, $user, $psw, $db)->exportAll($db,$table);
 ```
 
 export:
