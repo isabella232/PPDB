@@ -110,6 +110,10 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> failed to create table<br/>';
     return $errorMsg;
 	}
+	public function HAS_CONFIG_LENGHT_FAIL(){
+		$errorMsg = $this->getMessage();
+    return $errorMsg;
+	}
 	
 	
 }

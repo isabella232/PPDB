@@ -11,8 +11,6 @@ require('libs/ppdb.lib.php');
 <!--Javascript-->
 <?php
 echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
-echo URIS::PUSH_URL();
-
 ?>
 
 		<!-- CSS only -->
@@ -56,7 +54,7 @@ if(isset($_POST['regbtn'])){
 	echo PPDB::loadPanel();
 	echo PPDB::logout();
 	# Storage
-	if(isset($_POST['store']) || isset($_GET['type']) && $_GET['type'] === "storage" && SESSION_USER){
+	if(isset($_POST['store']) && SESSION_USER){
 		echo "<br/><br/><form method='post'>
 		<input type='submit' value='Create Storage' name='cs'/><br/><br/>
 		<input type='submit' value='Remove Storage' name='rs'/>
@@ -82,7 +80,7 @@ if(isset($_POST['regbtn'])){
 		}
 	# Database
 	
-	if(isset($_POST['db']) || isset($_GET['type']) && $_GET['type'] === "db" && SESSION_USER){
+	if(isset($_POST['db']) && SESSION_USER){
 			echo "<br/><br/><form method='post'>
 			<input type='text' placeholder='Enter Database Name' name='dbname' require/><br/>
 			<br/>
@@ -145,7 +143,7 @@ if(isset($_POST['dbinfo'])){
 
 # Table
 
-if(isset($_POST['table']) || isset($_GET['type']) && $_GET['type'] === "table" && SESSION_USER){
+if(isset($_POST['table']) && SESSION_USER){
 	echo '<br/><br/><form method="post">
 	<input type="text" name="dbname" placeholder="Enter Database Name"/><br/></br>
 	<input type="text" name="dbarr" placeholder="Enter data(use \',\' split)"/><br/></br>
@@ -191,6 +189,8 @@ if(isset($_POST['LoadLinkedTable'])){
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
+			echo URIS::config(BBCOLOR,["#696a69","body"]);
+		
 			?>
 		</body>
 	</html>

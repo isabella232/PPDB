@@ -44,6 +44,17 @@ public static function isNumber($int){
 			return false;
 		}
 	}
+	public static function hasConfigLength($arr, $length){
+		if(gettype($arr) === "array"){
+			if(count($arr) == $length){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
 }
 
 ?>
