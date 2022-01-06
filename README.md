@@ -689,7 +689,7 @@ URI::checkValid($url);
 
 adding scripts:
 
-_example: pushURI.js(Panel usage only)_
+_example: bgcolor.js(Panel usage only)_
 ```php
-URIS::PUSH_URL();
+URIS::config(BGCOLOR,["#696a69","body"]);
 ```
