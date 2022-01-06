@@ -81,3 +81,7 @@
 # v1.4.4
 
 - Added URI class and allow users to use direct url `?type="storage"|"db"|"table"`
+
+# v1.4.5
+
+- Fixed `URIS` is now written as `URIS::config($plugin, $pluginConfig);`
