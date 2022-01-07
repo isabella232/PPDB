@@ -607,7 +607,7 @@ JSON example:
 }],
 "table_2":[{
 "item_1":"value",
-"item_2":"valeu"
+"item_2":"value"
 }]
 }
 ```
@@ -626,7 +626,7 @@ array(
     "table_2" => array(
         array(
             "item_1" => "value",
-            "item_2" => "valeu"
+            "item_2" => "value"
         )
     )
 );
