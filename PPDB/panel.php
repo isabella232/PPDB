@@ -189,7 +189,8 @@ if(isset($_POST['LoadLinkedTable'])){
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
-			echo URIS::config(BBCOLOR,["#696a69","body"]);
+			echo URIS::config(BGCOLOR,["#696a69","body"]);
+			//echo URIS::config(PREVIEW_IMG, ["body", "https://www.hdnicewallpapers.com/Walls/Big/Rainbow/Rainbow_on_Mountain_HD_Image.jpg", 320, 320, "Rainbow on Mountain"]);
 		
 			?>
 		</body>
