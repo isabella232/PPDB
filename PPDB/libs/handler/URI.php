@@ -37,7 +37,7 @@ class URIS extends URI{
 	private function __construct(){
 		# nothing
 	}
-	public function config($URIS, $cS){
+	public static function config($URIS, $cS){
 		try{
 			if(!PPDBLogic::isString($URIS)){
 				throw new PPDBErr($URIS);
