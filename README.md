@@ -390,6 +390,15 @@ if(PPDBLogic::isArray($value)){
 }
 ```
 
+hasConfigLength();
+```php
+if(PPDBLogic::hasConfigLength($array, $arrayCount)){
+return true;
+}else{
+return false;
+}
+```
+
 ### 4. creating/removing/renaming Database
 
 This is easy
