@@ -611,7 +611,7 @@ JSON example:
 }]
 }
 ```
-"users" is the table of the setting
+This is an example of a database of mutiple tables
 
 PHP example:
 
@@ -632,7 +632,7 @@ array(
 );
 ```
 
-in PHP this will select `users=>0` being `__comment__`
+This is an example of a database of multiple tables as `arrays`
 
 ### 10. Syntax Errors
 
