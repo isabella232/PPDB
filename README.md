@@ -601,8 +601,13 @@ JSON example:
 
 ```json
 {
-"users": [{
-"__comment__": "Use only arrays, strings, numbers, no extra string"
+"table_1": [{
+"item_1":"value",
+"item_2":"value"
+}],
+"table_2":[{
+"item_1":"value",
+"item_2":"valeu"
 }]
 }
 ```
@@ -611,15 +616,20 @@ JSON example:
 PHP example:
 
 ```php
-array (
-  'users' => 
-  array (
-    0 => 
-    array (
-      '__comment__' => 'Use only arrays, strings, numbers, no extra string',
+array(
+    "table_1" => array(
+        array(
+            "item_1" => "value",
+            "item_2" => "value"
+        )
     ),
-  ),
-)
+    "table_2" => array(
+        array(
+            "item_1" => "value",
+            "item_2" => "valeu"
+        )
+    )
+);
 ```
 
 in PHP this will select `users=>0` being `__comment__`
