@@ -727,8 +727,8 @@ if($URIS === $script_file){
 7. type config limitation
 ```php
 	try{
-     if(!PPDBLogic::hasConfigLength($cS, ENTER_NUMBER)){
-	throw new PPDBErr('BBCOLOR config must have <b>ENTER_NUMBER</b> pramater you have <b>'.count($cS).'</b>');
+     if(!PPDBLogic::hasConfigLength($cS, PRAMA_COUNT)){
+	throw new PPDBErr('SCRIPT_NAME config must have <b>PRAMA_COUNT</b> pramater you have <b>'.count($cS).'</b>');
 	}
 }catch(PPDBErr $e){
 	echo $e->HAS_CONFIG_LENGHT_FAIL();
@@ -743,4 +743,24 @@ if($URIS === $script_file){
 			}
 			return SCRIPT_NAME($config_parma);
  }
+```
+
+Finish:
+```php
+	if($URIS === "SCRIPT_NAME"){
+			try{
+			if(!PPDBLogic::hasConfigLength($cS, PRAMA_COUNT)){
+				throw new PPDBErr('SCRIPT_NAME config must have <b>PRAMA_COUNT</b> pramater you have <b>'.count($cS).'</b>');
+			}
+		}catch(PPDBErr $e){
+			echo $e->HAS_CONFIG_LENGHT_FAIL();
+			return false;
+		}
+				function SCRIPT_NAME(PRAMA){
+		$runner = PPDB::createJSLink("libs/js/SCRIPT_NAME.js?v=VERSION");
+		$runner .= PPDB::createJS('setTimeout(function(){SCRIPT_NAME("'.PRAMA.'")}, 100);', '');
+		return $runner;
+			}
+			return SCRIPT_NAME(PRAMA);
+		}
 ```
