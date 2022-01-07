@@ -693,3 +693,54 @@ _example: bgcolor.js(Panel usage only)_
 ```php
 URIS::config(BGCOLOR,["#696a69","body"]);
 ```
+
+### 14.Creating URIS
+
+`URIS` is a __javascript__ file plugin, this is how you make it.
+1. Create a `js` file
+2. insert it into `libs/js/` folder
+3. go to `libs/handler/URI.php`
+4. Scroll to `class URIS extends URI`
+5. type after
+```php
+	try{
+			if(!PPDBLogic::isString($URIS)){
+				throw new PPDBErr($URIS);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotString();
+			return false;
+		}
+		try{
+			if(!PPDBLogic::isArray($cS)){
+				throw new PPDBErr($cS);
+			}
+		}catch(PPDBErr $e){
+			echo $e->isNotArray();
+			return false;
+		}
+```
+6. insert:
+```php
+if($URIS === $script_file){
+```
+7. type config limitation
+```php
+	try{
+     if(!PPDBLogic::hasConfigLength($cS, ENTER_NUMBER)){
+	throw new PPDBErr('BBCOLOR config must have <b>ENTER_NUMBER</b> pramater you have <b>'.count($cS).'</b>');
+	}
+}catch(PPDBErr $e){
+	echo $e->HAS_CONFIG_LENGHT_FAIL();
+}
+```
+8. type:
+```php
+		function SCRIPT_NAME($config_prama){
+		$runner = PPDB::createJSLink("libs/js/SCRIPT_NAME.js?v=VERSION");
+		$runner .= PPDB::createJS('setTimeout(function(){SCRIPT_NAME("'.$config_prama.'")}, 100);', '');
+		return $runner;
+			}
+			return SCRIPT_NAME($config_parma);
+ }
+```
