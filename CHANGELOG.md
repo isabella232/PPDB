@@ -86,3 +86,8 @@
 
 - Fixed `URIS` is now written as `URIS::config($plugin, $pluginConfig);`
 - Edited `readme.md`
+
+# v1.4.10
+
+- Added new `URIS::config(PREVIEW_IMG, [$target, $url, $width, $height, $alt])` called `previewImg.js` total of 5 parameters
+- Fixed URIS::config error
