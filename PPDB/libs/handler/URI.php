@@ -34,7 +34,7 @@ class URI{
 	}
 }
 class URIS extends URI{
-	private function __construct(){
+	private static function __construct(){
 		# nothing
 	}
 	public static function config($URIS, $cS){
