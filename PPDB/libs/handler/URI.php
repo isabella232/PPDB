@@ -56,7 +56,7 @@ class URIS extends URI{
 		}
 		
 		
-		if($URIS === "bbcolor"){
+		if($URIS === "bgcolor"){
 			try{
 			if(!PPDBLogic::hasConfigLength($cS, 2)){
 				throw new PPDBErr('BBCOLOR config must have <b>2</b> pramater you have <b>'.count($cS).'</b>');
