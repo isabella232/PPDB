@@ -85,3 +85,4 @@
 # v1.4.5
 
 - Fixed `URIS` is now written as `URIS::config($plugin, $pluginConfig);`
+- Edited `readme.md`
