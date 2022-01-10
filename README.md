@@ -2,7 +2,7 @@
   
 ### What is this?
 
-A PHP Program DataBase or PDBB is a simplifyed version of SQLi. This uses JSON files as a database with 
+A PHP Program DataBase or PDBB is a simplified version of SQLi. This uses JSON files as a database with 
 inclusive security. Along with a admin panel that will require a login/register prompt. Secure
 any database if you have SSL(secured socket layer) and more...
 
