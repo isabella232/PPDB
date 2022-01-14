@@ -92,3 +92,7 @@
 - Added new `URIS::config(PREVIEW_IMG, [$target, $url, $width, $height, $alt])` called `previewImg.js` total of 5 parameters
 - Fixed URIS::config error
 - Updated readme.md
+
+# 1.4.11
+
+- Fixed import mySQL where now it will be allowed on tables(your table is your database for the file)
