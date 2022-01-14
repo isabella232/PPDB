@@ -83,6 +83,8 @@ L = Localhost | D = Domain
 | LOWERCASE | lowercase | D & L |
 | FILE_INFO | ["created", "updated", "size", "type"] | D & L |
 | VIEW_ALL | -1 | D & L |
+| BGCOLOR | bgcolor | D & L |
+| PREVIEW_IMG | previewImg | D & L |
 
 ***
 
