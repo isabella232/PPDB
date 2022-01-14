@@ -2,7 +2,7 @@
 
 # package name
 const LIBRARY_NAME = "PPDB";
-const LIBRARY_VERSION = "1.4.10";
+const LIBRARY_VERSION = "1.4.11";
 const LIBRARY_API = [1];
 const LIBRARY_SSL_SUPPORT = true;
 const LIBRARY_LICENCE = "Apache-2.0 License";
