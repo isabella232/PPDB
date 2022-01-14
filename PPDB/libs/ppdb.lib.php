@@ -426,6 +426,8 @@ public static function userUI($dir){
 			<a href="./panel?type=db" class="nav-list dbTab" title="Database"><input type="submit" name="db" value="DataBase"/></a>
 			<span class="seperator">|</span>
 			<a href="./panel?type=table" class="nav-list tableTab" title="Table Viewer"><input type="submit" name="table" value="Table"/></a>
+			<span class="seperator">|</span>
+			<a href="./panel?type=mysql" class="nav-list sqlTab" title="Import mySQL"><input type="submit" name="mySQL" value="Import mySQL"/></a>
 			</form>
 			</nav>
 			</div>';

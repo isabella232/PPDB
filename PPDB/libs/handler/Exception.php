@@ -107,7 +107,7 @@ class PPDBErr extends Exception{
     }
 	public function mySQL_DB_FAIL(){
 		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-    .': <b>'.$this->getMessage().'</b> failed to create table<br/>';
+    .': <b>'.$this->getMessage().'</b> failed to connect to mySQL server.<br/>';
     return $errorMsg;
 	}
 	public function HAS_CONFIG_LENGHT_FAIL(){

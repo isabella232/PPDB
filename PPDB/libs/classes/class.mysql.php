@@ -18,8 +18,17 @@ class mySQL{
 		$info = "Host: " . $this->host . "<br/> Username: " . $this->user . "<br/> Password: " . $this->psw . "<br/> Database: " . $this->db;
 		return $info;
 	}
-	public function exportAll($db,$table){
-		$conn = @mysqli_connect($this->host, $this->user, $this->psw, $this->db) or die("Cannot connect to mySQL server");
+	public function importAll($db,$table){
+		$conn = mysqli_connect($this->host, $this->user, $this->psw, $this->db);
+		try{
+		if(!$conn){
+			throw new PPDBErr();
+		}
+	}catch(PPDBErr $e){
+		echo $e->mySQL_DB_FAIL();
+		return false;
+	}
+		
 		$query = "SELECT * FROM ".$table."";
 		$result = mysqli_query($conn, $query);
 		if(!$result){ echo "Couldn't execute the query"; die();}
@@ -31,12 +40,20 @@ class mySQL{
 				$data[]=$row;
 				}
 			$fp = fopen($db.$table.".json", "w+");
-			fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
+			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}
 }
-public function export($db, $table, $sel){
-		$conn = @mysqli_connect($this->host, $this->user, $this->psw, $this->db) or die("Cannot connect to mySQL server");
+public function import($db, $table, $sel){
+	$conn = mysqli_connect($this->host, $this->user, $this->psw, $this->db);
+		try{
+		if(!$conn){
+			throw new PPDBErr();
+		}
+	}catch(PPDBErr $e){
+		echo $e->mySQL_DB_FAIL();
+		return false;
+	}
 		if(file_exists($db.$table.".json")){
 			unlink($db.$table.".json");
 		}
@@ -52,7 +69,7 @@ public function export($db, $table, $sel){
 				$data[]=$row;
 				}
 			$fp = fopen($db.$table.".json", "a+");
-			fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
+			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}
 		}
