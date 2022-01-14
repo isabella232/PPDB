@@ -96,3 +96,4 @@
 # 1.4.11
 
 - Fixed import mySQL where now it will be allowed on tables(your table is your database for the file)
+- Edited readme.md
