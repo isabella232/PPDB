@@ -83,8 +83,8 @@ L = Localhost | D = Domain
 | LOWERCASE | lowercase | D & L |
 | FILE_INFO | ["created", "updated", "size", "type"] | D & L |
 | VIEW_ALL | -1 | D & L |
-| BGCOLOR | bgcolor | D & L |
-| PREVIEW_IMG | previewImg | D & L |
+| BGCOLOR | bgcolor `URIS usage only` | D & L |
+| PREVIEW_IMG | previewImg `URIS usage only` | D & L |
 
 ***
 
