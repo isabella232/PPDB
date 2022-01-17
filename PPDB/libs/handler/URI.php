@@ -84,13 +84,27 @@ class URIS extends URI{
 				function previewImg($target, $url, $width, $height, $alt){
 		$runner = PPDB::createJSLink("libs/js/previewImg.js?v=1.2.3");
 		$runner .= PPDB::createJS('setTimeout(function(){previewImg("'.$target.'","'.$url.'", "'.$width.'", "'.$height.'", "'.$alt.'")}, 100);', '');
-		$runner .= PPDB::createJS('setTimeout(function(){$(".previewImg").tooltip({ boundary: "window" , placement: "top"})},100);', '');
 		return $runner;
 			}
 			return previewImg($cS[0], $cS[1], $cS[2], $cS[3],$cS[4]);
 		}
-			
+	if($URIS === "previewVideo"){
+			try{
+			if(!PPDBLogic::hasConfigLength($cS, 5)){
+				throw new PPDBErr('previewVideo config must have <b>5</b> pramater you have <b>'.count($cS).'</b>');
+			}
+		}catch(PPDBErr $e){
+			echo $e->HAS_CONFIG_LENGHT_FAIL();
+			return false;
 		}
+				function previewImg($target, $url, $width, $height, $alt){
+		$runner = PPDB::createJSLink("libs/js/previewVid.js?v=1.0.0");
+		$runner .= PPDB::createJS('setTimeout(function(){previewVid("'.$target.'","'.$url.'", "'.$width.'", "'.$height.'", "'.$alt.'")}, 100);', '');
+		return $runner;
+			}
+			return previewVideo($cS[0], $cS[1], $cS[2], $cS[3],$cS[4]);
+		}		
+	}
 		
 	 
 }

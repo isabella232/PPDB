@@ -39,7 +39,7 @@ class mySQL{
 				while($row = mysqli_fetch_assoc($result)){
 				$data[]=$row;
 				}
-			$fp = fopen($db.$table.".json", "w+");
+			$fp = fopen($db.$this->db.".json", "w+");
 			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}
@@ -54,8 +54,8 @@ public function import($db, $table, $sel){
 		echo $e->mySQL_DB_FAIL();
 		return false;
 	}
-		if(file_exists($db.$table.".json")){
-			unlink($db.$table.".json");
+		if(file_exists($db.$this->db.".json")){
+			unlink($db.$this->db.".json");
 		}
 		foreach($sel as $s){
 			$query = "SELECT ".$s." FROM ".$table."";
@@ -68,7 +68,7 @@ public function import($db, $table, $sel){
 				while($row = mysqli_fetch_assoc($result)){
 				$data[]=$row;
 				}
-			$fp = fopen($db.$table.".json", "a+");
+			$fp = fopen($db.$this->db.".json", "a+");
 			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}

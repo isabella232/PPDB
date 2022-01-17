@@ -428,6 +428,8 @@ public static function userUI($dir){
 			<a href="./panel?type=table" class="nav-list tableTab" title="Table Viewer"><input type="submit" name="table" value="Table"/></a>
 			<span class="seperator">|</span>
 			<a href="./panel?type=mysql" class="nav-list sqlTab" title="Import mySQL"><input type="submit" name="mySQL" value="Import mySQL"/></a>
+			<span class="seperator">|</span>
+			<a href="./panel?type=delete+accunt" class="nav-list deleteAccount" title="Delete Account"><input type="submit" name="delteAccount" value="Delete Account"/></a>
 			</form>
 			</nav>
 			</div>';
@@ -605,6 +607,23 @@ public static function userUI($dir){
 		Reload::run();
 		}
 		
+	}
+	public static function checkDeletedFile($dir){
+		if(!file_exists($dir.'user.json') && SESSION_USER){
+		session_unset();
+		Reload::run();
+		return true;
+       }else{
+		   return false;
+	   }
+	}
+	public static function deleteAccount($dir){
+		if(!unlink($dir."user.json")){
+			session_unset();
+			Reload::run();
+		}else{
+			
+		}
 	}
 	
 
