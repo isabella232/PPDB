@@ -85,7 +85,7 @@ L = Localhost | D = Domain
 | VIEW_ALL | -1 | D & L |
 | BGCOLOR | bgcolor `URIS usage only` | D & L |
 | PREVIEW_IMG | previewImg `URIS usage only` | D & L |
-
+| PREVIEW_VID | previewVid `URIS usage only` | D & L | 
 ***
 
 ## PDDB FUNCTIONS
@@ -712,7 +712,7 @@ URI::checkValid($url);
 
 adding scripts:
 
-_example: bgcolor.js(Panel usage only)_
+_These are valid functions_
 ```php
 URIS::config(BGCOLOR,["#696a69","body"]);
 ```
