@@ -97,3 +97,10 @@
 
 - Fixed import mySQL where now it will be allowed on tables(your table is your database for the file)
 - Edited readme.md
+
+# 1.4.12
+
+- Added new function `PPDB::checkDeletedFile($dir)` checks if `user.json` is deleted
+- Edit readme.md
+- Added new URIS(`preivewVid.js`) 
+- `previewVid` and `previewImg` now have a `return` and a `appended` function
