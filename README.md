@@ -136,10 +136,7 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 			<?php
 		
 echo PPDB::userUI(ROOT);
-if(!file_exists(ROOT.'user.json') && SESSION_USER){
-		session_unset();
-		Reload::run();
-}
+PPDB::checkDeletedFile(ROOT);
 if(isset($_POST['regbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
@@ -272,7 +269,7 @@ if(isset($_POST['LoadTable'])){
 	$main = $_POST['dbmain'];
 	if(PPDBLogic::dbExists(ROOT_DB,$name)){
 		echo $READER->allowSearch(0);
-		echo $READER->allowPageLimit();
+		echo $READER->allowPageLimit([5,10,20,50,100]);
 		echo $READER->createTable($data, PPDB::JSONTOARRAY(file_get_contents(ROOT_DB.$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
 		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
@@ -285,14 +282,37 @@ if(isset($_POST['LoadLinkedTable'])){
 	$main = $_POST['dbmain'];
 	if(PPDBLogic::dbExists(ROOT_DB,$name)){
 		echo $READER->allowSearch(0);
-		echo $READER->allowPageLimit();
+		echo $READER->allowPageLimit([5,10,20,50,100]);
 		echo $READER->createLinkedTable($data, PPDB::JSONTOARRAY(file_get_contents(ROOT_DB.$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
 		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
 	}
-	
 }
 
+# export SQL
+if(isset($_POST['mySQL']) && SESSION_USER){
+	echo '<br/><br/><form method="post">
+	<input type="text" name="sql_host" placeholder="Enter mySQL host" required=""/><br/></br>
+	<input type="text" name="sql_user" placeholder="Enter mySQL username" required=""/><br/></br>
+	<input type="password" name="sql_psw" placeholder="Enter mySQL password"/><br/></br>
+	<input type="text" name="sql_db" placeholder="Enter mySQL database" required=""/><br/></br>
+	<input type="text" name="sql_table" placeholder="Enter mySQL table" required=""/><br/></br>
+	<input type="submit" name="sql_import" value="Import Database"/>
+	</form>';
+}
+if(isset($_POST['sql_import'])){
+	$host = $_POST['sql_host'];
+	$user = $_POST['sql_user'];
+	$psw = $_POST['sql_psw'];
+	$db = $_POST['sql_db'];
+	$table = $_POST['sql_table'];
+	$msql->connect($host, $user, $psw, $db)->importAll(ROOT_DB, $table);
+}
+
+if(isset($_POST['delteAccount']) && SESSION_USER){
+	PPDB::deleteAccount(ROOT);
+	PPDB::checkDeletedFile(ROOT);
+}
 ?>
 
 
@@ -302,14 +322,37 @@ if(isset($_POST['LoadLinkedTable'])){
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
+			echo PPDB::createJSLink("libs/js/previewImg.js");
+			echo PPDB::createJSLink("libs/js/previewVid.js");
 			echo URIS::config(BGCOLOR,["#696a69","body"]);
-			//echo URIS::config(PREVIEW_IMG, ["body", "https://www.hdnicewallpapers.com/Walls/Big/Rainbow/Rainbow_on_Mountain_HD_Image.jpg", 320, 320, "Rainbow on Mountain"]);
+			echo PPDB::createJS('setTimeout(function(){
+				let t = document.querySelectorAll("#portTable tr td");
+				for(let i=0;i<t.length;i++){
+					if(/(https?:\/\/.*\.(?:png|jpg|gif|tiff|pdf|raw))/g.test(t[i].innerHTML)){
+						t[i].innerHTML = returnImg(t[i].innerHTML, 320, 320, t[i].innerHTML);
+					}
+				}
+			}, 0)', '');
+			echo PPDB::createJS('setTimeout(function(){
+				$(".previewImg").tooltip({ boundary: "window" , placement: "left"})
+			}, 100);', '');
+			
+			
+			echo PPDB::createJS('setTimeout(function(){
+				let t = document.querySelectorAll("#portTable tr td");
+				for(let i=0;i<t.length;i++){
+					if(/(https?:\/\/.*\.(?:mp4|mov?|wmv|avi|avchd))/g.test(t[i].innerHTML)){
+						t[i].innerHTML = returnVid(t[i].innerHTML, 320, 320, t[i].innerHTML);
+					}
+				}
+			}, 0)', '');
+			echo PPDB::createJS('setTimeout(function(){
+				$(".previewVid").tooltip({ boundary: "window" , placement: "left"})
+			}, 100);', '');
 		
 			?>
 		</body>
 	</html>
-
-
 ```
 
 ok, lets break it down
