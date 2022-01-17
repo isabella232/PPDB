@@ -25,4 +25,5 @@ define("FILE_INFO", ["created", "updated", "size", "type"], false);
 define("VIEW_ALL", -1, false);
 define("BGCOLOR", "bgcolor");
 define("PREVIEW_IMG","previewImg");
+define("PREVIEW_VID","previewVid");
 ?>
