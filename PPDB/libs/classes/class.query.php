@@ -106,7 +106,7 @@ function export($dir, $tdir, $Split, $name, $type){
 			$data = file_get_contents($dir.$name.".json");
 			$data = str_replace(array("\n","\t","\t\n"),"",PPDB::JSONTOARRAY($data));
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".PPDB::minify(print_r($data, true)));
+			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true));
 			fclose($file);
 		}
 		$id = uniqid();
