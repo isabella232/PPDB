@@ -24,7 +24,7 @@ function update($update){
 		fclose($data);
 }
 
-function export($dir, $tdir, $name, $type){
+function export($dir, $tdir, $Split, $name, $type){
 	 try{
 		if(!PPDBLogic::isString($dir)){
 			throw new PPDBErr($dir);
@@ -70,7 +70,7 @@ function export($dir, $tdir, $name, $type){
 	
 	if($type === "JSON"){
 		$date = date("Y-m-d");
-		$path = $tdir.$date.DS;
+		$path = $tdir.$date.$Split;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
@@ -94,7 +94,7 @@ function export($dir, $tdir, $name, $type){
 	}
 	if($type === "PHP_ARRAY"){
 			$date = date("Y-m-d");
-		$path = $tdir.$date.DS;
+		$path = $tdir.$date.$Split;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
 			$data = file_get_contents($dir.$name.".json");
