@@ -522,7 +522,7 @@ same variables but `$arr` means PHP array to convert to JSON
 Export:
 
 ```php
-$READER->export($dir, $tdir, $name, $type);
+$READER->export($dir, $tdir, $Split, $name, $type);
 ```
 
 
@@ -531,6 +531,8 @@ more variables
 `$dir` eaither `ROOT_DB` or `ROOT_DB_FORWARD`
 
 `$tdir` eaither `ROOT_TEMP` or `ROOT_TEMP_FORWARD`
+
+`$Split` eaither `DS` or `DS_FORWARD`
 
 `$name` is database name
 
