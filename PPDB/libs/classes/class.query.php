@@ -73,12 +73,12 @@ function export($dir, $tdir, $Split, $name, $type){
 		$path = $tdir.$date.$Split;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
-			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
+			$data = file_get_contents($dir.$name.".json");
 			$file = fopen($path.$name.".json", "w+");
 			fwrite($file, $data);
 			fclose($file);
 		}else{
-			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
+			$data = file_get_contents($dir.$name.".json");
 			$file = fopen($path.$name.".json", "w+");
 			fwrite($file, $data);
 			fclose($file);
