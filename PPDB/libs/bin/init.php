@@ -21,7 +21,7 @@ const LIBRARY_AUTHOR = "SurveyBuilderTeams";
 	}
 	try{
 		if(LIBRARY_VERSION !== update::checkUpdate()){
-			throw new PPDBErr('<span style="position:absolute;top:25%;right:10%;background-color:white;font-size:32px;border-radius:15px;">You are out-of-date!<br/><br/><b>Your Version: '.LIBRARY_VERSION.'</b><br/><b>Current Version: '.update::checkUpdate().'</b><br/><a href="https://github.com/surveybuilderteams/PPDB" style="color:lime;">Download on github</a></span>');
+			throw new PPDBErr('<span style="position:absolute;top:25%;right:0;background-color:white;font-size:32px;border-radius:15px;">You are out-of-date!<br/><br/><b>Your Version: '.LIBRARY_VERSION.'</b><br/><b>Current Version: '.update::checkUpdate().'</b><br/><a href="https://github.com/surveybuilderteams/PPDB" style="color:lime;">Download on github</a></span>');
 		}
 	}catch(PPDBErr $e){
 		echo $e->neededUpdate();
