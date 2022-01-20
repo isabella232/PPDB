@@ -26,4 +26,5 @@ define("VIEW_ALL", -1, false);
 define("BGCOLOR", "bgcolor");
 define("PREVIEW_IMG","previewImg");
 define("PREVIEW_VID","previewVid");
+define("INCLUDE_WHITESPACE", true, false);
 ?>
