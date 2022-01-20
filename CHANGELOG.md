@@ -118,3 +118,7 @@
 # v1.4.15
 
 Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
+
+# v1.4.16
+
+- fixed any bugs/glitches
