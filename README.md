@@ -851,3 +851,19 @@ Finish:
 			return SCRIPT_NAME(PRAMA);
 		}
 ```
+
+# 14. rawText and encodeText
+
+Converting random string to raw or encode is easy.
+
+Raw text:
+
+```php
+PPDB::rawText($str);
+```
+
+Encode text: 
+
+```php
+PPDB::encodeText($str);
+```
