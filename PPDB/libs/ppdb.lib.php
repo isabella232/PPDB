@@ -269,6 +269,12 @@ public static function userUI($dir){
 		$min = str_replace("<br/>", " ", $min);
 		return $min;
 	}
+public static function rawText($str){
+        return htmlspecialchars($str);
+    }
+    public static function encodeText($str){
+        return htmlspecialchars_decode($str);
+    }
 	
 	public static function createStorage($dir){
 		#Check if dictionary 
