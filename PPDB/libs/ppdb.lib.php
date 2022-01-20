@@ -256,17 +256,16 @@ public static function userUI($dir){
 		fwrite($data, $update);
 		fclose($data);
 	}
-	
-	public static function minify($a){
-		$min = str_replace(array("\n","\r","\r\n", " "), "", $a);
-		$min = preg_replace("(\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*\/+)", "", $min); //remove block comments
+		public static function minify($a){
+        	$min = preg_replace("(\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+)", "", $a); //remove block comments
 		$min = preg_replace("(\<!--(.|\n)*?-->)", "", $min); //remove <!--.--> comments
 		$min = preg_replace("(\/\/.*)", "", $min); //remove single line
-        if(preg_match("(\"\#.*\")", $min) || preg_match("(=>\#.*)", $min)){
+        if(preg_match("(\"\#.*\")", $min) || preg_match("(=> \#.*)", $min)){
 
         }else{
         $min = preg_replace("(\#.*)", "", $min); //hashtag comment
         }
+		$min = str_replace(array("\n","\r","\r\n", " "), "", $min);
 		$min = str_replace("<br/>", " ", $min);
 		return $min;
 	}
