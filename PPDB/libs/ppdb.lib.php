@@ -256,7 +256,7 @@ public static function userUI($dir){
 		fwrite($data, $update);
 		fclose($data);
 	}
-		public static function minify($a){
+		public static function minify($a, $allowWS=false){
         	$min = preg_replace("(\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+)", "", $a); //remove block comments
 		$min = preg_replace("(\<!--(.|\n)*?-->)", "", $min); //remove <!--.--> comments
 		$min = preg_replace("(\/\/.*)", "", $min); //remove single line
@@ -265,7 +265,11 @@ public static function userUI($dir){
         }else{
         $min = preg_replace("(\#.*)", "", $min); //hashtag comment
         }
-		$min = str_replace(array("\n","\r","\r\n", " "), "", $min);
+        if($allowWS === INCLUDE_WHITESPACE){
+            	$min = str_replace(array("\n","\r","\r\n"), "", $min);
+        }else{
+	        $min = str_replace(array("\n","\r","\r\n", " "), "", $min);
+        }
 		$min = str_replace("<br/>", " ", $min);
 		return $min;
 	}
