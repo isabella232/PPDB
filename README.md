@@ -747,10 +747,11 @@ $msql->connect($host, $user, $psw, $db)->export($db, $table, $sel);
 ### 12. Minifing files or text
 
 ```php
-PPDB::minify($txt);
+PPDB::minify($txt, $allowWS);
 ```
 
 `$txt` is the string/array that you are minifying removing linebreaks,spaces,tabs
+`$allowWS` is to allow whitespaces by adding `INCLUDE_WHITESPACE` or just leave blank
 
 ### 13. URI(URL)
 
