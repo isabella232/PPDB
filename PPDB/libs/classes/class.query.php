@@ -24,7 +24,7 @@ function update($update){
 		fclose($data);
 }
 
-function export($dir, $tdir, $Split, $name, $type){
+function export($dir,$tdir, $Split, $name, $type){
 	 try{
 		if(!PPDBLogic::isString($dir)){
 			throw new PPDBErr($dir);
@@ -73,7 +73,7 @@ function export($dir, $tdir, $Split, $name, $type){
 		$path = $tdir.$date.$Split;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
-			$data = file_get_contents($dir.$name.".json");
+			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
 			$file = fopen($path.$name.".json", "w+");
 			fwrite($file, $data);
 			fclose($file);
@@ -97,16 +97,16 @@ function export($dir, $tdir, $Split, $name, $type){
 		$path = $tdir.$date.$Split;
 		if(!is_dir($path)){
 			mkdir($path, 0777, true);
-			$data = file_get_contents($dir.$name.".json");
+			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
 			$data = PPDB::JSONTOARRAY($data);
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true));
+			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true)));
 			fclose($file);
 		}else{
 			$data = file_get_contents($dir.$name.".json");
 			$data = str_replace(array("\n","\t","\t\n"),"",PPDB::JSONTOARRAY($data));
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true));
+			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true)));
 			fclose($file);
 		}
 		$id = uniqid();
@@ -302,7 +302,8 @@ public function allowSearch($searchBy=0){
         $e->isNotNumber();
     }
     $out = '';
-    $out.='<input type="search" id="searchBarFilter" placeholder="Search..." oninput="filterTable('.$searchBy.')"/>';
+    $rowsPlace = $searchBy+1;
+    $out.='<input type="search" id="searchBarFilter" placeholder="Search(row '.$rowsPlace.')..." oninput="filterTable('.$searchBy.')"/>';
     $out .= "<script>
 function filterTable(n) {
   // Declare variables
