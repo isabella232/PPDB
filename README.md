@@ -202,7 +202,9 @@ if(isset($_POST['regbtn'])){
 			<input type='submit' value='Create/Update' name='dbsubmit'/><br/><br/>
 			<input type='submit' value='Remove' name='dbremove'/><br/><br/>
 			<input type='submit' value='Rename' name='dbrename'/><br/><br/>
-			<input type='submit' value='Info' name='dbinfo'/>
+			<input type='submit' value='Info' name='dbinfo'/><br/><br/>
+			<input type='submit' value='Export as JSON' name='exportasjson'/><br/><br/>
+			<input type='submit' value='Export as PHP_ARRAY' name='exportasphp_array'/>
 		</form>"; 
 	}
 	if(isset($_POST['dbsubmit'])){
@@ -250,7 +252,24 @@ if(isset($_POST['dbinfo'])){
 		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
 	}
 }
-
+if(isset($_POST['exportasjson'])){
+	$fileName = $_POST['dbname'];
+	if(PPDBLogic::dbExists(ROOT_DB, $fileName)){
+		$READER->export(ROOT_DB, ROOT_TEMP, DS, $fileName, "JSON");
+		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database has been exported.<p>';
+	}else{
+		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+	}
+}
+if(isset($_POST['exportasphp_array'])){
+	$fileName = $_POST['dbname'];
+	if(PPDBLogic::dbExists(ROOT_DB, $fileName)){
+		$READER->export(ROOT_DB, ROOT_TEMP, DS, $fileName, "PHP_ARRAY");
+		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database has been exported.<p>';
+	}else{
+		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+	}
+}
 # Table
 
 if(isset($_POST['table']) && SESSION_USER){
