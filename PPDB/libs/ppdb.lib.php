@@ -258,11 +258,15 @@ public static function userUI($dir){
 	}
 	
 	public static function minify($a){
-		$min = str_replace(array("\n","\r","\r\n", " ", "\#"), "", $a);
+		$min = str_replace(array("\n","\r","\r\n", " "), "", $a);
 		$min = preg_replace("(\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+)", "", $min); //remove block comments
 		$min = preg_replace("(\<!--(.|\n)*?-->)", "", $min); //remove <!--.--> comments
-		$min = preg_replace("(\/\/\/*([a-zA-Z0-1 0-9_\-\!\@\#\$\%\^\&\*\(\)\+\=\|\/\.\,\?\'\"\:\;\`\~]{1,}))", "", $min); //remove single line
-		$min = preg_replace("(\#\#*([a-zA-Z0-1 0-9_\-\!\@\#\$\%\^\&\*\(\)\+\=\|\/\.\,\?\'\"\:\;\`\~]{1,}))", "", $min); //hashtag comment
+		$min = preg_replace("(\/\/.*)", "", $min); //remove single line
+        if(preg_match("(\"\#.*\")", $min) || preg_match("(=>\#.*)", $min)){
+
+        }else{
+        $min = preg_replace("(\#.*)", "", $min); //hashtag comment
+        }
 		$min = str_replace("<br/>", " ", $min);
 		return $min;
 	}
