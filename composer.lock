@@ -1,1 +1,20 @@
-
+{
+    "name": "surveybuilderteams/PPDB",
+    "description": "A PHP Program DataBase or PPDB is a simplified version of SQLi. This uses JSON files as a database with inclusive security. Along with a admin panel that will require a login/register prompt. Secure any database if you have SSL(secured socket layer) and more...",
+    "authors": [
+        {
+            "name": "SurveyBuilder-Admin",
+            "email": "surveybuildersbot@gmail.com",
+            "homepage": "https://surveybuilder.epizy.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "average-insane-insomniac",
+            "email": "",
+            "homepage": "https://github.com/average-insane-insomniac",
+            "role": "Bot"
+        }
+    ],
+    
+   "license": "Apache License 2.0"
+}
