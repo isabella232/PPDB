@@ -109,3 +109,8 @@
 
 - Fixed `PPDB::minify()` now doesn't remove hashtags inside of qoutes and from => in arrays
 - Export function now needs a `DS` or `DS_FORWARD` in 3rd parameter.
+
+# v1.4.14
+
+- Fixed `PPDB::minify()` now single line string will still remove anything its path, so make sure the `//` is on a new line or not inside of qoutes
+- export now will identify which `Split` to decide to use DOC_ROOT or DOC_ROOT_BACKWARDS
