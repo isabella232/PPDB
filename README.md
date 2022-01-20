@@ -852,7 +852,7 @@ Finish:
 		}
 ```
 
-# 14. rawText and encodeText
+# 15. rawText and encodeText
 
 Converting random string to raw or encode is easy.
 
