@@ -114,3 +114,7 @@
 
 - Fixed `PPDB::minify()` now single line string will still remove anything its path, so make sure the `//` is on a new line or not inside of qoutes
 - export now will identify which `Split` to decide to use DOC_ROOT or DOC_ROOT_BACKWARDS
+
+# v1.4.15
+
+Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
