@@ -629,7 +629,10 @@ public static function userUI($dir){
 			
 		}
 	}
-	
+	public static function removeSource($url){
+		$src = str_replace(dirname(__FILE__), ".", $url);
+		return $src;
+	}
 
 
 }
