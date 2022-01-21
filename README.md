@@ -732,12 +732,12 @@ echo $msql->connect($host, $user, $psw, $db)->getInfo();
 exportAll:
 
 ```php
-$msql->connect($host, $user, $psw, $db)->exportAll($db,$table);
+$msql->connect($host, $user, $psw, $db)->importAll($db,$table);
 ```
 
 export:
 ```php
-$msql->connect($host, $user, $psw, $db)->export($db, $table, $sel);
+$msql->connect($host, $user, $psw, $db)->import($db, $table, $sel);
 ```
 
 `$db` is the eaither `ROOT_DB` or `ROOT_DB_FORWARD`
