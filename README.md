@@ -86,6 +86,7 @@ L = Localhost | D = Domain
 | BGCOLOR | bgcolor `URIS usage only` | D & L |
 | PREVIEW_IMG | previewImg `URIS usage only` | D & L |
 | PREVIEW_VID | previewVid `URIS usage only` | D & L | 
+| INCLUDE_WHITESPACE | true | D & L |
 ***
 
 ## PDDB FUNCTIONS
