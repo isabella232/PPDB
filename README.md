@@ -713,7 +713,7 @@ class {CustomClass} extends PPDBErr{
 }
 ```
 
-### 11. mySQL exporter
+### 11. mySQL importer
 
 Export your mySQL database table as a JSON file
 
