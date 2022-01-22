@@ -122,3 +122,9 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 # v1.4.16
 
 - fixed any bugs/glitches
+
+# v1.4.17
+
+- Changed Password Hash
+- Added New function `PPDB::PSW_VARIFY()`
+- edit readme.md
