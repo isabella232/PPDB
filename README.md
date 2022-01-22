@@ -402,6 +402,11 @@ Check valid Password:
 PPDB::CHECK_VALID_PASSWORD($psw, $min_length, $max_length, $include_lowercase_str, $include_uppercase_str, $include_int, $include_symbol);
 ```
 
+Varify Password:
+```php
+PPDB::PSW_VARIFY($str, $hash);
+```
+
 Reloading Page:
 ```php
 Reload::run();
