@@ -21,7 +21,6 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 		</head>
 		<body>
 			<?php
-		
 echo PPDB::userUI(ROOT);
 PPDB::checkDeletedFile(ROOT);
 if(isset($_POST['regbtn'])){
@@ -36,10 +35,9 @@ if(isset($_POST['regbtn'])){
 	if(isset($_POST['logbtn'])){
 		$username = $_POST['username'];
 		$psw = $_POST['psw'];
-		$psw = PPDB::PSW_ENCRYPT($psw);
 		$json = file_get_contents(ROOT."user.json");
 		$query = json_decode($json);
-		if($username === $query->user && $psw === $query->password){
+		if($username === $query->user && PPDB::PSW_VARIFY($psw, $query->password)){
 			$_SESSION['username'] = $username;
 				Reload::run();
 		}else{
@@ -218,6 +216,29 @@ if(isset($_POST['sql_import'])){
 if(isset($_POST['delteAccount']) && SESSION_USER){
 	PPDB::deleteAccount(ROOT);
 	PPDB::checkDeletedFile(ROOT);
+}
+if(isset($_POST['changePassword']) && SESSION_USER){
+	echo '<br/><br/><form method="post">
+	<input type="password" name="old_psw" placeholder="Enter Old Password" required=""/><br/></br>
+	<input type="password" name="new_psw" placeholder="Enter New Password" required=""/><br/></br>
+	<input type="password" name="new_psw_copy" placeholder="Renter New Password" required=""/><br/></br>
+	<input type="submit" name="exec_change_psw" value="Change Password"/>
+	</form>';
+}
+if(isset($_POST['exec_change_psw']) && SESSION_USER){
+	$old = $_POST['old_psw'];
+	$new = $_POST['new_psw'];
+	$copyNew = $_POST['new_psw_copy'];
+	$json = file_get_contents(ROOT."user.json");
+	$query = json_decode($json);
+	if(PPDB::CHECK_VALID_PASSWORD($new, 8, 20, true, true, true, false)){
+			if($copyNew === $new){
+		 PPDB::CHANGE_PSW(ROOT, $old, $new);
+		}else{
+			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">The New Password does not match.<p>';
+		}
+	}
+	
 }
 ?>
 

@@ -63,11 +63,8 @@ public static function userUI($dir){
 			$pass = 0;
 		}
 		if($pass == 1){
-			$psw = hash("gost", $psw);
-			$psw = hash("sha1", $psw);
-			$psw = hash("md5", $psw);
-			$psw = hash("crc32b", $psw);
-			$psw = hash("ripemd128", $psw);
+			$psw = password_hash($psw, PASSWORD_BCRYPT, ["cost"=>12]);
+		
 			if(!file_exists($dir."user.json")){
 				$file = fopen($dir."user.json", "w+");
 				$data = array("user"=>$user, "password"=>$psw);
@@ -211,12 +208,15 @@ public static function userUI($dir){
 			return true;
 	}
 	public static function PSW_ENCRYPT($psw){
-			$psw = hash("gost", $psw);
-			$psw = hash("sha1", $psw);
-			$psw = hash("md5", $psw);
-			$psw = hash("crc32b", $psw);
-			$psw = hash("ripemd128", $psw);
+			$psw = password_hash($psw, PASSWORD_BCRYPT, ["cost"=>12]);
 			return $psw;
+	}
+	public static function PSW_VARIFY($psw, $checkPsw){
+		if(password_verify($psw, $checkPsw)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	public static function CHANGE_PSW($dir, $old, $new){
 		$get = file_get_contents($dir."user.json");
@@ -243,12 +243,14 @@ public static function userUI($dir){
 		echo $e->isNotString();
 		}
 		try{
-			if(PPDB::PSW_ENCRYPT($old) !== $d->password){
-			throw new PPDBErr("Your Password doesn't match the old password");
+			if(!PPDB::PSW_VARIFY($old, $d->password)){
+			throw new PPDBErr('<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">The Old Password does not match.<p>');
 		}
 		}catch(PPDBErr $e){
 			echo $e->passwordNotMatches();
+			return false;
 		}
+	
 		
 		
 		$update = '{"user": "'.$d->user.'", "password": "'.PPDB::PSW_ENCRYPT($new).'"}';
@@ -443,6 +445,8 @@ public static function rawText($str){
 			<a href="./panel?type=mysql" class="nav-list sqlTab" title="Import mySQL"><input type="submit" name="mySQL" value="Import mySQL"/></a>
 			<span class="seperator">|</span>
 			<a href="./panel?type=delete+accunt" class="nav-list deleteAccount" title="Delete Account"><input type="submit" name="delteAccount" value="Delete Account"/></a>
+			<span class="seperator">|</span>
+			<a href="./panel?type=change+password" class="nav-list changePassword" title="Change Password"><input type="submit" name="changePassword" value="Change Password"/></a>
 			</form>
 			</nav>
 			</div>';
