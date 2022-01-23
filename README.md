@@ -55,7 +55,7 @@ This can be used as a `Developer tools` This is also be a documentation as well.
 
 ***
 
-## Defined variables 
+## Defined variables(defined.php) 
 
 L = Localhost | D = Domain
 | Define | output | Allow |
@@ -87,8 +87,19 @@ L = Localhost | D = Domain
 | PREVIEW_IMG | previewImg `URIS usage only` | D & L |
 | PREVIEW_VID | previewVid `URIS usage only` | D & L | 
 | INCLUDE_WHITESPACE | true | D & L |
-| LIBRARY_AUTOUPDATE | true | D & L |
 ***
+
+## Defined Variables(init.php)
+| Define | output | changable | type |
+| ------ | ------ | --------- | ---- |
+| LIBRARY_NAME | PPDB | :x: | string |
+| LIBRARY_VERSION | {CURRENT_VERSION} | :heavy_check_mark: | string |
+| LIBRARY_API | [1] | :x: | array |
+| LIBRARY_SSL_SUPPORT | true | :heavy_check_mark: | boolean |
+| LIBRARY_LICENCE | Apache-2.0 License | :x: | string |
+| LIBRARY_AUTHOR | SurveyBuilderTeams | :x: | string |
+| LIBRARY_AUTOUPDATE | true | :heavy_check_mark: | boolean |
+
 
 ## PDDB FUNCTIONS
 
