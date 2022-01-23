@@ -128,3 +128,10 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 - Changed Password Hash
 - Added New function `PPDB::PSW_VARIFY()`
 - edit readme.md
+
+# v1.4.18
+
+- Added `LIBRARY_AUTOUPDATE` to allo you get notify if an update is available
+- Added .HTACCESS to the database folder to prevent `random users` from viewing the database
+- Fixed export to `PHP_ARRAY`
+- edit readme.md
