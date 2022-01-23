@@ -87,6 +87,7 @@ L = Localhost | D = Domain
 | PREVIEW_IMG | previewImg `URIS usage only` | D & L |
 | PREVIEW_VID | previewVid `URIS usage only` | D & L | 
 | INCLUDE_WHITESPACE | true | D & L |
+| LIBRARY_AUTOUPDATE | true | D & L |
 ***
 
 ## PDDB FUNCTIONS
