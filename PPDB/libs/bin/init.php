@@ -7,6 +7,7 @@ const LIBRARY_API = [1];
 const LIBRARY_SSL_SUPPORT = true;
 const LIBRARY_LICENCE = "Apache-2.0 License";
 const LIBRARY_AUTHOR = "SurveyBuilderTeams";
+const LIBRARY_AUTOUPDATE = true;
 
 
 # render
@@ -20,7 +21,7 @@ const LIBRARY_AUTHOR = "SurveyBuilderTeams";
 			  echo $e->CHECKLIBSNAME();
 	}
 	try{
-		if(LIBRARY_VERSION !== update::checkUpdate()){
+		if(LIBRARY_VERSION !== update::checkUpdate() && LIBRARY_AUTOUPDATE){
 			throw new PPDBErr('<span style="position:absolute;text-align:center;top:25%;right:0;background-color:white;font-size:32px;border-radius:15px;">You are out-of-date!<br/><br/><b>Your Version: '.LIBRARY_VERSION.'</b><br/><b style="color:green;text-decoration:underline;">Current Version: '.update::checkUpdate().'</b><br/><a href="https://github.com/surveybuilderteams/PPDB" style="color:lime;">Download on github</a></span>');
 		}
 	}catch(PPDBErr $e){
