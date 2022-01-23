@@ -39,7 +39,8 @@ class mySQL{
 				while($row = mysqli_fetch_assoc($result)){
 				$data[]=$row;
 				}
-			$fp = fopen($db.$this->db.".json", "w+");
+			$currentDB = str_replace($this->user."_", "", $this->db);
+			$fp = fopen($db.$currentDB.".json", "w+");
 			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}
@@ -54,8 +55,9 @@ public function import($db, $table, $sel){
 		echo $e->mySQL_DB_FAIL();
 		return false;
 	}
-		if(file_exists($db.$this->db.".json")){
-			unlink($db.$this->db.".json");
+	$currentDB = str_replace($this->user."_", "", $this->db);
+		if(file_exists($db.$currentDB.".json")){
+			unlink($db.$currentDB.".json");
 		}
 		foreach($sel as $s){
 			$query = "SELECT ".$s." FROM ".$table."";
