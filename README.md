@@ -93,7 +93,7 @@ L = Localhost | D = Domain
 | Define | output | changable | type |
 | ------ | ------ | --------- | ---- |
 | LIBRARY_NAME | PPDB | :x: | string |
-| LIBRARY_VERSION | {CURRENT_VERSION} | :heavy_check_mark: | string |
+| LIBRARY_VERSION | {YOUR_CURRENT_VERSION} | :heavy_check_mark: | string |
 | LIBRARY_API | [1] | :x: | array |
 | LIBRARY_SSL_SUPPORT | true | :heavy_check_mark: | boolean |
 | LIBRARY_LICENCE | Apache-2.0 License | :x: | string |
