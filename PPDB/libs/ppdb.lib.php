@@ -286,6 +286,9 @@ public static function rawText($str){
 		#Check if dictionary 
 		if(!is_dir($dir."db")){
 			mkdir($dir."db");
+			$deny = fopen($dir.".htaccess");
+			fwrite($deny, "Deny from all");
+			fclose($deny);
 		}else{
 			
 		}
