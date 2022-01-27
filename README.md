@@ -907,3 +907,19 @@ Encode text:
 ```php
 PPDB::encodeText($str);
 ```
+
+### 16. alerts
+
+You can give yourself an alert by using these functions
+
+onSuccess:
+```php
+echo PPDB::success($str);
+```
+
+onFailed():
+```php
+echo PPDB::failed($str);
+```
+
+`$str` is the string that is going to be outputted
