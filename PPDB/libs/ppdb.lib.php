@@ -649,7 +649,13 @@ public static function rawText($str){
 		$src = str_replace(dirname(__FILE__), ".", $url);
 		return $src;
 	}
-
+	
+	public static function failed($str){
+		return '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">'.$str.'<p>';
+	}
+	public static function success($str){
+		return '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">'.$str.'<p>';
+	}
 
 }
 

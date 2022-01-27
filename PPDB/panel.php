@@ -41,7 +41,7 @@ if(isset($_POST['regbtn'])){
 			$_SESSION['username'] = $username;
 				Reload::run();
 		}else{
-			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(42).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Error: cannot login correctly!</p>';
+			echo PPDB::failed("Error: cannot login correctly!");
 		}
 		
 	}
@@ -58,17 +58,17 @@ if(isset($_POST['regbtn'])){
 		if(isset($_POST['cs'])){
 			if(!PPDBLogic::storageExists(ROOT)){
 				PPDB::createStorage(ROOT); # ROOT or ROOT_FORWARD
-		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Storage created<p>';	
+		echo PPDB::success("Storage created");	
 		}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Storage already exists<p>';	
+		echo PPDB::failed("Storage already exists.");	
 		}
 		}
 		if(isset($_POST['rs'])){
 		if(PPDBLogic::storageExists(ROOT)){
 		PPDB::removeStorage(ROOT, DS); # ROOT/ROOT_FORWARD || DS/DS_FORWARD
-		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Storage Removed<p>';	
+		echo PPDB::success("Storage Removed.");	
 		}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Storage does not exist.<p>';	
+		echo PPDB::failed("Storage does not exist.");	
 		}
 		
 			
@@ -90,8 +90,49 @@ if(isset($_POST['regbtn'])){
 			<input type='submit' value='Info' name='dbinfo'/><br/><br/>
 			<input type='submit' value='Export as JSON' name='exportasjson'/><br/><br/>
 			<input type='submit' value='Export as PHP_ARRAY' name='exportasphp_array'/>
-		</form>"; 
+		</form><br/>"; 
+		echo "<hr style=' border: 10px solid cyan;border-radius: 5px;'/>
+		<br/>
+		<form method='post' enctype='multipart/form-data'>
+		<h5>Upload exported JSON file</h5>
+			<input type='file' required class='form-group' name='reg_db_import'/>
+			<br/><br/>
+			<input type='submit' value='Upload JSON fie' name='upload_reg_import'/>
+			</form>";
 	}
+	# upload exported file
+	if(isset($_POST['upload_reg_import'])){
+		$target_dir = "db/";
+$target_file = $target_dir . preg_replace("/\d{4}-\d{2}-\d{2}-/",'',basename($_FILES["reg_db_import"]["name"]));
+$uploadOk = 1;
+$extend = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+
+// Check if file already exists
+if (file_exists($target_file)) {
+  echo PPDB::failed("Sorry, ".$target_file." already exists.");
+  $uploadOk = 0;
+}
+
+// Allow certain file formats
+if($extend != "json") {
+  echo PPDB::failed("Sorry, only JSON files are allowed.");
+  $uploadOk = 0;
+}
+
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+  echo PPDB::failed("Sorry, your file was not uploaded.");
+// if everything is ok, try to upload file
+} else {
+  if (move_uploaded_file($_FILES["reg_db_import"]["tmp_name"], $target_file)) {
+    echo PPDB::success("The file ". htmlspecialchars(str_replace($target_dir,'',$target_file)). " has been uploaded.");
+  } else {
+    echo PPDB::failed("Sorry, there was an error uploading your file.");
+  }
+	}
+}
+	# reg add
 	if(isset($_POST['dbsubmit'])){
 		$fileName = $_POST['dbname'];
 				$args = PPDB::JSONTOARRAY($_POST['dbarr']);
@@ -176,7 +217,7 @@ if(isset($_POST['LoadTable'])){
 		echo $READER->allowPageLimit([5,10,20,50,100]);
 		echo $READER->createTable($data, PPDB::JSONTOARRAY(file_get_contents(ROOT_DB.$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+		echo PPDB::failed("Database does not exist");
 	}
 }
 if(isset($_POST['LoadLinkedTable'])){
@@ -235,7 +276,7 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 			if($copyNew === $new){
 		 PPDB::CHANGE_PSW(ROOT, $old, $new);
 		}else{
-			echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">The New Password does not match.<p>';
+			echo PPDB::failed("The New Password does not match");
 		}
 	}
 	
@@ -248,10 +289,12 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 			<!-- JavaScript Bundle with Popper -->
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
+			echo PPDB::createJSLink("https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js", true, "sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==", "anonymous");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
 			echo PPDB::createJSLink("libs/js/previewImg.js");
 			echo PPDB::createJSLink("libs/js/previewVid.js");
 			echo URIS::config(BGCOLOR,["#696a69","body"]);
+			echo URIS::config(QRCODE, ["body", "https://surveybuilder.epizy.com/", 320, 320, "#000000", "#ffffff"]);
 			echo PPDB::createJS('setTimeout(function(){
 				let t = document.querySelectorAll("#portTable tr td");
 				for(let i=0;i<t.length;i++){
