@@ -917,7 +917,7 @@ onSuccess:
 echo PPDB::success($str);
 ```
 
-onFailed():
+onFailed:
 ```php
 echo PPDB::failed($str);
 ```
