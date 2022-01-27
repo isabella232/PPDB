@@ -135,3 +135,8 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 - Added .HTACCESS to the database folder to prevent `random users` from viewing the database
 - Fixed export to `PHP_ARRAY`
 - edit readme.md
+
+# v1.4.19
+
+- Added upload JSON file for database(can be used after export)
+- Added `PPDB::success();` and `PPDB::failed();` for alerts
