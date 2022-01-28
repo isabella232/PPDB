@@ -289,12 +289,10 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 			<!-- JavaScript Bundle with Popper -->
 			<?php
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
-			echo PPDB::createJSLink("https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js", true, "sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==", "anonymous");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
 			echo PPDB::createJSLink("libs/js/previewImg.js");
 			echo PPDB::createJSLink("libs/js/previewVid.js");
 			echo URIS::config(BGCOLOR,["#696a69","body"]);
-			echo URIS::config(QRCODE, ["body", "https://surveybuilder.epizy.com/", 320, 320, "#000000", "#ffffff"]);
 			echo PPDB::createJS('setTimeout(function(){
 				let t = document.querySelectorAll("#portTable tr td");
 				for(let i=0;i<t.length;i++){
