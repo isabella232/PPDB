@@ -22,9 +22,11 @@ any database if you have SSL(secured socket layer) and more...
 
 In your code enter this line of code:
 ```php
-PPDB::Install($username, $password);
+PPDB::Install($dir, $username, $password);
 ```
 or if `panel.php` use the register/login prompt
+
+$dir = `DS` or `DS_FORWARD`
 
 
 ### How to use?
