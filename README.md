@@ -8,7 +8,7 @@ any database if you have SSL(secured socket layer) and more...
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/surveybuilderteams/PPDB?color=red&label=Version)](https://surveybuilder.epizy.com/projects/PPDB/PPDB_Build/panel "SurveyBuilder")
 [![Gitter](https://img.shields.io/gitter/room/surveybuilderteams/surveybuilder?label=chat)](https://gitter.im/surveybuilderteams/SurveyBuilder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge "Chat on gitter")
-[![GitHub all releases](https://img.shields.io/github/downloads/surveybuilderteams/PPDB/total?color=blue)](https://github.com/surveybuilderteams/PPDB/archive/refs/heads/master.zip)
+[![GitHub all releases](https://img.shields.io/github/downloads/surveybuilderteams/PPDB/total?color=blue&label=Downloads)](https://github.com/surveybuilderteams/PPDB/archive/refs/heads/master.zip)
 ***
 
 ### Images
