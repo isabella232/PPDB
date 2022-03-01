@@ -7,7 +7,6 @@ inclusive security. Along with a admin panel that will require a login/register 
 any database if you have SSL(secured socket layer) and more...
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/surveybuilderteams/PPDB?color=red&label=Version)](https://surveybuilder.epizy.com/projects/PPDB/PPDB_Build/panel "SurveyBuilder")
-
 [![GitHub all releases](https://img.shields.io/github/downloads/surveybuilderteams/PPDB/total?color=blue&label=Downloads)](https://github.com/surveybuilderteams/PPDB/archive/refs/heads/master.zip)
 ***
 
