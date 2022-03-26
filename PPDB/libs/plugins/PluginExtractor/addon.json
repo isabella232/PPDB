@@ -8,6 +8,9 @@
 	"author": "SurveyBuilderTeams",
 	"mail": "surveybuildersbot@gmail.com",
 	"togglable": true,
+	"dependencies":{
+		"yaml": true
+	},
 	"config":{
 		"page": "config.php",
 		"active":true,
