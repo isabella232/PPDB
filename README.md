@@ -114,6 +114,8 @@ L = Localhost | D = Domain
 | LIBRARY_AUTHOR | SurveyBuilderTeams | :x: | string |
 | LIBRARY_AUTOUPDATE | true | :heavy_check_mark: | boolean |
 | LIBRARY_BUILD | 220325 | :x: | boolean |
+| LOGIN_TEMP | 3 | :heavy_check_mark: | int |
+| DEBUG_MODE | FALSE | :heavy_check_mark: | boolean |
 
 ## PDDB FUNCTIONS
 
