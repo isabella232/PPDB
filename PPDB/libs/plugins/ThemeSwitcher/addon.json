@@ -1,0 +1,16 @@
+{
+	"name": "Theme Switcher",
+	"icon": "icon.png",
+	"description": "Allow you to switch themes as much as you like. You can also make custom themes in the '/themes' folder",
+	"version": "1.1.0",
+	"L_updated": "02/23/22",
+	"webpage": "https://github.com/surveybuilderteams/PPDB",
+	"author": "SurveyBuilderTeams",
+	"mail": "surveybuildersbot@gmail.com",
+	"togglable": true,
+	"config":{
+		"page": "",
+		"active":true,
+		"include_btn": false
+	}
+}

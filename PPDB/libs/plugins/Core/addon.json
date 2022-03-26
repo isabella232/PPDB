@@ -1,0 +1,16 @@
+{
+	"name": "PPDB Core",
+	"icon": "icon.png",
+	"description": "Run plugins easier and is used for base function, this will use 'base library' to run the server",
+	"version": "1.0.6",
+	"L_updated": "02/12/22",
+	"webpage": "https://github.com/surveybuilderteams/PPDB",
+	"author": "SurveyBuilderTeams",
+	"mail": "surveybuildersbot@gmail.com",
+	"togglable": false,
+	"config":{
+		"page": "",
+		"active":true,
+		"include_btn": false
+	}
+}

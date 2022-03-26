@@ -1,0 +1,16 @@
+{
+	"name": "PluginExtractor",
+	"icon": "icon.png",
+	"description": "Upload your plugins easier by uploading to the server",
+	"version": "1.0.1",
+	"L_updated": "02/12/22",
+	"webpage": "https://github.com/surveybuilderteams/PPDB",
+	"author": "SurveyBuilderTeams",
+	"mail": "surveybuildersbot@gmail.com",
+	"togglable": true,
+	"config":{
+		"page": "config.php",
+		"active":true,
+		"include_btn": true
+	}
+}
