@@ -104,7 +104,7 @@ L = Localhost | D = Domain
 ***
 
 ## Defined Variables(init.php)
-| Define | output | changable | type |
+| Define | Default | changable | type |
 | ------ | ------ | --------- | ---- |
 | LIBRARY_NAME | PPDB | :x: | string |
 | LIBRARY_VERSION | {YOUR_CURRENT_VERSION} | :heavy_check_mark: | string |
