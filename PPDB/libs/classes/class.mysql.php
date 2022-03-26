@@ -8,10 +8,14 @@ class mySQL{
 	# Nothing
 	}
 	public function connect($host, $user, $psw, $db){
-			$this->host = $host;
+		$this->host = $host;
 		$this->user = $user;
 		$this->psw = $psw;
 		$this->db = $db;
+		filter_var($this->host, FILTER_SANITIZE_STRING);
+		filter_var($this->user, FILTER_SANITIZE_STRING);
+		filter_var($this->psw, FILTER_SANITIZE_STRING);
+		filter_var($this->db, FILTER_SANITIZE_STRING);
 		return $this;
 	}
 	public function getInfo(){
@@ -29,7 +33,7 @@ class mySQL{
 		return false;
 	}
 		
-		$query = "SELECT * FROM ".$table."";
+		$query = "SELECT * FROM ".filter_var($table, FILTER_SANITIZE_STRING)."";
 		$result = mysqli_query($conn, $query);
 		if(!$result){ echo "Couldn't execute the query"; die();}
 			else{
@@ -60,7 +64,7 @@ public function import($db, $table, $sel){
 			unlink($db.$currentDB.".json");
 		}
 		foreach($sel as $s){
-			$query = "SELECT ".$s." FROM ".$table."";
+			$query = "SELECT ".$s." FROM ".filter_var($table, FILTER_SANITIZE_STRING)."";
 		$result = mysqli_query($conn, $query);
 		if(!$result){ echo "Couldn't execute the query"; die();}
 			else{
@@ -71,7 +75,7 @@ public function import($db, $table, $sel){
 				$data[]=$row;
 				}
 			$fp = fopen($db.$this->db.".json", "a+");
-			fwrite($fp, '{"'.$table.'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
+			fwrite($fp, '{"'.filter_var($table, FILTER_SANITIZE_STRING).'":'.json_encode($data, JSON_PRETTY_PRINT).'}');
 			fclose($fp);
 	}
 		}

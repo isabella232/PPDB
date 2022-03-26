@@ -8,10 +8,29 @@ const LIBRARY_SSL_SUPPORT = true;
 const LIBRARY_LICENCE = "Apache-2.0 License";
 const LIBRARY_AUTHOR = "SurveyBuilderTeams";
 const LIBRARY_AUTOUPDATE = true;
+const LIBRARY_BUILD = "220216";
+const LOGIN_TEMP = 3;
+define("LIBRARY_MODULES",apache_get_modules(), false);
+//debug use TRUE, FALSE, NULL defaulted to FALSE
+const DEBUG_MODE = FALSE;
 
 
 # render
    function RenderLibrary(){
+	   if (DEBUG_MODE) {
+    ini_set('error_log', Utils::getROOT('ROOT', Utils::getDS()).'error.log');
+    if (DEBUG_MODE === true) {
+        error_reporting(E_ALL | E_STRICT | E_NOTICE);
+        ini_set('display_errors', true);
+        ini_set('display_startup_errors', true);
+        ini_set("track_errors", 1);
+        ini_set('html_errors', 1);
+    } else if (DEBUG_MODE === false) {
+        error_reporting(0);
+        ini_set('display_errors', false);
+        ini_set('display_startup_errors', false);
+    }
+}
 			# cache LIBRARY values
 		try{
 		if(LIBRARY_NAME !== "PPDB"){
@@ -63,6 +82,13 @@ const LIBRARY_AUTOUPDATE = true;
 	}catch(PPDBErr $e){
 		echo $e->noOpenSSL();
 	}
+	try{
+		if(LIBRARY_BUILD !== '220216'){
+			throw new PPDBErr(LIBRARY_BUILD);
+		}
+   }catch(PPDBErr $e){
+	   echo $e->CHECKLIBSBuild();
+   }
 
 	
 	
