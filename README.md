@@ -91,16 +91,16 @@ L = Localhost | D = Domain
 | PREVIEW_IMG | previewImg `URIS usage only` | D & L |
 | PREVIEW_VID | previewVid `URIS usage only` | D & L | 
 | INCLUDE_WHITESPACE | true | D & L |
-| ROOT_HISTORY | dirname(__FILE__).DS."libs".DS."history".DS | L |
-| ROOT_HISTORY_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."history".DS_FORWARD | D |
-| ROOT_DATA |  dirname(__FILE__).DS."libs".DS."data".DS | L |
-| ROOT_DATA_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."data".DS_FORWARD | D |
-| ROOT_UPLOAD | dirname(__FILE__).DS."libs".DS."uploads".DS | L |
-| ROOT_UPLOAD_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."uploads".DS_FORWARD | D |
-| ROOT_PLUGIN | dirname(__FILE__).DS."libs".DS."plugins".DS | L |
-| ROOT_PLUGIN_FORWARD |  dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."plugins".DS_FORWARD | D |
-| ROOT_THEME | dirname(__FILE__).DS."libs".DS."themes".DS | L |
-| ROOT_THEME_FORWARD | dirname(__FILE__).DS_FORWARD."libs".DS_FORWARD."themes".DS_FORWARD | D |
+| ROOT_HISTORY | dirname( __ FILE __ ).DS."libs".DS."history".DS | L |
+| ROOT_HISTORY_FORWARD | dirname( __ FILE __ ).DS_FORWARD."libs".DS_FORWARD."history".DS_FORWARD | D |
+| ROOT_DATA |  dirname( __ FILE __ ).DS."libs".DS."data".DS | L |
+| ROOT_DATA_FORWARD | dirname( __ FILE __ ).DS_FORWARD."libs".DS_FORWARD."data".DS_FORWARD | D |
+| ROOT_UPLOAD | dirname( __FILE__ ).DS."libs".DS."uploads".DS | L |
+| ROOT_UPLOAD_FORWARD | dirname( __FILE __ ).DS_FORWARD."libs".DS_FORWARD."uploads".DS_FORWARD | D |
+| ROOT_PLUGIN | dirname( __ FILE __ ).DS."libs".DS."plugins".DS | L |
+| ROOT_PLUGIN_FORWARD |  dirname( __ FILE __ ).DS_FORWARD."libs".DS_FORWARD."plugins".DS_FORWARD | D |
+| ROOT_THEME | dirname( __ FILE __ ).DS."libs".DS."themes".DS | L |
+| ROOT_THEME_FORWARD | dirname( __ FILE __ ).DS_FORWARD."libs".DS_FORWARD."themes".DS_FORWARD | D |
 ***
 
 ## Defined Variables(init.php)
@@ -113,7 +113,7 @@ L = Localhost | D = Domain
 | LIBRARY_LICENCE | Apache-2.0 License | :x: | string |
 | LIBRARY_AUTHOR | SurveyBuilderTeams | :x: | string |
 | LIBRARY_AUTOUPDATE | true | :heavy_check_mark: | boolean |
-
+| LIBRARY_BUILD | 220325 | :x: | boolean |
 
 ## PDDB FUNCTIONS
 
