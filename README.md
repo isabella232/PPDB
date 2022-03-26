@@ -1669,7 +1669,7 @@ required/optional elements:
 * {CONFIG_PAGE_NAME}.php(optional)
 * config/config.yml(optional)
 
-find examples in the `/plugin` folder
+find examples in the `/plugin` folder(I did have a way of doing this, but github is not responding this long documentation and kept crashing)
 
 ### 19. Themes
 
