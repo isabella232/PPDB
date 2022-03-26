@@ -140,3 +140,9 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 
 - Added upload JSON file for database(can be used after export)
 - Added `PPDB::success();` and `PPDB::failed();` for alerts
+
+# v2.0.0
+- Added `Utils` functions and folder
+- Added `Plugins` folder and functions
+- Added `Themes` folder and functions
+- And More fixes and changes(to much to type)
