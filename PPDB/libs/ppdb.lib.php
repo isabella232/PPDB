@@ -4,6 +4,7 @@ if(session_status() === PHP_SESSION_NONE || session_id() == ''){
 }
 require("handler/autoupdater.php");
 require(dirname(__DIR__)."/defined.php");
+require("utils/utils.php");
 require("handler/Exception.php");
 require("handler/removeFileFolder.php");
 require("handler/ReturnfileSize.php");
@@ -13,11 +14,38 @@ require("bin/reload.php");
 require("bin/logic.php");
 require("classes/class.query.php");
 require("classes/class.mysql.php");
+require("classes/class.plugin.php");
+if(!version_compare(PHP_VERSION, '5.3.0', '>=')){
+	echo '<script>setTimeout(function(){document.write("<span style=\'color:red;font-size:32px;font-weight:bold;\'>You must be using PHP 5.3.0 or greater</span>");},0);</script>';
+}
+/*Runner*/
 class PPDB{
 
 	private function __construct(){
 	 #nothing	
 	}
+		public static function GETIP(){
+		if($_SERVER['SERVER_NAME'] === "localhost"){
+			$ip = getHostByName(getHostName());
+		}elseif(!empty($_SERVER['HTTP_CLIENT_IP'])){
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		}elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}else{
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+		if(filter_var($ip, FILTER_VALIDATE_IP)){
+			return $ip;
+		}
+	}
+	public static function ENCRYPTIP($ip){
+		if(filter_var($ip, FILTER_VALIDATE_IP)){
+			return hash("sha512", $ip);
+		}
+	}
+public static function removeDOC($root){
+	return str_replace(Utils::getROOT('DOC', Utils::getDS()), '', Utils::getDS().$root);
+}
 public static function userUI($dir){
 		#register
 		if(!file_exists($dir."user.json")){
@@ -34,7 +62,11 @@ public static function userUI($dir){
 		return $form;
 		}else{
 			if(!SESSION_USER){
-				$form = "<form method='post' action='#' class='panelForm'>";
+				$form = '';
+				if(isset($_COOKIE['ppdb_session_temp']) && $_COOKIE['ppdb_session_temp'] > 3 ){
+					$form .= PPDB::failed("Error: cannot login correctly and logged in to many times! Try again tomorrow.");
+				}
+				$form .= "<form method='post' action='#' class='panelForm' ".(isset($_COOKIE['ppdb_session_temp']) && $_COOKIE['ppdb_session_temp'] > 3 ? 'hidden' : '').">";
 			$form .= "<h1 class='text-center'>Login</h1>";
 			$form .= '  <div class="form-group">';
 		$form .= "<input type='text' class='form-control' name='username' required='' id='username' placeholder='Username'/><br/>";
@@ -50,9 +82,52 @@ public static function userUI($dir){
 		
 	}
 	
+	public static function PROFILE_EDIT(){
+	$getUser = file_get_contents(Utils::getROOT("ROOT", Utils::getDS()).'user.json');
+	$userInfo = json_decode($getUser, true);
+		$prompt = '
+		<div class="modal fade" id="profileEditor" tabindex="-1" aria-labelledby="ProfileEditorLabel" aria-hidden="true">
+		<form method="post" enctype="multipart/form-data">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ProfileEditorLabel">Edit Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+	  <div class="row">
+        <div class="col">
+		<label for="email">Email address: </label>
+		<input type="email" id="email" '.($userInfo['email']!==''?'value="'.$userInfo['email'].'"' : '').' name="emailaddress" class="form-control" placeholder="Email address"/>
+		</div>
+		<div class="col">
+		<label for="displayName">Disply Name: </label>
+		<input type="text" id="displayName" '.($userInfo['displayName']!==''?'value="'.$userInfo['displayName'].'"' : '').' name="displayName" class="form-control" placeholder="Disply Name"/>
+		</div>
+		</div>
+		<div class="row">
+		<label for="about">About you: </label>
+		<textarea name="about" class="form-control" style="height:128px;" id="about" placeholder="Enter Your description">'.($userInfo['about']!==''?$userInfo['about']:'').'</textarea>
+		</div>
+		<div class="row">
+		<label for="propicid">Picture: </label>
+		<input type="file" name="propic" class="form-control" id="propicid" accept="image/*"/>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="saveProfile" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div></form>
+</div>';
+		
+		
+		return $prompt;
+	}
 	
 	
-	public static function INSTALL($dir, $user, $psw, $host=PPDB_CONNECT){
+	public static function INSTALL($dir, $user, $psw, $email='', $displayName='',$host=PPDB_CONNECT){
 		$pass = 1;
 		try{
 			if($host !== PPDB_CONNECT){
@@ -67,7 +142,7 @@ public static function userUI($dir){
 		
 			if(!file_exists($dir."user.json")){
 				$file = fopen($dir."user.json", "w+");
-				$data = array("user"=>$user, "password"=>$psw);
+				$data = array("user"=>$user, "password"=>$psw, "email"=>$email, "ip"=>PPDB::GETIP() ,'displayName'=>$user, 'about'=>'');
 				$query = json_encode($data);
 				fwrite($file, $query);
 				fclose($file);
@@ -207,6 +282,7 @@ public static function userUI($dir){
 		
 			return true;
 	}
+
 	public static function PSW_ENCRYPT($psw){
 			$psw = password_hash($psw, PASSWORD_BCRYPT, ["cost"=>12]);
 			return $psw;
@@ -437,7 +513,8 @@ public static function rawText($str){
 			</form>
 			</div>';
 			$panel.= '<div class="panel-nav">
-			<nav class="nav-con">
+			<nav class="nav-con navbar">
+			<div class="container-fluid">
 			<form method="post">
 			<a href="./panel?type=storage" class="nav-list storageTab" title="Storage"><input type="submit" name="store" value="Storage"/></a>
 			<span class="seperator">|</span>
@@ -450,7 +527,23 @@ public static function rawText($str){
 			<a href="./panel?type=delete+accunt" class="nav-list deleteAccount" title="Delete Account"><input type="submit" name="delteAccount" value="Delete Account"/></a>
 			<span class="seperator">|</span>
 			<a href="./panel?type=change+password" class="nav-list changePassword" title="Change Password"><input type="submit" name="changePassword" value="Change Password"/></a>
+			<span class="seperator">|</span>
+<span class="dropdown">
+  <a class="dropdown-toggle" style="font-weight:normal;color:yellow;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    More...
+  </a>
+
+  <ul class="dropdown-menu" style="background-color:gray;" aria-labelledby="dropdownMenuLink">
+    <li id="list-item-plugin"><a href="./panel?type=plugins" class="nav-list viewPlugins" title="Plugins"><input type="submit" name="viewPlugins" value="Plugins"/></a></li>
+	
+	<li id="list-item-themes"'.(Utils::getPluginAddon('ThemeSwitcher')['config']['active'] ? '' : 'style="display:none;"').'><hr class="dropdown-divider"><a href="./panel?type=themes" class="nav-list viewThemes" title="Themes"><input type="submit" id="themeSwitcherPlugin" name="viewThemes" value="Themes"/></a></li>
+	<li id="list-item-dashboard"><a href="./panel?type=dashboard" class="nav-list viewDashboard" title="Dashboard"><hr class="dropdown-divider"><input type="submit" name="viewDashboard" value="Dashboard"/></a></li>
+	<li id="list-item-history"><a href="./panel?type=history" class="nav-list viewHistory" title="History"><hr class="dropdown-divider"><input type="submit" name="viewHistory" value="History"/></a></li>
+	<li id="list-item-email"><a href="./panel?type=profile" class="nav-list viewProfile" title="Profile"><hr class="dropdown-divider"><input type="submit" name="viewProfile" value="Profile"/></a></li>
+  </ul>
+</span>
 			</form>
+			</div>
 			</nav>
 			</div>';
 			$panel .= '</div>';
@@ -543,6 +636,44 @@ public static function rawText($str){
                  width:50%;
                  outline:none;
                 }
+			/*Plugins*/
+			#plugin-success{
+				width:410px;
+				height:250px;
+				display:block;
+			}
+			.card-columns{
+				display:block;
+			}
+		 .plugin-description{
+			 position:absolute;
+			 width:45%;
+			 overflow:auto;
+			 height:45%;
+		 }
+		 .plugin-description::-webkit-scrollbar{
+			 display:none;
+		 }
+		 .card-image:hover{
+			 border: 15px solid rgba(231, 249, 64, 0.95);
+			 background-color:rgba(231, 249, 64, 0.95);
+			 border-radius:25px;
+		 }
+		 #plugin-config-btn{
+			 position:absolute;
+			 bottom:2%;
+			 left:0;
+			 width:35%;
+		 }
+		
+		#plugin-c-icon{
+			margin-right:10px;
+		}
+		/*dropdown*/
+		.dropdown li:hover{
+			background-color:lightgray;
+		}
+
 			</style>';
 	}
 	public static function createCSSLink($url, $inter="", $crossorigin=""){
@@ -567,7 +698,9 @@ public static function rawText($str){
 			return '<script id="'.$id.'" type="text/javascript" async>'.$JS.'</script>';
 		}
 	}
-	
+	public static function createTheme($theme){
+		return createCSSLink(Utils::getROOT('THEME', Utils::getDS()).$theme);
+	}
 	public static function BOLD(){
 		return 'font-weight:bold;';
 	}
@@ -637,12 +770,50 @@ public static function rawText($str){
 		   return false;
 	   }
 	}
-	public static function deleteAccount($dir){
-		if(!unlink($dir."user.json")){
-			session_unset();
-			Reload::run();
+	protected static function removeHistory(){
+			$removeHistory = array_values(array_diff(scandir(Utils::getROOT("HISTORY", Utils::getDS())),[".", ".."]));
+			foreach($removeHistory as $h){
+					if(unlink(Utils::getROOT("HISTORY", Utils::getDS()).$h)){
+					echo PPDB::success("Removed " . Utils::getROOT("HISTORY", Utils::getDS()).$h);
 		}else{
-			
+				echo PPDB::failed("Failed to Removed " . Utils::getROOT("HISTORY", Utils::getDS()).$h);
+			}
+			}
+		
+	}
+	protected static function removeDBAll(){
+		$removeDB = array_values(array_diff(scandir(Utils::getROOT("DB", Utils::getDS())),[".", ".."]));
+			foreach($removeDB as $db){
+					if($db === ".htaccess"){
+						//nothing
+						}else{
+					if(unlink(Utils::getROOT("DB", Utils::getDS()).$db)){
+							echo PPDB::success("Removed " . Utils::getROOT("DB", Utils::getDS()).$db);
+						}else{
+						echo PPDB::failed("Failed to Removed " . Utils::getROOT("DB", Utils::getDS()).$db);
+						}
+
+				}
+		}
+	}
+	protected static function removeLogo(){
+		$logo = Utils::getROOT("UPLOAD", Utils::getDS()).'avatars'.Utils::getDS();
+		if(unlink($logo.SESSION_USER.'.png')){
+				echo PPDB::success("Removed " . $logo.SESSION_USER.'.png');
+		}else{
+			echo PPDB::failed('Failed to remove'.$logo.SESSION_USER.'.png');
+		}
+	}
+	public static function deleteAccount($dir){
+			PPDB::removeHistory();
+			PPDB::removeDBAll();
+			PPDB::removeLogo();
+		if(!unlink($dir."user.json")){
+				session_unset();
+				Reload::run();
+		}else{
+			PPDB::failed("Failed to remove user.json");
+			return false;
 		}
 	}
 	public static function removeSource($url){
@@ -656,6 +827,29 @@ public static function rawText($str){
 	public static function success($str){
 		return '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">'.$str.'<p>';
 	}
+	public static function strMultiplyer($times=2, $str){
+		$dot = [];
+		$data = '';
+		for($i=0;$i<$times;$i++){
+			$dot[] = ".";
+		}
+		foreach($dot as $d){
+			$data .= $str;
+		}
+		return $data;
+	}
+	public static function boolToStr($bool){
+	switch($bool){
+		case 0:
+		return 'false';
+		break;
+		case 1:
+		return 'true';
+		break;
+	}
+}
+	
+
 
 }
 
