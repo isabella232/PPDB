@@ -32,6 +32,16 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> is not a valid Library licence(string)<br/>';
     return $errorMsg;
 	}
+	public function CHECKLIBSBuild(){
+		  $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid Library Build(string)<br/>';
+    return $errorMsg;
+	}
+	public function CHECKLIBServer(){
+		  $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid Library Server(string)<br/>';
+    return $errorMsg;
+	}
 	public function CONNECT_ERR(){
 		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
     .': <b>'.$this->getMessage().'</b> cannot connect to server<br/>';
