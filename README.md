@@ -1668,3 +1668,9 @@ required/optional elements:
 * {PLUGIN_NAME}.plg.php
 * {CONFIG_PAGE_NAME}.php(optional)
 * config/config.yml(optional)
+
+find examples in the `/plugin` folder
+
+### 19. Themes
+
+You can place custom theme in the `/themes` folder
