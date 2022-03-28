@@ -127,7 +127,7 @@ if(isset($_POST['regbtn'])){
 			<br/>
 			<input type='text' class='form-control' placeholder='Replace Name(use only replacing name)' name='dbvrename'/><br/>
 			<br/>
-			<input type='text' class='form-control' placeholder='Enter Table Name' onchange='writeTable(this.value)' name='tbname' require/><br/>
+			<input type='text' class='form-control' placeholder='Enter Table Name(leave null if changing file)' onchange='writeTable(this.value)' name='tbname' require/><br/>
 			<br/>
 			<textarea class='form-control' placeholder='Enter JSON code' id='dbarr' name='dbarr' style='margin-left:5px;width:60%;height:40%;'></textarea>
 			<br/>
