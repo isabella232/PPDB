@@ -149,3 +149,6 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 
 # v2.0.1
 - Fixed `panel.php` so ROOT_DB will auto-detect DS(dictionary separator)
+
+# v2.0.2
+- Fixed Update/Create database, was only identify a create new file by table name, leave blank to update
