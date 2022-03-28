@@ -391,7 +391,7 @@ if(isset($_POST['dbrename'])){
 if(isset($_POST['dbinfo'])){
 	$fileName = $_POST['dbname'];
 	if(PPDBLogic::dbExists(Utils::getROOT('DB',Utils::getDS()), $fileName)){
-		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(15).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'"> Created: '.PPDB::infoDB(ROOT_DB,$fileName)['created'].'<br/> Updated: '.PPDB::infoDB(ROOT_DB,$fileName)['updated'].'<br/> Size: '.PPDB::infoDB(ROOT_DB,$fileName)['size'].'<br/> Type: '.PPDB::infoDB(ROOT_DB,$fileName)['type'].'<p>';
+		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(15).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'"> Created: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['created'].'<br/> Updated: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['updated'].'<br/> Size: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['size'].'<br/> Type: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['type'].'<p>';
 	}else{
 		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
 	}
@@ -477,10 +477,10 @@ if(isset($_POST['LoadTable'])){
 	$isdata = preg_replace("/\s*/m","",$_POST['dbarr']);
 	$data = explode(",",$isdata);
 	$main = $_POST['dbmain'];
-	if(PPDBLogic::dbExists(ROOT_DB,$name)){
+	if(PPDBLogic::dbExists(Utils::getROOT('DB', Utils::getDS()),$name)){
 		echo $READER->allowSearch(0);
 		echo $READER->allowPageLimit([5,10,20,50,100]);
-		echo $READER->createTable($data, PPDB::JSONTOARRAY(file_get_contents(ROOT_DB.$name.'.json')), $main ,$data)->view(VIEW_ALL);
+		echo $READER->createTable($data, PPDB::JSONTOARRAY(file_get_contents(Utils::getROOT('DB', Utils::getDS()).$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
 		echo PPDB::failed("Database does not exist");
 	}
@@ -532,7 +532,7 @@ if(isset($_POST['sql_import'])){
 	$psw = $_POST['sql_psw'];
 	$db = $_POST['sql_db'];
 	$table = $_POST['sql_table'];
-	$msql->connect($host, $user, $psw, $db)->importAll(ROOT_DB, $table);
+	$msql->connect($host, $user, $psw, $db)->importAll(Utils::getROOT('DB', Utils::getDS()), $table);
 }
 /*Account*/
 if(isset($_POST['delteAccount']) && SESSION_USER){
