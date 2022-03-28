@@ -146,3 +146,6 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 - Added `Plugins` folder and functions
 - Added `Themes` folder and functions
 - And More fixes and changes(to much to type)
+
+# v2.0.1
+- Fixed `panel.php` so ROOT_DB will auto-detect DS(dictionary separator)
