@@ -205,7 +205,7 @@ if ($uploadOk == 0) {
 	}
 }
 	if(isset($_POST['dbsubmit'])){
-		$fileName = $_POST['tbname'];
+		$fileName = isset($_POST['tbname'])&&$_POST['tbname']!=='' ? $_POST['tbname'] : $_POST['dbname'];
 				$args = PPDB::JSONTOARRAY($_POST['dbarr']);
 		if(!PPDBLogic::dbExists(Utils::getROOT("DB", Utils::getDS()), $fileName)){ # ROOT_DB/ROOT_DB_FORWARD
 			PPDB::createDB(Utils::getROOT("DB", Utils::getDS()), $fileName, $args); # ROOT_DB/ROOT_DB_FORWARD
