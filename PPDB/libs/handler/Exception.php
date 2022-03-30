@@ -91,6 +91,11 @@ class PPDBErr extends Exception{
     .': <b>'.$this->getMessage().'</b> is not a valid export type.<br/>';
     return $errorMsg;
 	}
+	public function invalidTimezone(){
+		$errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid Timezone type.<br/>';
+    return $errorMsg;
+	}
 	public function neededUpdate(){
 		$errorMsg = $this->getMessage();
     return $errorMsg;

@@ -70,7 +70,7 @@ class plugin{
 		}
 		
 	public static function saveRedirect($plugin,$title="saving"){
-			return '<div class="alert alert-success m-5 display-3" role="alert">'.$title.' '.$plugin.' <i class="fa fa-spinner fa-spin"></i></div>
+			return '<div class="alert alert-success m-5 display-3" role="alert">'.$title.': '.$plugin.' <i class="fa fa-spinner fa-spin"></i></div>
 	<script>setTimeout(function(){
 		'.'setTimeout(function(){
 		let getUrl = window.location.href;
@@ -84,7 +84,7 @@ class plugin{
 	';
 	}
 	public static function deleteRedirect($plugin,$title="deleted"){
-			return '<div class="alert alert-danger m-5 display-3" role="alert">'.$title.' '.$plugin.' <i class="fa fa-spinner fa-spin"></i></div>
+			return '<div class="alert alert-danger m-5 display-3" role="alert">'.$title.': '.$plugin.' <i class="fa fa-spinner fa-spin"></i></div>
 	<script>setTimeout(function(){
 		'.'setTimeout(function(){
 		let getUrl = window.location.href;

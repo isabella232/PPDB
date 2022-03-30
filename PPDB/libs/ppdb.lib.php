@@ -82,6 +82,16 @@ public static function userUI($dir){
 		
 	}
 	
+	public static function autoRedirect($desc,$title="redirecting",$type="success"){
+			return '<div class="alert alert-'.$type.' m-5 display-3" role="alert">'.$title.': '.$desc.' <i class="fa fa-spinner fa-spin"></i></div>
+	<script>setTimeout(function(){
+		'.'setTimeout(function(){
+			'.Reload::ret().'
+		},0)
+	}, 3000);</script>;
+	';
+	}
+	
 	public static function PROFILE_EDIT(){
 	$getUser = file_get_contents(Utils::getROOT("ROOT", Utils::getDS()).'user.json');
 	$userInfo = json_decode($getUser, true);
@@ -323,7 +333,7 @@ public static function userUI($dir){
 			throw new PPDBErr('<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">The Old Password does not match.<p>');
 		}
 		}catch(PPDBErr $e){
-			echo $e->passwordNotMatches();
+			//echo $e->passwordNotMatches();
 			return false;
 		}
 	
@@ -333,6 +343,7 @@ public static function userUI($dir){
 		$data = fopen($dir."user.json", "w+");
 		fwrite($data, $update);
 		fclose($data);
+		return true;
 	}
 		public static function minify($a, $allowWS=false){
         	$min = preg_replace("(\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+)", "", $a); //remove block comments
