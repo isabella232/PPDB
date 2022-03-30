@@ -152,3 +152,7 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 
 # v2.0.2
 - Fixed Update/Create database, was only identify a create new file by table name, leave blank to update
+
+# v2.0.3
+- Added `PPDB::autoRedirect($desc, $title=redirecting, $type=success)`
+- Uses autoredirect for more items that fail or succeed
