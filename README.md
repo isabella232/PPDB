@@ -1674,3 +1674,27 @@ find examples in the `/plugin` folder(I did have a way of doing this, but github
 ### 19. Themes
 
 You can place custom theme in the `/themes` folder
+
+### 20. Auto-Redirectors
+
+These are some codes you can use to autoredirect this
+
+Plugin Usage:
+
+Success:
+```php
+# redirects anything with ?savePlugin in URL
+Plugin::saveRedirect($plugin, $title='saving');
+```
+
+Deleted:
+```php
+# redirects anything with ?savePlugin in URL
+Plugin::deleteRedirect($plugin, $title='deleted');
+```
+
+Custom:
+```php
+# redirects anything from any URL
+PPDB::autoRedirect($desc,$title="redirecting",$type="success");
+```
