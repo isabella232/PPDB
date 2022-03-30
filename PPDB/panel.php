@@ -96,17 +96,17 @@ if(isset($_POST['regbtn'])){
 		if(isset($_POST['cs'])){
 			if(!PPDBLogic::storageExists(Utils::getROOT('ROOT',Utils::getDS()))){
 				PPDB::createStorage(Utils::getROOT('ROOT',Utils::getDS()));
-		echo PPDB::success("Storage created");	
+		echo PPDB::autoRedirect('Storage', 'Created');	
 		}else{
-		echo PPDB::failed("Storage already exists.");	
+		echo PPDB::autoRedirect('Storage already exists', 'Failed', 'danger');	
 		}
 		}
 		if(isset($_POST['rs'])){
 		if(PPDBLogic::storageExists(Utils::getROOT('ROOT',Utils::getDS()))){
 		PPDB::removeStorage(Utils::getROOT('ROOT',Utils::getDS()), Utils::getDS()); # ROOT/ROOT_FORWARD || DS/DS_FORWARD
-		echo PPDB::success("Storage Removed.");	
+		echo PPDB::autoRedirect('Storage', 'Removed');	
 		}else{
-		echo PPDB::failed("Storage does not exist.");	
+		echo PPDB::autoRedirect('Storage dosen\'t exists', 'Failed', 'danger');	
 		}
 		
 			
@@ -206,23 +206,29 @@ if ($uploadOk == 0) {
 }
 	if(isset($_POST['dbsubmit'])){
 		$fileName = isset($_POST['tbname'])&&$_POST['tbname']!=='' ? $_POST['tbname'] : $_POST['dbname'];
+		if(!isset($_POST['tbname']) || $_POST['tbname'] === '' && !isset($_POST['dbname'])){
+			echo PPDB::autoRedirect('to update/create Database', 'Failed', 'danger');	
+		}else{
 				$args = PPDB::JSONTOARRAY($_POST['dbarr']);
 		if(!PPDBLogic::dbExists(Utils::getROOT("DB", Utils::getDS()), $fileName)){ # ROOT_DB/ROOT_DB_FORWARD
 			PPDB::createDB(Utils::getROOT("DB", Utils::getDS()), $fileName, $args); # ROOT_DB/ROOT_DB_FORWARD
-			echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Created<p>';
+			//echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Created<p>';
+			echo PPDB::autoRedirect('Database', 'Created');	
 		}else{
 			$READER->select(Utils::getROOT("DB", Utils::getDS()), $fileName)->update($args);
-			echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Updated<p>';
+			//echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Updated<p>';
+			echo PPDB::autoRedirect('Database', 'Updated');	
 		}
-	
+		}
 }
 	if(isset($_POST['dbremove'])){
-			$fileName = $_POST['dbname'];
+			$fileName = isset($_POST['dbname']) ? $_POST['dbname'] : '';
 		if(PPDBLogic::dbExists(Utils::getROOT("DB", Utils::getDS()), $fileName)){
 			PPDB::removeDB(Utils::getROOT("DB", Utils::getDS()), $fileName);
-			echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Removed<p>';
+			echo PPDB::autoRedirect('Database', 'Removed');
 		}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';	
+		//echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';	
+			echo PPDB::autoRedirect('to remove Database', 'Failed', 'danger');	
 		}
 	}
 if(isset($_POST['dbrename'])){
@@ -233,43 +239,43 @@ if(isset($_POST['dbrename'])){
 			if(strpos($fileName, ">")){
 
 			PPDB::renameDB(Utils::getROOT("DB", Utils::getDS()), $replace[0], $replace[1]);
-			echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database Renamed<p>';
+			echo PPDB::autoRedirect('Database', 'Renamed');	
 			}else{
-				echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Textbox does not have ">" to change name<p>';
+				echo PPDB::autoRedirect('Textbox does not have ">" to change name', 'Failed Queries', 'danger');	
 			}
 
 		}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';	
+		echo PPDB::autoRedirect('to find Database', 'Failed', 'danger');	
 		}
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Can\'t have rename string null.<p>';	
+		echo PPDB::autoRedirect('Can\'t have rename string null.', 'failed', 'danger');	
 	}
 			
 	}
 if(isset($_POST['dbinfo'])){
-	$fileName = $_POST['dbname'];
+	$fileName = isset($_POST['dbname']) ? $_POST['dbname'] : '';
 	if(PPDBLogic::dbExists(Utils::getROOT('DB',Utils::getDS()), $fileName)){
 		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(15).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'"> Created: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['created'].'<br/> Updated: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['updated'].'<br/> Size: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['size'].'<br/> Type: '.PPDB::infoDB(Utils::getROOT('DB', Utils::getDS()),$fileName)['type'].'<p>';
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+		echo PPDB::autoRedirect('Database doesn\'t exits', 'Failed', 'danger');	
 	}
 }
 if(isset($_POST['exportasjson'])){
-	$fileName = $_POST['dbname'];
+	$fileName = isset($_POST['dbname']) ? $_POST['dbname'] : '';
 	if(PPDBLogic::dbExists(Utils::getROOT('DB',Utils::getDS()), $fileName)){
 		$READER->export(Utils::getROOT('DB',Utils::getDS()), Utils::getROOT('DATA',Utils::getDS()), Utils::getDS(), $fileName, "JSON");
-		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database has been exported.<p>';
+		echo PPDB::autoRedirect('Database has been exported', 'Success');	
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+		echo PPDB::autoRedirect('Database doesn\'t exists', 'Failed', 'danger');	
 	}
 }
 if(isset($_POST['exportasphp_array'])){
-	$fileName = $_POST['dbname'];
+	$fileName = isset($_POST['dbname']) ? $_POST['dbname'] : '';
 	if(PPDBLogic::dbExists(Utils::getROOT('DB',Utils::getDS()), $fileName)){
 		$READER->export(Utils::getROOT('DB',Utils::getDS()), Utils::getROOT('DATA',Utils::getDS()), Utils::getDS(), $fileName, "PHP_ARRAY");
-		echo '<p style="'.PPDB::COLOR(0,255,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database has been exported.<p>';
+		echo PPDB::autoRedirect('Database has been exported', 'Success');
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+		echo PPDB::autoRedirect('Database doesn\'t exists', 'Failed', 'danger');
 	}
 }
 if(isset($_GET['savePlugin']) && isset($_GET['createBackup'])){
@@ -277,9 +283,9 @@ if(isset($_GET['savePlugin']) && isset($_GET['createBackup'])){
 	$root = Utils::getROOT("DOC", Utils::getDS()).Utils::getDS();
 	if(!is_dir($root."PPDB_backup")){
 		if(!mkdir($root."PPDB_backup")){
-			echo PPDB::failed("Failed to create backup");
+			echo PPDB::autoRedirect('to create backup', 'Failed', 'danger');
 		}else{
-			echo PPDB::success("Successfully to created backup");
+			echo PPDB::autoRedirect('created backup','Successfully');
 		}
 	}
 	$zipTitle = $root."PPDB_backup".Utils::getDS().date_format(date_create(date('Y-m-d H:i:s')), "m-d-YH_i_s").".zip";
@@ -331,16 +337,16 @@ if(isset($_POST['table']) && SESSION_USER){
 	},0);</script>';
 }
 if(isset($_POST['LoadTable'])){
-	$name = $_POST['dbname'];
-	$isdata = preg_replace("/\s*/m","",$_POST['dbarr']);
+	$name = isset($_POST['dbname']) ? $_POST['dbname'] : '';
+	$isdata = preg_replace("/\s*/m","",isset($_POST['dbarr']) ? $_POST['dbarr'] : '');
 	$data = explode(",",$isdata);
-	$main = $_POST['dbmain'];
+	$main = isset($_POST['dbmain']) ? $_POST['dbmain'] : '';
 	if(PPDBLogic::dbExists(Utils::getROOT('DB', Utils::getDS()),$name)){
 		echo $READER->allowSearch(0);
 		echo $READER->allowPageLimit([5,10,20,50,100]);
 		echo $READER->createTable($data, PPDB::JSONTOARRAY(file_get_contents(Utils::getROOT('DB', Utils::getDS()).$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
-		echo PPDB::failed("Database does not exist");
+		echo PPDB::autoRedirect('Database doesn\'t exists', 'Failed', 'danger');
 	}
 }
 if(isset($_POST['LoadLinkedTable'])){
@@ -353,7 +359,7 @@ if(isset($_POST['LoadLinkedTable'])){
 		echo $READER->allowPageLimit([5,10,20,50,100]);
 		echo $READER->createLinkedTable($data, PPDB::JSONTOARRAY(file_get_contents(Utils::getROOT('DB',Utils::getDS()).$name.'.json')), $main ,$data)->view(VIEW_ALL);
 	}else{
-		echo '<p style="'.PPDB::COLOR(255,0,0,1).PPDB::BOLD().PPDB::SIZE(32).PPDB::ALIGN(CENTER).PPDB::TXTRANS(UPPERCASE).'">Database does not exist.<p>';
+		echo PPDB::autoRedirect('Database doesn\'t exists', 'Failed', 'danger');
 	}
 }
 
@@ -438,9 +444,13 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 	$query = json_decode($json);
 	if(PPDB::CHECK_VALID_PASSWORD($new, 8, 20, true, true, true, false)){
 			if($copyNew === $new){
-		 PPDB::CHANGE_PSW(Utils::getROOT('ROOT',Utils::getDS()), $old, $new);
+		 if(PPDB::CHANGE_PSW(Utils::getROOT('ROOT',Utils::getDS()), $old, $new)){
+			echo PPDB::autoRedirect('Changed Password', 'Successfully');
+		 }else{
+			echo PPDB::autoRedirect('Old Password Doesn\'t match', 'Failed', 'danger');
+		 }
 		}else{
-			echo PPDB::failed("The New Password does not match");
+			echo PPDB::autoRedirect('New Password does not match', 'Failed', 'danger');
 		}
 	}
 	
@@ -784,7 +794,7 @@ if(isset($_POST['viewProfile'])){
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #0476f7; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:9%;left:22%;">&nbsp;</span>
+			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:5%;left:22%;">&nbsp;</span>
            
 		   <img src="'.PPDB::removeDOC($getAvatars).(file_exists($getAvatars.SESSION_USER.'.png') ? SESSION_USER : 'default').'.png?imgID='.uniqid().'" alt="User image" class="image img-fluid img-thumbnail rounded mt-4 mb-2" style="width: 150px; z-index: 1">
 			  <button type="button" data-bs-toggle="modal" data-bs-target="#profileEditor" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
@@ -862,31 +872,31 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
   if($check !== false) {
     $uploadOk = 1;
   } else {
-    echo PPDB::failed("File is not an image.");
+	echo PPDB::autoRedirect('not an image', 'Failed', 'danger');	
     $uploadOk = 0;
   }
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  echo PPDB::failed("Sorry, file already exists.");
+  echo PPDB::autoRedirect('file already exists.', 'Failed', 'danger');	
   $uploadOk = 0;
 }
 
 // Check file size
 if ($_FILES["propic"]["size"] > 500000) {
-  echo PPDB::failed("Sorry, your file is too large.");
+   echo PPDB::autoRedirect('your file is too large.', 'Failed', 'danger');	
   $uploadOk = 0;
 }
 
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-  echo PPDB::failed("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+   echo PPDB::autoRedirect('only JPG, JPEG, PNG & GIF files are allowed.', 'Failed', 'danger');	
   $uploadOk = 0;
 }
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
+   echo PPDB::autoRedirect('your file was not uploaded.', 'Failed', 'danger');	
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["propic"]["tmp_name"], $target_file)) {
@@ -896,13 +906,13 @@ if ($uploadOk == 0) {
 	$file = fopen(Utils::getROOT("ROOT",Utils::getDS())."user.json", "w+");
 	fwrite($file, $query);
 	fclose($file);
-	Reload::run();
+	
 	  }else{
-		  PPDB::failed("Failed to rename item");
+		  echo PPDB::autoRedirect('to rename item', 'Failed', 'danger');	
 	  }
  	
   } else {
-    echo PPDB::failed("Sorry, there was an error uploading your file.");
+	echo PPDB::autoRedirect('there was an error uploading your file.', 'Failed', 'danger');	
   }
 }
   
@@ -912,13 +922,9 @@ if ($uploadOk == 0) {
 	$file = fopen(Utils::getROOT("ROOT",Utils::getDS())."user.json", "w+");
 	fwrite($file, $query);
 	fclose($file);
-	Reload::run();
+	
 }
-
-
-
-		
-		
+			echo PPDB::autoRedirect('Profile', 'saving');	
 	}	
 }
 ?>
