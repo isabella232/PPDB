@@ -849,7 +849,7 @@ if(isset($_POST['removeLogo'])){
 }
 	
 if(isset($_POST['saveProfile'])){
-		$getUser = file_get_contents(Utils::getROOT("DOC", Utils::getDS()).'PPDB'.Utils::getDS().'user.json');
+		$getUser = file_get_contents(Utils::getROOT("ROOT", Utils::getDS()).'user.json');
 	$info = json_decode($getUser, true);
 	
 	$email = $_POST['emailaddress'];
