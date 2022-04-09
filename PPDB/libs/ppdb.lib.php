@@ -43,9 +43,6 @@ class PPDB{
 			return hash("sha512", $ip);
 		}
 	}
-public static function removeDOC($root){
-	return str_replace(Utils::getROOT('DOC', Utils::getDS()), '', Utils::getDS().$root);
-}
 public static function userUI($dir){
 		#register
 		if(!file_exists($dir."user.json")){
@@ -518,7 +515,7 @@ public static function rawText($str){
 		if(SESSION_USER){
 			$panel = '<div class="container-fluid panelCon">';
 			$panel .= '<div class="heading">
-			<h1 class="text-center text-primary">Panel</h1>
+			<h1 class="text-center">Panel</h1>
 			<form method="post">
 			<input type="submit" name="logoutbtn" class="btn btn-danger logoutbtn" value="Logout"/>
 			</form>
@@ -603,89 +600,11 @@ public static function rawText($str){
 		return 'color:rgba('.$r.', '.$g.', '.$b.', '.$a.');';
 		
 	}
+	public static function removeDOC($root){
+	return str_replace(Utils::getROOT('ROOT', Utils::getDS()), '', $root);
+}
 	public static function createPanelCSS(){
-		return '<style>	*{ margin:0; padding:0; } 
-			body{ background-color:rgb(105, 106, 105); } 
-			.heading{
-				width:100%;
-			}
-			.panelForm{ width:50%; height:50%; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background-color: rgb(0, 167, 232); } 
-			h1{ font-size:52px; color:rgb(115, 234, 7); } 
-			.panelCon{ background-color:rgba(16, 213, 5, 0.5); } 
-			.logoutbtn{ position:absolute; top:0; right:0; font-size:32px; }
-			.panel-header{width:100%;}
-			.nav-con{
-				background-color:rgb(3, 252, 218);
-				width:100%;
-			}
-			.nav-con input[type=submit]{
-				background-color:transparent;
-				border:0;
-				color:yellow;
-			}
-			.nav-con a{
-				text-decoration:none;
-				font-size:32px;
-				margin-right:8px;
-				color:rgb(255, 213, 0);
-				font-weight: bold;
-			}
-			.seperator{
-				font-size:32px;
-				color:yellow;
-				marign-left:5px;
-				margin-right: 5px;
-			}
-			/*Table*/
-
-            /*Search*/
-            input[type=search] {
-                  padding: 6px;
-                     margin-top: 8px;
-                    font-size: 17px;
-                 border: 1px solid #ccc;  
-                 width:50%;
-                 outline:none;
-                }
-			/*Plugins*/
-			#plugin-success{
-				width:410px;
-				height:250px;
-				display:block;
-			}
-			.card-columns{
-				display:block;
-			}
-		 .plugin-description{
-			 position:absolute;
-			 width:45%;
-			 overflow:auto;
-			 height:45%;
-		 }
-		 .plugin-description::-webkit-scrollbar{
-			 display:none;
-		 }
-		 .card-image:hover{
-			 border: 15px solid rgba(231, 249, 64, 0.95);
-			 background-color:rgba(231, 249, 64, 0.95);
-			 border-radius:25px;
-		 }
-		 #plugin-config-btn{
-			 position:absolute;
-			 bottom:2%;
-			 left:0;
-			 width:35%;
-		 }
-		
-		#plugin-c-icon{
-			margin-right:10px;
-		}
-		/*dropdown*/
-		.dropdown li:hover{
-			background-color:lightgray;
-		}
-
-			</style>';
+		return '<link href="'.PPDB::removeDOC(Utils::getROOT('THEME', Utils::getDS())).(isset($_COOKIE['panel_theme']) ? $_COOKIE['panel_theme'] : 'default.min.css').'?v='.date('Y-m-dsi').'" rel="stylesheet"/>';
 	}
 	public static function createCSSLink($url, $inter="", $crossorigin=""){
 		return '<link href="'.$url.'" rel="stylesheet" integrity="'.$inter.'" crossorigin="'.$crossorigin.'"/>';
