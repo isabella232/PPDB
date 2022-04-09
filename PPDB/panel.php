@@ -1,7 +1,10 @@
 <?php 
 session_start();
  
-require('libs/ppdb.lib.php');
+require_once('libs/ppdb.lib.php');
+foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugin){
+	include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
+}
  ?>
 <html>
 	<head>
@@ -462,9 +465,11 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 	//$plugins = array_diff(scandir(Utils::getROOT("PLUGIN", Utils::getDS())), [".", ".."]);
 	foreach($plugins as $plugin){
 		if(is_dir(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin)){
-			$plist[] = $plugin;
+			$getData = file_get_contents(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS()."addon.json");
+		$data = json_decode($getData, true);
+			 isset($data['dependencies']['yaml']) && !extension_loaded('yaml') ? '' : $plist[] = $plugin;
 			 if(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php"){
-				include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
+				//include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
 			 }else{
 				 echo "can't find ".$plugin.".plg.php to run function";
 			 }
@@ -493,7 +498,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 			$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header">
 			<div class=" form-check form-switch float-end" data-html="true"   title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -519,7 +524,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" style="display:none;" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"  title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -542,7 +547,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"    title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -630,31 +635,13 @@ if(isset($_GET['plugin']) && isset($_GET['page'])){
 	}
 }
 /*Themes*/
-if(isset($_POST['viewThemes']) && SESSION_USER){
-$themes = array_diff(scandir(Utils::getROOT("THEME", Utils::getDS())), [".", ".."]);
-$theme = '';
-if(PLUGIN::LOST('ThemeSwitcher', true)){
-	$theme .= '<form method="post">';
-$theme .= '<select class="form-control form-select-lg mb-3 mt-5">';
-$theme .= '<option value="">Default</option>';
-foreach($themes as $t){
-	if(preg_match('/^.+(\.css)$/', $t) && !is_dir(Utils::getROOT("THEME", Utils::getDS()).$t)){
-		$theme .= '<option value="'.str_replace('.css','',$t).'">'.str_replace('.css','',$t).'</option>';
-	}
+
+
+
+foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+echo plugin::hook('view', $plugins);
 }
-$theme .= '</select>';
-$theme .= '</form>';
-}
-echo $theme;
-	echo '<script>setTimeout(function(){
-		let getUrl = window.location.href;
-		if(getUrl.match(/(\?plugin).*/)){
-			getUrl = getUrl.replace(/(\?plugin).*/, "");
-			history.pushState("", "", getUrl);
-			'.Reload::ret().'
-		}
-	},0);</script>';
-}
+
 
 /*Dashboard*/
 if(isset($_POST['viewDashboard']) && SESSION_USER){
@@ -794,7 +781,7 @@ if(isset($_POST['viewProfile'])){
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #0476f7; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:5%;left:22%;">&nbsp;</span>
+			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:8%;left:22%;">&nbsp;</span>
            
 		   <img src="'.PPDB::removeDOC($getAvatars).(file_exists($getAvatars.SESSION_USER.'.png') ? SESSION_USER : 'default').'.png?imgID='.uniqid().'" alt="User image" class="image img-fluid img-thumbnail rounded mt-4 mb-2" style="width: 150px; z-index: 1">
 			  <button type="button" data-bs-toggle="modal" data-bs-target="#profileEditor" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
@@ -849,7 +836,7 @@ if(isset($_POST['removeLogo'])){
 }
 	
 if(isset($_POST['saveProfile'])){
-		$getUser = file_get_contents(Utils::getROOT("ROOT", Utils::getDS()).'user.json');
+		$getUser = file_get_contents(Utils::getROOT("DOC", Utils::getDS()).'PPDB'.Utils::getDS().'user.json');
 	$info = json_decode($getUser, true);
 	
 	$email = $_POST['emailaddress'];
@@ -959,7 +946,10 @@ if ($uploadOk == 0) {
 					}
 				}
 			}, 0)', '');
-			echo plugin::hook('footerJS', 'ThemeSwitcher');
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+				echo plugin::hook('footerJS', $plugins);
+			}
+		
 			?>
 		</body>
 	</html>
