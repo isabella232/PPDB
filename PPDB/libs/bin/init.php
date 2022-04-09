@@ -8,7 +8,7 @@ const LIBRARY_SSL_SUPPORT = true;
 const LIBRARY_LICENCE = "Apache-2.0 License";
 const LIBRARY_AUTHOR = "SurveyBuilderTeams";
 const LIBRARY_AUTOUPDATE = true;
-const LIBRARY_BUILD = "220330"; # 30(March)2022
+const LIBRARY_BUILD = "220409"; # 09(April)2022
 const LOGIN_TEMP = 3;
 define("LIBRARY_MODULES",apache_get_modules(), false);
 //To use debug change DEBUG_MODE[0] to TRUE, FALSE, or NULL; To display alerts change DEBUG_MODE[1] to TRUE, FALSE, NULL
@@ -84,7 +84,7 @@ const DEFAULT_TIMEZONE = 'UTC';
 		echo $e->noOpenSSL();
 	}
 	try{
-		if(LIBRARY_BUILD !== '220330'){
+		if(LIBRARY_BUILD !== '220409'){
 			throw new PPDBErr(LIBRARY_BUILD);
 		}
    }catch(PPDBErr $e){
