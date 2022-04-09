@@ -156,3 +156,7 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 # v2.0.3
 - Added `PPDB::autoRedirect($desc, $title=redirecting, $type=success)`
 - Uses autoredirect for more items that fail or succeed
+
+# v2.0.4
+- Now added a new hook `plugin::hook('view', $plugin)` checks for `YOURPLUGIN_view()`
+- Fixed a few issues and bugs/glitches
