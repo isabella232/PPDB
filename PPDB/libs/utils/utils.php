@@ -47,6 +47,9 @@ class Utils{
 			return 'error';
 		}
 	}
+	public static function scanDir($dir){
+		return array_diff(scandir($dir), ['.','..']);
+	}
 	
 	
 }
