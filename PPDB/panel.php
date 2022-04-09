@@ -493,7 +493,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 			$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header">
 			<div class=" form-check form-switch float-end" data-html="true"   title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -519,7 +519,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" style="display:none;" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"  title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -542,7 +542,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"    title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.Utils::getDS().'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
