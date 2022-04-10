@@ -7,7 +7,7 @@ inclusive security. Along with a admin panel that will require a login/register 
 any database if you have SSL(secured socket layer) and more... check out this _**[demo](https://surveybuilder.epizy.com/projects/PPDB/PPDB_Build/panel?u=0 "PPDB online Demo")**_ All you have to do is press `Login` 
 
 
-> some function may not be active/is hidden for demo/public reasons
+> some functions may not be active/is hidden for demo/public reasons
 
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/surveybuilderteams/PPDB?color=red&label=Version)](https://surveybuilder.epizy.com/projects/PPDB/PPDB_Build/panel "SurveyBuilderTeams-PPDB")
