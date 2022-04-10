@@ -58,8 +58,9 @@ if(isset($_POST['regbtn'])){
 				Reload::run();
 		}else{
 			if(floatval($_COOKIE['ppdb_session_temp']) < LOGIN_TEMP){
+				$calc = LOGIN_TEMP-floatval($_COOKIE['ppdb_session_temp']);
 		setcookie('ppdb_session_temp', floatval($_COOKIE['ppdb_session_temp'])+1, time() + (3600 * 1), "/"); //expires in 1 hour
-			echo PPDB::failed("Error: cannot login correctly! ".LOGIN_TEMP-floatval($_COOKIE['ppdb_session_temp']) ." attemps left");
+			echo PPDB::failed("Error: cannot login correctly! ".$calc." attemps left");
 			}else{
 		setcookie('ppdb_session_temp', floatval($_COOKIE['ppdb_session_temp'])+1, time() + (86400 * 1), "/"); //expires in 1 day
 		echo PPDB::failed("Error: cannot login correctly and logged in to many times! Try again tomorrow.");
