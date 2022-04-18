@@ -4,7 +4,7 @@
 
 A PHP Program DataBase or PPDB is a simplified version of SQLi. This uses JSON files as a database with 
 inclusive security. Along with a admin panel that will require a login/register prompt. Secure
-any database if you have SSL(secured socket layer) and more... check out this _**[demo](https://surveybuilder.epizy.com/projects/PPDB/PPDB_Build/panel?u=0 "PPDB online Demo")**_ All you have to do is press `Login` 
+any database if you have SSL(secured socket layer) and more...
 
 
 > some functions may not be active/is hidden for demo/public reasons
