@@ -4,7 +4,7 @@
   </head>
   <body>
   <?php
-include(dirname(__DIR__).'PPDB/panel.php');
+echo 'hi'
 ?>
   </body>
 </html>
