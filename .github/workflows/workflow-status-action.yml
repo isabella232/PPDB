@@ -1,2 +1,0 @@
-- name: Workflow Status Action
-  uses: martialonline/workflow-status@v3
