@@ -1,8 +1,11 @@
 {
 "name":"surveybuilderteams/PPDB",
 "version": "2.0.4",
+"license":"Apache-2.0",
 "author":[{
 "name": "SurveyBuilder-Admin",
-"email":"surveybuildersbot@gmail.com"
+"email":"surveybuildersbot@gmail.com",
+"role":"developer",
+"homepage":"https://github.com/surveybuilderteams/PPDB"
 }]
 }
