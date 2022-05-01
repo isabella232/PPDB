@@ -47,5 +47,4 @@ function PluginExtractor_config(){
 	
 	echo Plugin::saveRedirect($_GET['savePlugin']);
 }
-
 ?>

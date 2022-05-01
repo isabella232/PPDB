@@ -20,6 +20,12 @@ function ThemeSwitcher_footerJS(){
 	}, 100);';
 	
 	$out.='</script>';
+	$out .= '<script>
+		document.querySelector("#ThemeSwitcher_profile_changer").addEventListener("click",function(){
+			document.querySelector("#themeSwitcherPlugin").click();
+		});
+
+	</script>';
 	return $out;
 }
 function ThemeSwitcher_view(){
@@ -59,5 +65,25 @@ if(isset($_POST['saveTheme']) && SESSION_USER){
 	} 
 }
 
+}
+function ThemeSwitcher_panelList(){
+	$out = '<li id="list-item-themes"'.(Utils::getPluginAddon('ThemeSwitcher')['config']['active'] ? '' : 'style="display:none;"').'><hr class="dropdown-divider"><a href="./panel?type=themes" class="nav-list viewThemes" title="Themes"><input type="submit" id="themeSwitcherPlugin" name="viewThemes" value="Themes"/></a></li>';
+return $out;
+}
+function ThemeSwitcher_profile(){
+$themes = array_diff(scandir(Utils::getROOT("THEME", Utils::getDS())), [".", ".."]);
+$theme = '';
+$out = '';
+if(PLUGIN::LOST('ThemeSwitcher', true)){
+	$out .= '<div class="mb-5">
+			<p class="lead fw-normal mb-1">ThemeSwitcher</p>
+			  <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1"><ul class="list-group"><button type="button" id="ThemeSwitcher_profile_changer" class="btn btn-success w-100">View Themes</button></ul></p>
+              </div>
+			</div>';
+}else{
+	$out .= 'ThemeSwitcher doesn\'t exists or disabled';
+}
+	return $out;
 }
 ?>
