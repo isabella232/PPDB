@@ -105,21 +105,21 @@ function export($dir,$tdir, $Split, $name, $type){
 			$data = PPDB::minify(file_get_contents($dir.$name.".json"));
 			$data = PPDB::JSONTOARRAY($data);
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true)));
+			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".str_replace("Array","array",print_r($data))));
 			fclose($file);
 		}else{
 			$data = file_get_contents($dir.$name.".json");
 			$data = str_replace(array("\n","\t","\t\n"),"",PPDB::JSONTOARRAY($data));
 			$file = fopen($path.$name.".php", "w+");
-			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".print_r($data, true)));
+			fwrite($file, PPDB::minify(htmlspecialchars_decode("&lt;?php exit();?&gt;")."\n".str_replace("Array","array",print_r($data))));
 			fclose($file);
 		}
 		$id = uniqid();
 		if($Split === DS){
-		$getMoved = str_replace(DOC_ROOT_BACKWARDS,"", $path);
+		$getMoved = str_replace(ROOT_DOC_FORWARD,"", $path);
 		}
 		if($Split === DS_FORWARD){
-		$getMoved = str_replace(DOC_ROOT,"", $path);
+		$getMoved = str_replace(ROOT_DOC,"", $path);
 		}
 		echo '<a href="'.$getMoved.$name.".php".'" class="backup_'.$id.'" download="'.$date.'-'.$name.'.php"></a>'.PPDB::createJS('setTimeout(function(){
 			let download = document.querySelector(".backup_'.$id.'");

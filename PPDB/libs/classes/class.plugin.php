@@ -51,6 +51,15 @@ class plugin{
 			return $func($parma);
 		}
 	}
+	public static function myHook($hook, $plugin, $param = null)
+	{
+		$hookFunc = $plugin. '_' .$hook;
+		return $hookFunc($param);
+	}
+	public static function isValidHook($hook, $plugin)
+	{
+		return function_exists($plugin. '_' .$hook);
+	}
 	public static function LOST($plugin, $requireActive=false){
 		if($requireActive){
 			if(!Utils::getPluginAddon($plugin)['config']['active'] || !file_exists(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS())){
