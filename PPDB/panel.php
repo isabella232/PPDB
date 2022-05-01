@@ -23,6 +23,11 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 			echo PPDB::createCSSLink("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 			echo PPDB::createPanelCSS();
 			?>
+			<?php
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+echo plugin::hook('head', $plugins);
+}
+			?>
 		</head>
 		<body>
 			<?php
@@ -463,7 +468,7 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 if(isset($_POST['viewPlugins']) && SESSION_USER){
 	$plist = [];
 	global $plugins;
-	//$plugins = array_diff(scandir(Utils::getROOT("PLUGIN", Utils::getDS())), [".", ".."]);
+	$plugins = array_diff(scandir(Utils::getROOT("PLUGIN", Utils::getDS())), [".", ".."]);
 	foreach($plugins as $plugin){
 		if(is_dir(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin)){
 			$getData = file_get_contents(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS()."addon.json");
@@ -622,7 +627,7 @@ if(isset($_POST['submit_config'])){
 	}else{
 		echo PPDB::failed("activate was not found");
 	}
-include Utils::getROOT("PLUGIN", Utils::getDS()).$_GET['savePlugin'].Utils::getDS().$_GET['savePlugin'].'.plg.php';
+
 $func = $_GET['savePlugin'].'_config';
 if(function_exists($func)){$func();}else{PPDB::failed("cannot run function correctly!");}
 
@@ -817,6 +822,11 @@ if(isset($_POST['viewProfile'])){
                 <p class="font-italic mb-1"><ul class="list-group">'.$listTimeStamp.'</ul></p>
               </div>
 			</div>
+			';
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+				$profile.= plugin::hook('profile', $plugins);
+			}
+			$profile.='
             </div>
           </div>
         </div>
@@ -921,8 +931,7 @@ if ($uploadOk == 0) {
 
 
 			<!-- JavaScript Bundle with Popper -->
-			<?php
-			echo PPDB::createJSLink("libs/js/base.lib.js?v1.0.6");
+			<?php 
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
 			echo PPDB::createJSLink("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
