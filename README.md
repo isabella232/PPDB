@@ -1665,6 +1665,16 @@ Plugins are most helpful tools to be using on a lot of databasing, customizing t
 
 all you have to do is activate, config, finished!
 
+Here are some hook list you can use
+
+| Hooks | Execute in | Note |
+| ----- | ---------- | ---- |
+| plugin::hook('head') | panel | Executes in header |
+| plugin::hook('view') | plugin | Executes code when plugin runs |
+| plugin::hook('profile') | profile | Executes code when profile displays |
+| plugin::hook('footerJS') | panel | Executes code when footer JS runs |
+| plugin::hook('panelList') | lib | Execute list when panel list(More...) is ranned |
+
 ### Making your plugins:
 
 This is how you make your own plugin
