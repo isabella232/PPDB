@@ -160,3 +160,13 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 # v2.0.4
 - Now added a new hook `plugin::hook('view', $plugin)` checks for `YOURPLUGIN_view()`
 - Fixed a few issues and bugs/glitches
+
+# v2.0.5
+- Added new plugin hooks: here is a list
+| Hooks | Execute in | Note |
+| ----- | ---------- | ---- |
+| plugin::hook('head') | panel | Executes in header |
+| plugin::hook('view') | plugin | Executes code when plugin runs |
+| plugin::hook('profile') | profile | Executes code when profile displays |
+| plugin::hook('footerJS') | panel | Executes code when footer JS runs |
+| plugin::hook('panelList') | lib | Execute list when panel list(More...) is ranned |
