@@ -163,6 +163,7 @@ Added `PPDB::rawText()` and `PPDB::encodeText()` functions.
 
 # v2.0.5
 - Added new plugin hooks: here is a list
+
 | Hooks | Execute in | Note |
 | ----- | ---------- | ---- |
 | plugin::hook('head') | panel | Executes in header |
