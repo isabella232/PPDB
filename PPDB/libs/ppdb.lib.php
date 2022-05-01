@@ -543,12 +543,13 @@ public static function rawText($str){
 
   <ul class="dropdown-menu" style="background-color:gray;" aria-labelledby="dropdownMenuLink">
     <li id="list-item-plugin"><a href="./panel?type=plugins" class="nav-list viewPlugins" title="Plugins"><input type="submit" name="viewPlugins" value="Plugins"/></a></li>
-	
-	<li id="list-item-themes"'.(Utils::getPluginAddon('ThemeSwitcher')['config']['active'] ? '' : 'style="display:none;"').'><hr class="dropdown-divider"><a href="./panel?type=themes" class="nav-list viewThemes" title="Themes"><input type="submit" id="themeSwitcherPlugin" name="viewThemes" value="Themes"/></a></li>
 	<li id="list-item-dashboard"><a href="./panel?type=dashboard" class="nav-list viewDashboard" title="Dashboard"><hr class="dropdown-divider"><input type="submit" name="viewDashboard" value="Dashboard"/></a></li>
 	<li id="list-item-history"><a href="./panel?type=history" class="nav-list viewHistory" title="History"><hr class="dropdown-divider"><input type="submit" name="viewHistory" value="History"/></a></li>
-	<li id="list-item-email"><a href="./panel?type=profile" class="nav-list viewProfile" title="Profile"><hr class="dropdown-divider"><input type="submit" name="viewProfile" value="Profile"/></a></li>
-  </ul>
+	<li id="list-item-email"><a href="./panel?type=profile" class="nav-list viewProfile" title="Profile"><hr class="dropdown-divider"><input type="submit" name="viewProfile" value="Profile"/></a></li>';
+  foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+$panel.=plugin::hook('panelList', $plugins);
+}
+  $panel.='</ul>
 </span>
 			</form>
 			</div>
@@ -735,6 +736,8 @@ public static function rawText($str){
 		}
 	}
 	public static function deleteAccount($dir){
+		isset($_COOKIE['ppdb_session_temp']) ? setcookie('ppdb_session_temp','',time()-3600,'/') : '';
+		isset($_COOKIE['panel_theme']) ? setcookie('panel_theme','',time()-3600,'/') : '';
 			PPDB::removeHistory();
 			PPDB::removeDBAll();
 			PPDB::removeLogo();
