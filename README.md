@@ -144,7 +144,10 @@ Build prompt/panel (`panel.php`):
 <?php 
 session_start();
  
-require('libs/ppdb.lib.php');
+require_once('libs/ppdb.lib.php');
+foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugin){
+	include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
+}
  ?>
 <html>
 	<head>
@@ -162,6 +165,11 @@ echo PPDB::createJSLink("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jque
 			echo PPDB::createCSSLink("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css");
 			echo PPDB::createCSSLink("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 			echo PPDB::createPanelCSS();
+			?>
+			<?php
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+echo plugin::hook('head', $plugins);
+}
 			?>
 		</head>
 		<body>
@@ -198,8 +206,9 @@ if(isset($_POST['regbtn'])){
 				Reload::run();
 		}else{
 			if(floatval($_COOKIE['ppdb_session_temp']) < LOGIN_TEMP){
+				$calc = LOGIN_TEMP-floatval($_COOKIE['ppdb_session_temp']);
 		setcookie('ppdb_session_temp', floatval($_COOKIE['ppdb_session_temp'])+1, time() + (3600 * 1), "/"); //expires in 1 hour
-			echo PPDB::failed("Error: cannot login correctly! ".LOGIN_TEMP-floatval($_COOKIE['ppdb_session_temp']) ." attemps left");
+			echo PPDB::failed("Error: cannot login correctly! ".$calc." attemps left");
 			}else{
 		setcookie('ppdb_session_temp', floatval($_COOKIE['ppdb_session_temp'])+1, time() + (86400 * 1), "/"); //expires in 1 day
 		echo PPDB::failed("Error: cannot login correctly and logged in to many times! Try again tomorrow.");
@@ -602,12 +611,14 @@ if(isset($_POST['exec_change_psw']) && SESSION_USER){
 if(isset($_POST['viewPlugins']) && SESSION_USER){
 	$plist = [];
 	global $plugins;
-	//$plugins = array_diff(scandir(Utils::getROOT("PLUGIN", Utils::getDS())), [".", ".."]);
+	$plugins = array_diff(scandir(Utils::getROOT("PLUGIN", Utils::getDS())), [".", ".."]);
 	foreach($plugins as $plugin){
 		if(is_dir(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin)){
-			$plist[] = $plugin;
+			$getData = file_get_contents(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS()."addon.json");
+		$data = json_decode($getData, true);
+			 isset($data['dependencies']['yaml']) && !extension_loaded('yaml') ? '' : $plist[] = $plugin;
 			 if(Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php"){
-				include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
+				//include Utils::getROOT("PLUGIN", Utils::getDS()).$plugin.Utils::getDS().$plugin.".plg.php";
 			 }else{
 				 echo "can't find ".$plugin.".plg.php to run function";
 			 }
@@ -636,7 +647,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 			$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header">
 			<div class=" form-check form-switch float-end" data-html="true"   title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -662,7 +673,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" style="display:none;" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"  title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -685,7 +696,7 @@ if(isset($_POST['viewPlugins']) && SESSION_USER){
 					$card = '<div id="plugin-success" class="card border border-secondary border-4 mb-2" data-pluginid="'.$plugin.'" data-plugincardroot="true">';
 		$card .= '<div class="card-header"    title="Dependencies: '.$depend.'">
 			<div class="form-check form-switch float-end" data-html="true"    title="'.$toggleTitle .'">
-						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(PPDB::strMultiplyer(2,DS)).'\');">
+						<input class="'.$plugin.'_active form-check-input" '.$toggle.' type="checkbox" id="pluginactivtor" '.$active.' onclick="ToggleCheckBox(this.checked, '.$id.', \''.$plugin.'\', \''.(Utils::getDS()==='\\'?PPDB::strMultiplyer(2,DS) : Utils::getDS()).'\');">
 					<script>
 					setTimeout(function(){
 						ToggleisChecked('.$id.');
@@ -759,7 +770,7 @@ if(isset($_POST['submit_config'])){
 	}else{
 		echo PPDB::failed("activate was not found");
 	}
-include Utils::getROOT("PLUGIN", Utils::getDS()).$_GET['savePlugin'].Utils::getDS().$_GET['savePlugin'].'.plg.php';
+
 $func = $_GET['savePlugin'].'_config';
 if(function_exists($func)){$func();}else{PPDB::failed("cannot run function correctly!");}
 
@@ -773,31 +784,13 @@ if(isset($_GET['plugin']) && isset($_GET['page'])){
 	}
 }
 /*Themes*/
-if(isset($_POST['viewThemes']) && SESSION_USER){
-$themes = array_diff(scandir(Utils::getROOT("THEME", Utils::getDS())), [".", ".."]);
-$theme = '';
-if(PLUGIN::LOST('ThemeSwitcher', true)){
-	$theme .= '<form method="post">';
-$theme .= '<select class="form-control form-select-lg mb-3 mt-5">';
-$theme .= '<option value="">Default</option>';
-foreach($themes as $t){
-	if(preg_match('/^.+(\.css)$/', $t) && !is_dir(Utils::getROOT("THEME", Utils::getDS()).$t)){
-		$theme .= '<option value="'.str_replace('.css','',$t).'">'.str_replace('.css','',$t).'</option>';
-	}
+
+
+
+foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+echo plugin::hook('view', $plugins);
 }
-$theme .= '</select>';
-$theme .= '</form>';
-}
-echo $theme;
-	echo '<script>setTimeout(function(){
-		let getUrl = window.location.href;
-		if(getUrl.match(/(\?plugin).*/)){
-			getUrl = getUrl.replace(/(\?plugin).*/, "");
-			history.pushState("", "", getUrl);
-			'.Reload::ret().'
-		}
-	},0);</script>';
-}
+
 
 /*Dashboard*/
 if(isset($_POST['viewDashboard']) && SESSION_USER){
@@ -937,7 +930,7 @@ if(isset($_POST['viewProfile'])){
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #0476f7; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:5%;left:22%;">&nbsp;</span>
+			<span id="status" style="'.($userInfo['ip']!==PPDB::getIP()&&SESSION_USER===''?'background-color:red;':'background-color:lime;').'z-index:2;border-radius:50%;width:30px;height:30px;position:absolute;top:8%;left:22%;">&nbsp;</span>
            
 		   <img src="'.PPDB::removeDOC($getAvatars).(file_exists($getAvatars.SESSION_USER.'.png') ? SESSION_USER : 'default').'.png?imgID='.uniqid().'" alt="User image" class="image img-fluid img-thumbnail rounded mt-4 mb-2" style="width: 150px; z-index: 1">
 			  <button type="button" data-bs-toggle="modal" data-bs-target="#profileEditor" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
@@ -972,6 +965,11 @@ if(isset($_POST['viewProfile'])){
                 <p class="font-italic mb-1"><ul class="list-group">'.$listTimeStamp.'</ul></p>
               </div>
 			</div>
+			';
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+				$profile.= plugin::hook('profile', $plugins);
+			}
+			$profile.='
             </div>
           </div>
         </div>
@@ -1076,8 +1074,7 @@ if ($uploadOk == 0) {
 
 
 			<!-- JavaScript Bundle with Popper -->
-			<?php
-			echo PPDB::createJSLink("libs/js/base.lib.js?v1.0.6");
+			<?php 
 			echo PPDB::createJSLink("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", true, "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", "anonymous");
 			echo PPDB::createJSLink("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js");
 			echo PPDB::createJS("function writeTable(type){document.querySelector('#dbarr').value = '{\\n\"'+type+'\": [{\\n\\n}]\\n}';}","");
@@ -1102,7 +1099,10 @@ if ($uploadOk == 0) {
 					}
 				}
 			}, 0)', '');
-			echo plugin::hook('footerJS', 'ThemeSwitcher');
+			foreach(Utils::scanDir(Utils::getROOT('PLUGIN', Utils::getDS())) as $plugins){
+				echo plugin::hook('footerJS', $plugins);
+			}
+		
 			?>
 		</body>
 	</html>
