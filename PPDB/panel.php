@@ -699,7 +699,7 @@ if(isset($_POST['viewDashboard']) && SESSION_USER){
     </tr>
 	<tr>
       <th scope="row">PHP Modules</th>
-      <td class="word-wrap">'.implode(', ',LIBRARY_MODULES).'</td>
+      <td class="word-wrap">'.implode(', ',get_loaded_extensions()).'</td>
     </tr>
 	<tr>
       <th scope="row">Memory</th>
